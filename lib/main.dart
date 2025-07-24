@@ -108,7 +108,15 @@ class CreateGanache extends StatelessWidget {
   build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Créer sa ganache"),
+        title: const Text("Créer sa ganache"),
+        actions: <Widget>[
+          IconButton(
+            onPressed: (){/* TODO implement card popup (found in textfields */},
+            icon: Icon(Icons.help),
+            tooltip: "Aide",
+          ),
+          ],
+
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
@@ -119,14 +127,19 @@ class CreateGanache extends StatelessWidget {
            SizedBox(height: 16),
            GanacheTypeSelection(),
            SizedBox(height: 16),
-
+           ApplicationTypeSelection(),
+           SizedBox(height: 16),
          ],
        )
       )
     );
   }
 }
-// Indentation pour signfiier que les classes sous-jacentes sont appelés par CreateGanache.
+// Variables / Enum / Listes
+enum Application {Moulage, Cadrage, Autre}
+
+// Indentation pour signfier que les classes sous-jacentes sont appelés par CreateGanache.
+// Classes
   class GanacheTypeSelection extends StatefulWidget {
   const GanacheTypeSelection({super.key});
   @override
@@ -163,7 +176,6 @@ class CreateGanache extends StatelessWidget {
           ]
       );
 }
-
 }
   class GanacheNameInput extends StatelessWidget {
   const GanacheNameInput({super.key});
@@ -181,6 +193,50 @@ class CreateGanache extends StatelessWidget {
       );
     }
   }
+  class ApplicationTypeSelection extends StatefulWidget {
+    const ApplicationTypeSelection({super.key});
+
+  @override
+  State<ApplicationTypeSelection> createState() => _ApplicationTypeSelectionState();
+}
+
+class _ApplicationTypeSelectionState extends State<ApplicationTypeSelection> {
+  Application applicationView = Application.Moulage;
+
+  @override
+    Widget build(BuildContext context) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Type d'application", style: Theme.of(context).textTheme.headlineSmall),
+          SegmentedButton<Application>(
+              segments: const <ButtonSegment<Application>>[
+                ButtonSegment<Application>(
+                  value: Application.Moulage,
+                  label: Text("Moulage"),
+                  icon: Icon(Icons.apps)
+                ),
+                ButtonSegment<Application>(
+                  value: Application.Cadrage,
+                  label: Text("Cadrage"),
+                  icon: Icon(Icons.crop_square)
+                ),
+                ButtonSegment(value: Application.Autre,
+                  label: Text("Autre"),
+                  icon: Icon(Icons.more_horiz)
+                ),
+
+  ],
+    selected: <Application>{applicationView},
+          onSelectionChanged: (Set<Application> newSelection) {
+                setState(() {
+                  applicationView = newSelection.first;
+                });
+    }),
+      ]
+      );
+    }
+}
   class OnWelcomeScreen extends StatelessWidget {
   const OnWelcomeScreen({super.key});
   build(BuildContext context) {
