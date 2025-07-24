@@ -101,6 +101,7 @@ class _ConcatenedFloatingActionButtonState extends State<ConcatenedFloatingActio
     );
   }
 }
+
 class CreateGanache extends StatelessWidget {
   const CreateGanache({super.key});
 
@@ -109,40 +110,49 @@ class CreateGanache extends StatelessWidget {
       appBar: AppBar(
         title: Text("Créer sa ganache"),
       ),
-      body:
-        GanacheTypeSelection()
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16),
+       child: Column(
+         crossAxisAlignment: CrossAxisAlignment.start,
+         children: [
+           GanacheNameInput(),
+           SizedBox(height: 16),
+           GanacheTypeSelection(),
+           SizedBox(height: 16),
+
+         ],
+       )
+      )
     );
   }
 }
+// Indentation pour signfiier que les classes sous-jacentes sont appelés par CreateGanache.
   class GanacheTypeSelection extends StatefulWidget {
   const GanacheTypeSelection({super.key});
   @override
   State<GanacheTypeSelection> createState() => _GanacheTypeSelectionState();
   }
   class _GanacheTypeSelectionState extends State<GanacheTypeSelection> {
-  int? _value = 1;
+  int? ChocolateTypeValue = 1;
   final noms = ["Noir", "Lait", "Noir/Lait", "Blanc", "Autre"];
 
 @override
   Widget build(BuildContext context) {
   return
-    Scaffold(
-    body:
-    Padding(padding: const EdgeInsets.all(16),
-      child: Column(
+     Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Type de ganache", style: Theme.of(context).textTheme.headlineMedium),
+            Text("Type de ganache", style: Theme.of(context).textTheme.headlineSmall),
             Wrap(
               spacing: 5.0,
               children:
               List<Widget>.generate(noms.length, (int index) {
                 return ChoiceChip(
                   label: Text(noms[index]),
-                  selected: _value == index,
+                  selected: ChocolateTypeValue == index,
                   onSelected: (bool selected) {
                     setState(() {
-                      _value = selected ? index : null;
+                      ChocolateTypeValue = selected ? index : null;
                       // _value = condition ? valeurSiVrai : valeurSiFaux;
 
                     });
@@ -151,13 +161,27 @@ class CreateGanache extends StatelessWidget {
               }).toList(),
             ),
           ]
-      ),
-    )
       );
 }
 
 }
-class OnWelcomeScreen extends StatelessWidget {
+  class GanacheNameInput extends StatelessWidget {
+  const GanacheNameInput({super.key});
+    @override
+    Widget build(BuildContext context) {
+      return
+        TextField(
+        decoration: InputDecoration(
+            prefixIcon: const Icon(Icons.edit),
+            labelText: "Nom de la ganache",
+            // TODO Implémenter ChocolateTypeValue remplace chocolat
+            hintText: "Ganache au chocolat",
+            border: OutlineInputBorder(),
+        ),
+      );
+    }
+  }
+  class OnWelcomeScreen extends StatelessWidget {
   const OnWelcomeScreen({super.key});
   build(BuildContext context) {
     return Scaffold(
