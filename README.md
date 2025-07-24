@@ -1,3 +1,5 @@
 # ganache_dot_first
 
-The first formulation software for creating Ganache.
+Le premier équilibreur de ganache multiplatformes !
+
+> ⚠️ Ceci est mon premier projet, il me permet d'apprendre Dart & Flutter !

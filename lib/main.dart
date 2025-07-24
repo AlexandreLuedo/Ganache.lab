@@ -8,7 +8,10 @@ class GanacheApp extends StatelessWidget {
   @override
   build(BuildContext context)
   {
-    return const MaterialApp(home: Navigation());
+    return MaterialApp(
+        // debugShowCheckedModeBanner: false,
+        theme: ThemeData(colorSchemeSeed: const Color(0xFFEB8C36)),
+        home: const Navigation());
   }
 }
 
@@ -66,9 +69,7 @@ class _NavigationState extends State<Navigation> {
       ),
       body:
        <Widget>[
-
-        // Faire une gestuelle avec Handle taps
-        OnWelcomeScreen(),
+         OnWelcomeScreen(),
         // Gestuelle de glissement pour chaques cartouches de recettes : https://docs.flutter.dev/cookbook/gestures/dismissible
         // Quand l'on clique sur une recette : https://api.flutter.dev/flutter/material/ZoomPageTransitionsBuilder-class.html?_gl=1*1jeu0qs*_ga*NjY1MTkxNDE1LjE3NDg5NTI1NDc.*_ga_04YGWK0175*czE3NTMyNzE3MTAkbzgkZzEkdDE3NTMyNzE5MTIkajMxJGwwJGgw
         RecipeList(),
@@ -108,8 +109,53 @@ class CreateGanache extends StatelessWidget {
       appBar: AppBar(
         title: Text("Créer sa ganache"),
       ),
+      body:
+        GanacheTypeSelection()
     );
   }
+}
+  class GanacheTypeSelection extends StatefulWidget {
+  const GanacheTypeSelection({super.key});
+  @override
+  State<GanacheTypeSelection> createState() => _GanacheTypeSelectionState();
+  }
+  class _GanacheTypeSelectionState extends State<GanacheTypeSelection> {
+  int? _value = 1;
+  final noms = ["Noir", "Lait", "Noir/Lait", "Blanc", "Autre"];
+
+@override
+  Widget build(BuildContext context) {
+  return
+    Scaffold(
+    body:
+    Padding(padding: const EdgeInsets.all(16),
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Type de ganache", style: Theme.of(context).textTheme.headlineMedium),
+            Wrap(
+              spacing: 5.0,
+              children:
+              List<Widget>.generate(noms.length, (int index) {
+                return ChoiceChip(
+                  label: Text(noms[index]),
+                  selected: _value == index,
+                  onSelected: (bool selected) {
+                    setState(() {
+                      _value = selected ? index : null;
+                      // _value = condition ? valeurSiVrai : valeurSiFaux;
+
+                    });
+                  },
+                );
+              }).toList(),
+            ),
+          ]
+      ),
+    )
+      );
+}
+
 }
 class OnWelcomeScreen extends StatelessWidget {
   const OnWelcomeScreen({super.key});
