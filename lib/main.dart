@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(const GanacheApp());
 
@@ -105,15 +106,48 @@ class _ConcatenedFloatingActionButtonState extends State<ConcatenedFloatingActio
 class CreateGanache extends StatelessWidget {
   const CreateGanache({super.key});
 
-  build(BuildContext context) {
+  Future<void> _launchUrl() async {
+    final Uri url = Uri.parse('https://flutter.dev');
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
+@override
+ Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Créer sa ganache"),
         actions: <Widget>[
           IconButton(
-            onPressed: (){/* TODO implement card popup (found in textfields */},
-            icon: Icon(Icons.help),
-            tooltip: "Aide",
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text("Aide"),
+                    content: const Text("Dans cette page vous devez compléter toutes les informations proposés. \n Il n\'est pas encore possible d\'ajouter ses propres paramètres. \n Pour plus d'informations veuillez vous rendre sur le site internet."),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();  // Ferme le dialog
+                          _launchUrl();// )
+                        },
+                        child: const Text("Visiter la page d\'aide"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();  // Ferme le dialog
+                        },
+                        child: const Text("Fermer"),
+
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            icon: const Icon(Icons.help_outline),
           ),
           ],
 
@@ -241,10 +275,8 @@ class _ApplicationTypeSelectionState extends State<ApplicationTypeSelection> {
   const OnWelcomeScreen({super.key});
   build(BuildContext context) {
     return Scaffold(
-      body:
-        WelcomeScreen(),
-      floatingActionButton:
-        ConcatenedFloatingActionButton(),
+      body: WelcomeScreen(),
+      floatingActionButton: ConcatenedFloatingActionButton(),
     );
   }
 }
