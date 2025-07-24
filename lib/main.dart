@@ -13,8 +13,7 @@ class GanacheApp extends StatelessWidget {
         // debugShowCheckedModeBanner: false,
         theme: ThemeData(colorSchemeSeed: const Color(0xFFEB8C36)),
         home: const Navigation());
-  }
-}
+  } }
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
@@ -163,6 +162,8 @@ class CreateGanache extends StatelessWidget {
            SizedBox(height: 16),
            ApplicationTypeSelection(),
            SizedBox(height: 16),
+           GanacheIngredients(),
+           SizedBox(height: 16),
          ],
        )
       )
@@ -208,7 +209,7 @@ enum Application {Moulage, Cadrage, Autre}
               }).toList(),
             ),
           ]
-      );
+     );
 }
 }
   class GanacheNameInput extends StatelessWidget {
@@ -233,7 +234,6 @@ enum Application {Moulage, Cadrage, Autre}
   @override
   State<ApplicationTypeSelection> createState() => _ApplicationTypeSelectionState();
 }
-
 class _ApplicationTypeSelectionState extends State<ApplicationTypeSelection> {
   Application applicationView = Application.Moulage;
 
@@ -270,6 +270,73 @@ class _ApplicationTypeSelectionState extends State<ApplicationTypeSelection> {
       ]
       );
     }
+}
+class GanacheIngredients extends StatelessWidget {
+  const GanacheIngredients({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Exemple de données d’ingrédients
+    final ingredients = [
+      {'title': 'Chocolat', 'subtitle': 'Callebaut 58% min.', 'value': 1000},
+      {'title': 'Crème', 'subtitle': '35% MG', 'value': 900},
+      {'title': 'Chocolat', 'subtitle': 'Callebaut 58% min.', 'value': 1000},
+      {'title': 'Crème', 'subtitle': '35% MG', 'value': 900},
+      {'title': 'Chocolat', 'subtitle': 'Callebaut 58% min.', 'value': 1000},
+      {'title': 'Crème', 'subtitle': '35% MG', 'value': 900},
+      {'title': 'Chocolat', 'subtitle': 'Callebaut 58% min.', 'value': 1000},
+      {'title': 'Crème', 'subtitle': '35% MG', 'value': 900},
+      {'title': 'Chocolat', 'subtitle': 'Callebaut 58% min.', 'value': 1000},
+      {'title': 'Crème', 'subtitle': '35% MG', 'value': 900},
+      {'title': 'Chocolat', 'subtitle': 'Callebaut 58% min.', 'value': 1000},
+      {'title': 'Crème', 'subtitle': '35% MG', 'value': 900},
+      {'title': 'Chocolat', 'subtitle': 'Callebaut 58% min.', 'value': 1000},
+      {'title': 'Crème', 'subtitle': '35% MG', 'value': 900},
+      {'title': 'Chocolat', 'subtitle': 'Callebaut 58% min.', 'value': 1000},
+      {'title': 'Crème', 'subtitle': '35% MG', 'value': 900},
+      {'title': 'Chocolat', 'subtitle': 'Callebaut 58% min.', 'value': 1000},
+      {'title': 'Crème', 'subtitle': '35% MG', 'value': 900},
+      {'title': 'Chocolat', 'subtitle': 'Callebaut 58% min.', 'value': 1000},
+      {'title': 'Crème', 'subtitle': '35% MG', 'value': 900},
+      {'title': 'Chocolat', 'subtitle': 'Callebaut 58% min.', 'value': 1000},
+      {'title': 'Crème', 'subtitle': '35% MG', 'value': 900},
+      // Ajoute d’autres si besoin…
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "Liste des ingrédients",
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            Icon(Icons.add),
+          ],
+        ),
+        const SizedBox(height: 8),
+        // Génération dynamique de containers + ListTile
+        ...ingredients.map((ingredient) {
+          return Container(
+            margin: const EdgeInsets.symmetric(vertical: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surfaceContainerHighest,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: ListTile(
+              leading: const Icon(Icons.tablet),
+              title: Text("${ingredient['title']}"),
+              subtitle: Text("${ingredient['subtitle']}"),
+              trailing: Text("${ingredient['value']}"),
+            ),
+          );
+        }).toList(),
+      ],
+    );
+  }
 }
   class OnWelcomeScreen extends StatelessWidget {
   const OnWelcomeScreen({super.key});
