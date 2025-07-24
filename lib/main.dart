@@ -102,8 +102,16 @@ class _ConcatenedFloatingActionButtonState extends State<ConcatenedFloatingActio
   }
 }
 
-class CreateGanache extends StatelessWidget {
+class CreateGanache extends StatefulWidget {
   const CreateGanache({super.key});
+
+  @override
+  State<CreateGanache> createState() => _CreateGanacheState();
+}
+
+class _CreateGanacheState extends State<CreateGanache> {
+  bool _isLoading = false;
+  double _progressValue = 0.0;
 
   Future<void> _launchUrl() async {
     final Uri url = Uri.parse('https://flutter.dev');
@@ -114,7 +122,8 @@ class CreateGanache extends StatelessWidget {
 
 @override
  Widget build(BuildContext context) {
-    return Scaffold(
+    return
+      Scaffold(
       appBar: AppBar(
         title: const Text("Créer sa ganache"),
         actions: <Widget>[
@@ -139,7 +148,6 @@ class CreateGanache extends StatelessWidget {
                           Navigator.of(context).pop();  // Ferme le dialog
                         },
                         child: const Text("Fermer"),
-
                       ),
                     ],
                   );
@@ -149,9 +157,39 @@ class CreateGanache extends StatelessWidget {
             icon: const Icon(Icons.help_outline),
           ),
           ],
-
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(4.0),
+            child: LinearProgressIndicator(
+              value: _progressValue,
+              backgroundColor: Colors.grey,
+              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFEB8C36)),
+            ),
+          ),
       ),
-      body: SingleChildScrollView(
+          bottomNavigationBar: BottomAppBar(
+            elevation: 10,
+            child: Row(
+              children: [
+                IconButton(
+                  tooltip: "Rechercher des ingrédients",
+                  icon: const Icon(Icons.search),
+                  onPressed: () {},
+                ),
+                IconButton(tooltip: "Sauvegarder le brouillon", onPressed: (){}, icon: const Icon(Icons.bookmark_add))
+              ],
+            ),
+          ),
+          floatingActionButton: FloatingActionButton.extended(
+              heroTag: "Calcule",
+              label: Text("Calculer"),
+              icon: Icon(Icons.calculate),
+              backgroundColor: Color(0xFFEB8C36),
+              foregroundColor: Colors.white,
+              onPressed: () {},
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+          body:
+      SingleChildScrollView(
         padding: EdgeInsets.all(16),
        child: Column(
          crossAxisAlignment: CrossAxisAlignment.start,
@@ -234,7 +272,7 @@ enum Application {Moulage, Cadrage, Autre}
   @override
   State<ApplicationTypeSelection> createState() => _ApplicationTypeSelectionState();
 }
-class _ApplicationTypeSelectionState extends State<ApplicationTypeSelection> {
+  class _ApplicationTypeSelectionState extends State<ApplicationTypeSelection> {
   Application applicationView = Application.Moulage;
 
   @override
@@ -271,7 +309,7 @@ class _ApplicationTypeSelectionState extends State<ApplicationTypeSelection> {
       );
     }
 }
-class GanacheIngredients extends StatelessWidget {
+  class GanacheIngredients extends StatelessWidget {
   const GanacheIngredients({super.key});
 
   @override
@@ -313,7 +351,7 @@ class GanacheIngredients extends StatelessWidget {
               "Liste des ingrédients",
               style: Theme.of(context).textTheme.headlineSmall,
             ),
-            Icon(Icons.add),
+            Icon(Icons.add), // TODO rendre cliquable pour ajouter des ingrédients
           ],
         ),
         const SizedBox(height: 8),
@@ -327,10 +365,14 @@ class GanacheIngredients extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             child: ListTile(
-              leading: const Icon(Icons.tablet),
+              leading: const Icon(Icons.widgets),
               title: Text("${ingredient['title']}"),
               subtitle: Text("${ingredient['subtitle']}"),
-              trailing: Text("${ingredient['value']}"),
+              trailing: Text("${ingredient['value']}g",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),),
             ),
           );
         }).toList(),
@@ -338,7 +380,7 @@ class GanacheIngredients extends StatelessWidget {
     );
   }
 }
-  class OnWelcomeScreen extends StatelessWidget {
+class OnWelcomeScreen extends StatelessWidget {
   const OnWelcomeScreen({super.key});
   build(BuildContext context) {
     return Scaffold(
