@@ -47,43 +47,48 @@ class CalculateGanache extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
 
-      body: Column(
-        children: <Widget>[
-          Container(
-            margin: const EdgeInsets.all(10.0),
-            padding: const EdgeInsets.all(20.0),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceContainer,
-              borderRadius: BorderRadius.circular(15),
-              //border: Border.all(width: 1),
-            ),
-            child: Column(
-              children: [
-                Text(
+      body: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
                   "État de correction",
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                Divider(),
-                Text(
-                  "Indications :",
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                Container(
-                  padding: const EdgeInsets.all(20.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                   // border: Border.all(width: 1),
-                    color: Theme.of(context).colorScheme.primaryContainer,
+              ),
+              Container(
+                margin: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(20.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(width: 1),
+                      // border: Border.all(width: 1),
+                      color: Theme.of(context).colorScheme.primaryContainer,
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.info_outline),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child:
+                          Text(
+                            "Votre ganache est idéale pour une application en cadre.",
+                          ),
+                        ),
+
+                      ]
+                    ),
+
                   ),
-                  child: Text(
-                    "Votre ganache est idéale pour la mettre en cadre.",
-                  ),
-                ),
-              ],
-            ),
+
+              // We are here
+              Indicator()
+            ],
           ),
-          // We are here
-        ],
+        ),
       ),
     );
   }
