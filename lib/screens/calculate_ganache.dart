@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:morphable_shape/morphable_shape.dart';
 import 'create_ganache.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
 
@@ -62,30 +61,57 @@ class CalculateGanache extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.all(10.0),
                 padding: const EdgeInsets.all(20.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(width: 1),
-                      // border: Border.all(width: 1),
-                      color: Theme.of(context).colorScheme.primaryContainer,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(width: 1),
+                  // border: Border.all(width: 1),
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.sentiment_very_satisfied),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        "Votre ganache est idéale pour une application en cadre.",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
-                    child: Row(
-                      children: [
-                        Icon(Icons.info_outline),
-                        SizedBox(width: 10),
-                        Expanded(
-                          child:
-                          Text(
-                            "Votre ganache est idéale pour une application en cadre.",
+                  ],
+                ),
+              ),
+              Indicator(),
+              Container(
+                margin: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(width: 1),
+                  // border: Border.all(width: 1),
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                ),
+                child: SizedBox(
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.info_outline),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              "Les informations calculées par Ganache.lab sont à titre indicatif. Des variations peuvent survenir lors de la préparation réelle des recettes.",
+                            ),
                           ),
-                        ),
-
-                      ]
-                    ),
-
+                        ],
+                      ),
+                      Divider(),
+                      Text(
+                        "Pour améliorer votre ganache appuyez sur le bouton orange, ci dessous.",
+                      ),
+                    ],
                   ),
-
-              // We are here
-              Indicator()
+                ),
+              ),
             ],
           ),
         ),

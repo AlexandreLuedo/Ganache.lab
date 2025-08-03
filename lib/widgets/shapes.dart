@@ -62,7 +62,7 @@ class MessageShapeBorder extends OutlinedBorder {
   ShapeBorder? lerpTo(ShapeBorder? other, double t) {
     if (other is MessageShapeBorder) {
       return MessageShapeBorder(
-        side: BorderSide.lerp(side, other.side, t)!,
+        side: BorderSide.lerp(side, other.side, t),
         borderRadius: lerpDouble(borderRadius, other.borderRadius, t)!,
         weight: lerpDouble(weight, other.weight, t)!,
       );
@@ -74,7 +74,7 @@ class MessageShapeBorder extends OutlinedBorder {
   ShapeBorder? lerpFrom(ShapeBorder? other, double t) {
     if (other is MessageShapeBorder) {
       return MessageShapeBorder(
-        side: BorderSide.lerp(other.side, side, t)!,
+        side: BorderSide.lerp(other.side, side, t),
         borderRadius: lerpDouble(other.borderRadius, borderRadius, t)!,
         weight: lerpDouble(other.weight, weight, t)!,
       );

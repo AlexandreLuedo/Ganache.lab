@@ -7,7 +7,7 @@ class RecipeList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: create_fab(),
+      floatingActionButton: createFab(),
       appBar: AppBar(
         // centerTitle: true,
         title: const Text(

@@ -7,7 +7,7 @@ class OnWelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: WelcomeScreen(),
-      floatingActionButton: create_fab(),
+      floatingActionButton: createFab(),
     );
   }
 }

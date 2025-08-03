@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/screens/create_ganache.dart';
-class create_fab extends StatelessWidget {
-  const create_fab ({super.key});
-  build(BuildContext context) {
+class createFab extends StatelessWidget {
+
+  const createFab ({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return FloatingActionButton.extended(
       heroTag: "createGanache",
       label: const Text("Créer sa ganache"),
