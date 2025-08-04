@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/screens/create_ganache.dart';
-class createFab extends StatelessWidget {
+class createFab extends StatefulWidget {
 
   const createFab ({super.key});
 
+  @override
+  State<createFab> createState() => _createFabState();
+}
+
+class _createFabState extends State<createFab> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
@@ -13,7 +18,7 @@ class createFab extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => CreateGanache()),
+          MaterialPageRoute(builder: (context) => const CreateGanache()),
         );
       },
       backgroundColor: Color(0xFFEB8C36),

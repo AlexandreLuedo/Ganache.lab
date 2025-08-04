@@ -22,7 +22,7 @@ class CalculateGanache extends StatelessWidget {
             IconButton(
               tooltip: "Modifier la ganache",
               onPressed: () {
-                Navigator.push(
+                Navigator.pop(
                   context,
                   MaterialPageRoute(builder: (context) => CreateGanache()),
                   // TODO va pas fonctionner (je pense)
@@ -67,7 +67,7 @@ class CalculateGanache extends StatelessWidget {
                   // border: Border.all(width: 1),
                   color: Theme.of(context).colorScheme.primaryContainer,
                 ),
-                child: Row(
+                child: const Row(
                   children: [
                     Icon(Icons.sentiment_very_satisfied),
                     SizedBox(width: 10),
@@ -93,7 +93,7 @@ class CalculateGanache extends StatelessWidget {
                 child: SizedBox(
                   child: Column(
                     children: [
-                      Row(
+                      const Row(
                         children: [
                           Icon(Icons.info_outline),
                           SizedBox(width: 10),

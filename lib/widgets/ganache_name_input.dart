@@ -7,11 +7,11 @@ class GanacheNameInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
-        prefixIcon: const Icon(Icons.edit),
+        prefixIcon: const Icon(Icons.label),
         labelText: "Nom de la ganache",
         // TODO Implémenter ChocolateTypeValue remplace chocolat
         hintText: "Ganache au chocolat",
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
       ),
     );
   }
