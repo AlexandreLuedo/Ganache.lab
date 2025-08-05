@@ -138,10 +138,8 @@ class _CreateGanacheState extends State<CreateGanache> {
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      body: SingleChildScrollView(
+      body: ListView(
         padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             GanacheNameInput(),
             SizedBox(height: 16),
@@ -153,7 +151,6 @@ class _CreateGanacheState extends State<CreateGanache> {
             SizedBox(height: 16),
           ],
         ),
-      ),
-    );
+      );
   }
 }

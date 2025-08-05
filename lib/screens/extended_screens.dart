@@ -18,6 +18,41 @@ class ExtendedHumidity extends StatelessWidget {
           ],
         ),
       ),
+      body: ListView(
+        padding: EdgeInsets.all(10.0),
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(10.0),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surfaceContainer,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Humiditée relativement élevée !",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                Text("63%", style: Theme.of(context).textTheme.displayLarge),
+                Divider(),
+              ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 30.0),
+            padding: const EdgeInsets.all(10.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: Theme.of(context).colorScheme.primary),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [Text(""), ListTile()],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
