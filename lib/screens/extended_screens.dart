@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'glossary.dart';
 
 // TODO faire en sorte via provider de changer le nom de chaque appBar en fonction du nom de son "intinéraire de départ" (la route qui l'a emené ici).
 // TODO faire également correspondre les icones aux cartes.
@@ -17,6 +18,27 @@ class ExtendedHumidity extends StatelessWidget {
             const Text("Humidité"),
           ],
         ),
+        actions: [
+          // Ajouter ça aux trois autres indicators
+          // Attention à la répétition !! (il y a son homonyme originel dans "welcome_screen.dart :50"
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Glossary()),
+              );
+            },
+            icon: IconButton(
+              color: Theme.of(context).colorScheme.tertiary,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Glossary()),
+                );
+              },
+              icon: const Icon(Icons.book_outlined),
+            ),
+          ),        ]
       ),
       body: ListView(
         padding: EdgeInsets.all(10.0),
@@ -35,7 +57,6 @@ class ExtendedHumidity extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 Text("63%", style: Theme.of(context).textTheme.displayLarge),
-                Divider(),
               ],
             ),
           ),
@@ -48,7 +69,7 @@ class ExtendedHumidity extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Text(""), ListTile()],
+              children: [Text("jmkjlm"), ListTile()],
             ),
           ),
         ],

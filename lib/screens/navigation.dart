@@ -33,7 +33,7 @@ class _NavigationState extends State<Navigation> {
           ),
           NavigationDestination(
             selectedIcon: Icon(
-              Icons.menu_book,
+              Icons.menu_book_outlined,
               // Icons.collections_bookmark,
               color: Colors.white,
             ),
