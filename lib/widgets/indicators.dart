@@ -11,6 +11,7 @@ class Indicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.center,
       margin: const EdgeInsets.all(10.0),
       padding: const EdgeInsets.all(6.3),
       decoration: BoxDecoration(
@@ -304,7 +305,7 @@ class Indicator extends StatelessWidget {
                           value: 0.75,
                           onChanged: (value) {},
                           divisions: 4,
-                          label: "03/08/2025",
+                          label: "3 mois",
                         ),
                       ),
                       Row(
