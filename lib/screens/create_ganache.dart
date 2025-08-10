@@ -1,3 +1,5 @@
+// Affiche la création de ganache.
+// Appel les différents widgets de paramétrage pour la ganache ~/ganache_dot_first/lib/widgets/...
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'calculate_ganache.dart';

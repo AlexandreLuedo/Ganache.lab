@@ -1,3 +1,4 @@
+// Selectionneur d'utilisation de la ganache via des segmented buttons
 import 'package:flutter/material.dart';
 
 class ApplicationTypeSelection extends StatefulWidget {

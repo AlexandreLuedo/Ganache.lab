@@ -1,3 +1,4 @@
+// Retourne le nom de la ganache
 import 'package:flutter/material.dart';
 
 class GanacheNameInput extends StatelessWidget {

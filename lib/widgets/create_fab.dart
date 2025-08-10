@@ -1,3 +1,4 @@
+// FAB "+ Créer sa ganache"
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/screens/create_ganache.dart';
 class createFab extends StatefulWidget {

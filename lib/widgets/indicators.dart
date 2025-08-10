@@ -1,3 +1,4 @@
+// Ce fichier retourne les indicateurs/informations lors d'un calcul de ganache (d'où le nom indicators).
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ganache_lab/screens/screens_exportation_file.dart';

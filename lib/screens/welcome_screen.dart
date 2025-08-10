@@ -1,6 +1,8 @@
+// Affiche la page principale
 import 'package:flutter/material.dart';
+import 'package:ganache_lab/widgets/glossary_button.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
-import 'package:ganache_lab/screens/glossary.dart';
+
 
 class OnWelcomeScreen extends StatelessWidget {
   const OnWelcomeScreen({super.key});
@@ -47,24 +49,7 @@ class WelcomeScreen extends StatelessWidget {
               ],
             ),
           ),
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Glossary()),
-              );
-            },
-            icon: IconButton(
-              color: Theme.of(context).colorScheme.tertiary,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Glossary()),
-                );
-              },
-              icon: const Icon(Icons.book_outlined),
-            ),
-          ),
+         GlossaryButton()
         ],
       ),
       body: Center(

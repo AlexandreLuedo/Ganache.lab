@@ -1,3 +1,4 @@
+// Affiche le résultat d'un calcul de ganache. Appelle les indicators.
 import 'package:flutter/material.dart';
 import 'create_ganache.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
