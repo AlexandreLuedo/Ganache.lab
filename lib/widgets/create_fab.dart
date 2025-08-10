@@ -1,15 +1,15 @@
 // FAB "+ Créer sa ganache"
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/screens/create_ganache.dart';
-class createFab extends StatefulWidget {
+class CreateFab extends StatefulWidget {
 
-  const createFab ({super.key});
+  const CreateFab ({super.key});
 
   @override
-  State<createFab> createState() => _createFabState();
+  State<CreateFab> createState() => _CreateFabState();
 }
 
-class _createFabState extends State<createFab> {
+class _CreateFabState extends State<CreateFab> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
