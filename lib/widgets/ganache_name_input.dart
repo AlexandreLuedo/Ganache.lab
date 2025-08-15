@@ -7,6 +7,7 @@ class GanacheNameInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      autofocus: true,
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.label),
         labelText: "Nom de la ganache",
