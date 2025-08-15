@@ -1,0 +1,37 @@
+#+title: Project
+* Todo
+** TODO Renseigner l'explication d'humidité :extendedHumidity:
+
+** TODO Renseigner l'explication du pouvoir sucrant :extendedSweetening:
+
+** TODO Renseigner l'explication de la texture :extendedSweetening:
+
+** TODO Renseigner l'explication de la conservation :extendedSweetening:
+
+** TODO Ajouter une nouvelle page :Correction:
+Cette page s'affiche tel une todo-list, où l'utilisateur doit valider ou non les corrections proposés par le logiciel.
+*** TODO Titre de la page "Phase de correction" :TitleCorrection:Correction:
+**** TODO Utiliser route :TitleCorrection:
+
+*** TODO Implémenter le nom de la ganache :NameCorrection:Correction:
+Ajouter en "TODO" implémentation via provider
+
+*** TODO Implémenter un encadré pour le pourcentage :TasksCorrection:PercentRecommendationCorrection:Correction:
+
+*** TODO Impl. des modifications d'ingrédients :TasksCorrection:ModificationIngredientCorrection:Correction:
+
+*** TODO Impl. de la conservation avec possibilité d'extension ou diminution de la DLC :TasksCorrection:DLCCorrection:Correction:
+
+*** TODO FAB SaveIcon :Correction:
+*** TODO bottomBar Share, Modify. :Correction:Correction:
+* Notes
+* Questionnaires
+** Questions en vrac
+| Questions                                                                          | Réponses multiples                                                                                                                                     | Réponses |
+|------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+----------|
+| Parmis les spécifications suivantes lequels apporterez-vous le plus d'importance ? | 1. Synchronisation & fonctionnement de l'application sur différentes plateformes (ex: Windows, MacOS, iPhone, Android)                                 |          |
+|                                                                                    | 2. Interface pratique est agréable visuellement                                                                                                        |          |
+|                                                                                    | 3. Possibilitée de calculs de recettes pour une optimisation financière                                                                                |          |
+|                                                                                    | 4. Possibilitées de calculs avec des règles précises (ex: uniquement choc origines, ingrédients bios, sans sucres, peu de MG, peu de pouvoir sucrant.) |          |
+|                                                                                    | 5. Calcul de recettes en fonction de la zone géographique et de la météo                                                                               |          |
+|                                                                                    | 6. Stockage de recettes sur l'application et exportation de celle-ci en plusieurs formats                                                          |          |
