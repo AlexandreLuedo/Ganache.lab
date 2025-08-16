@@ -1,6 +1,6 @@
 // Affiche le résultat d'un calcul de ganache. Appelle les indicators.
 import 'package:flutter/material.dart';
-import 'create_ganache.dart';
+import 'screens_exportation_file.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
 
 class CalculateGanache extends StatelessWidget {
@@ -42,7 +42,10 @@ class CalculateGanache extends StatelessWidget {
         backgroundColor: Color(0xFFEB8C36),
         foregroundColor: Colors.white,
         onPressed: () {
-          // TODO à implémenter
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Correction()),
+          );
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
