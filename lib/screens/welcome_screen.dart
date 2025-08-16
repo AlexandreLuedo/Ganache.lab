@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:ganache_lab/widgets/glossary_button.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
 
-
 class OnWelcomeScreen extends StatelessWidget {
   const OnWelcomeScreen({super.key});
 
@@ -49,7 +48,7 @@ class WelcomeScreen extends StatelessWidget {
               ],
             ),
           ),
-         GlossaryButton()
+          GlossaryButton(),
         ],
       ),
       body: Center(
