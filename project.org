@@ -1,17 +1,17 @@
 #+title: Project
 * Todo
-** TODO Renseigner l'explication d'humidité :extendedHumidity:
+** WAIT Renseigner l'explication du pouvoir sucrant :extendedSweetening:
 
-** TODO Renseigner l'explication du pouvoir sucrant :extendedSweetening:
+** WAIT Renseigner l'explication d'humidité :extendedHumidity:
 
-** TODO Renseigner l'explication de la texture :extendedSweetening:
+** WAIT Renseigner l'explication de la texture :extendedSweetening:
 
-** TODO Renseigner l'explication de la conservation :extendedSweetening:
+** WAIT Renseigner l'explication de la conservation :extendedSweetening:
 
 ** TODO Ajouter une nouvelle page :Correction:
 Cette page s'affiche tel une todo-list, où l'utilisateur doit valider ou non les corrections proposés par le logiciel.
 *** TODO Titre de la page "Phase de correction" :TitleCorrection:Correction:
-**** TODO Utiliser route :TitleCorrection:
+**** DONE Utiliser route :TitleCorrection:
 
 *** TODO Implémenter le nom de la ganache :NameCorrection:Correction:
 Ajouter en "TODO" implémentation via provider
@@ -24,7 +24,59 @@ Ajouter en "TODO" implémentation via provider
 
 *** TODO FAB SaveIcon :Correction:
 *** TODO bottomBar Share, Modify. :Correction:Correction:
+*** TODO Container réutilisables
+**** TODO Créer une classe CustomContainer en stateless
+**** TODO Déclarer :
+#+begin_src dart
+import 'package:flutter/material.dart';
+
+class CustomContainer extends StatelessWidget {
+  final Color color;
+  final double padding;
+  final double margin;
+  final Widget child;
+
+  CustomContainer({
+    required this.color,
+    required this.padding,
+    required this.margin,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: color,
+      padding: EdgeInsets.all(padding),
+      margin: EdgeInsets.all(margin),
+      child: child,
+    );
+  }
+}
+#+end_src
+**** TODO Remplacer les container par custom container :
+#+begin_src dart
+CustomContainer(
+  color: Colors.blue,
+  padding: 16.0,
+  margin: 8.0,
+  child: Text('Premier Container'),
+),
+
+CustomContainer(
+  color: Colors.green,
+  padding: 12.0,
+  margin: 4.0,
+  child: Text('Second Container'),
+),
+#+end_src
+*** TODO Rassembler les floatingActrionButton en model :12mn:
+*** TODO Rassembler les BottomAppBar :7mn:
 * Notes
+**** Modification d'écriture des ExtendedWidgets
+Il serai plus interessant de générer chaque widget extended à la chaîne et y ajouter des données en paramètres (titres, icons, explications).
+Utiliser[[TODO Déclarer :][ une classe personnalisée]]
+
 * Questionnaires
 ** Questions en vrac
 | Questions                                                                          | Réponses multiples                                                                                                                                     | Réponses |

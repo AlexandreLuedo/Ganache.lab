@@ -11,6 +11,7 @@ class CalculateGanache extends StatelessWidget {
     return Scaffold(
       // TODO Remplacer la ganache par une variable récupérée grâce au nom.
       appBar: AppBar(title: const Text("Ganache chocolat Callebaut 56%")),
+      // TODO Rassembler les BottomAppbar
       bottomNavigationBar: BottomAppBar(
         elevation: 10,
         child: Row(
@@ -58,7 +59,7 @@ class CalculateGanache extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  "État de correction",
+                  "État de calcul",
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
@@ -78,7 +79,7 @@ class CalculateGanache extends StatelessWidget {
                     Expanded(
                       child: Text(
                         "Votre ganache est idéale pour une application en cadre.",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
