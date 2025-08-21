@@ -12,7 +12,7 @@ class GanacheNameInput extends StatelessWidget {
         prefixIcon: const Icon(Icons.label),
         labelText: "Nom de la ganache",
         // TODO Implémenter ChocolateTypeValue remplace chocolat
-        hintText: "Ganache au chocolat",
+        hintText: "Ex: Ganache au chocolat",
         border: const OutlineInputBorder(),
       ),
     );
