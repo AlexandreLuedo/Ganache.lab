@@ -1,9 +1,9 @@
 // FAB "+ Créer sa ganache"
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/screens/create_ganache.dart';
-class CreateFab extends StatefulWidget {
 
-  const CreateFab ({super.key});
+class CreateFab extends StatefulWidget {
+  const CreateFab({super.key});
 
   @override
   State<CreateFab> createState() => _CreateFabState();
@@ -22,7 +22,7 @@ class _CreateFabState extends State<CreateFab> {
           MaterialPageRoute(builder: (context) => const CreateGanache()),
         );
       },
-      backgroundColor: Color(0xFFEB8C36),
+      backgroundColor: const Color(0xFFEB8C36),
       foregroundColor: Colors.white,
     );
   }

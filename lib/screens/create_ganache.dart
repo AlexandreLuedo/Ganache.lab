@@ -11,6 +11,7 @@ class CreateGanache extends StatefulWidget {
   @override
   State<CreateGanache> createState() => _CreateGanacheState();
 }
+
 class _CreateGanacheState extends State<CreateGanache> {
   double progressValue = 0.0;
 
@@ -83,7 +84,8 @@ class _CreateGanacheState extends State<CreateGanache> {
                     return AlertDialog(
                       title: const Text("Rechercher un Ingrédient"),
                       content: const Text(
-                        /* TODO Ajouter la recherche d\'ingrédients */ "",
+                        /* TODO Ajouter la recherche d\'ingrédients */
+                        "",
                       ),
                       actions: <Widget>[
                         TextButton(
@@ -142,17 +144,17 @@ class _CreateGanacheState extends State<CreateGanache> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       body: ListView(
         padding: EdgeInsets.all(16),
-          children: [
-            GanacheNameInput(),
-            SizedBox(height: 16),
-            GanacheTypeSelection(),
-            SizedBox(height: 16),
-            ApplicationTypeSelection(),
-            SizedBox(height: 16),
-            GanacheIngredients(),
-            SizedBox(height: 16),
-          ],
-        ),
-      );
+        children: [
+          GanacheNameInput(),
+          SizedBox(height: 16),
+          GanacheTypeSelection(),
+          SizedBox(height: 16),
+          ApplicationTypeSelection(),
+          SizedBox(height: 16),
+          GanacheIngredients(),
+          SizedBox(height: 16),
+        ],
+      ),
+    );
   }
 }
