@@ -1,7 +1,7 @@
 // Affiche la page principale
 import 'package:flutter/material.dart';
-import 'package:ganache_lab/widgets/glossary_button.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OnWelcomeScreen extends StatelessWidget {
   const OnWelcomeScreen({super.key});
@@ -14,6 +14,12 @@ class OnWelcomeScreen extends StatelessWidget {
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
+  Future<void> _launchUrl() async {
+    final Uri url = Uri.parse("https://www.microsoft.com/en-us/microsoft-365/online-surveys-polls-quizzes");
+    if (!await launchUrl(url)) {
+      throw Exception("Impossible d'$url");
+    }
+  }
 
   @override
   build(BuildContext context) {
@@ -51,32 +57,71 @@ class WelcomeScreen extends StatelessWidget {
           GlossaryButton(),
         ],
       ),
-      body: Center(
-        // #docregion text
-        child: RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(
-            text: 'Bienvenue dans \n',
-            style: TextStyle(fontSize: 20, color: Colors.grey),
-            children: const <TextSpan>[
-              TextSpan(
-                text: 'Ganache',
-                style: TextStyle(
-                  color: Color(0xFF422322),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 32,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Center(
+              // #docregion text
+              child: Padding(
+                padding: EdgeInsets.only(top: 100, bottom: 100),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: 'Bienvenue dans \n',
+                    style: TextStyle(fontSize: 20, color: Colors.grey),
+                    children: const <TextSpan>[
+                      TextSpan(
+                        text: 'Ganache',
+                        style: TextStyle(
+                          color: Color(0xFF422322),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 32,
+                        ),
+                      ),
+                      TextSpan(
+                        text: '.lab',
+                        style: TextStyle(
+                          color: Color(0xFFEB8C36),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 32,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              TextSpan(
-                text: '.lab',
-                style: TextStyle(
-                  color: Color(0xFFEB8C36),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 32,
-                ),
+            ),
+            CustomContainer(
+              borderRadius: 12,
+              borderWidth: 1,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.assignment),
+                      SizedBox(width: 10),
+                      Text(
+                        "Formulaire",
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 30),
+                  Text("Ce logiciel s’inscrit dans la démarche de mon mémoire pour le BTM Chocolatier‑Confiseur que je prépare.\nMon mémoire porte sur la question suivante : « Comment rendre accessible la création et l’équilibrage de la ganache ».\nPour cela, j’ai besoin d’obtenir des informations et des réponses à différentes questions afin de toucher le plus grand nombre de professionnels possible.\nJ’ai donc choisi de vous proposer un questionnaire en ligne, facile d’accès et rapide à remplir.\nGrâce à votre collaboration, les résultats seront multiples : des données précieuses pour enrichir mon mémoire, un apprentissage personnel sur les besoins des artisans chocolatiers, et un recueil d’idées permettant d’améliorer ce tout‑jeune logiciel.\nJe vous remercie vivement pour votre aide et vous invite à cliquer sur le bouton ci‑dessous, qui vous dirigera vers le formulaire."),
+                  SizedBox(height: 10),
+                  FilledButton.icon(
+                    onPressed: () {// Ferme le dialog
+                      _launchUrl();
+                    },
+                    icon: Icon(Icons.open_in_new),
+                    label: const Text("Compléter"),
+                    iconAlignment: IconAlignment.end,
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

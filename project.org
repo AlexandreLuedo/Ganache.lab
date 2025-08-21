@@ -16,14 +16,14 @@ Cette page s'affiche tel une todo-list, où l'utilisateur doit valider ou non le
 *** TODO Implémenter le nom de la ganache :NameCorrection:Correction:
 Ajouter en "TODO" implémentation via provider
 
-*** TODO Implémenter un encadré pour le pourcentage :TasksCorrection:PercentRecommendationCorrection:Correction:
+*** DONE Implémenter un encadré pour le pourcentage :TasksCorrection:PercentRecommendationCorrection:Correction:
 
 *** TODO Impl. des modifications d'ingrédients :TasksCorrection:ModificationIngredientCorrection:Correction:
 
 *** TODO Impl. de la conservation avec possibilité d'extension ou diminution de la DLC :TasksCorrection:DLCCorrection:Correction:
 
-*** TODO FAB SaveIcon :Correction:
-*** TODO bottomBar Share, Modify. :Correction:Correction:
+*** DONE FAB SaveIcon :Correction:
+*** DONE bottomBar Share, Modify. :Correction:Correction:
 *** TODO Container réutilisables
 **** TODO Créer une classe CustomContainer en stateless
 **** TODO Déclarer :

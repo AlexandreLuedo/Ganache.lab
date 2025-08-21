@@ -97,16 +97,6 @@ class _CorrectionState extends State<Correction> {
                         ),
                       ],
                     ),
-                    // Positioned(
-                    //   bottom: 1,
-                    //   right: 10,
-                    //   child: FilledButton.icon(
-                    //     onPressed: () {},
-                    //     icon: Icon(Icons.check),
-                    //     label: const Text("Résoudre"),
-                    //     iconAlignment: IconAlignment.end,
-                    //   ),
-                    // ),
                   ],
                 ),
               ),

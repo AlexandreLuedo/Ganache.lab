@@ -42,7 +42,7 @@ class _CreateGanacheState extends State<CreateGanache> {
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).pop(); // Ferme le dialog
-                          _launchUrl(); // )
+                          _launchUrl();
                         },
                         child: const Text("Visiter la page d'aide"),
                       ),
