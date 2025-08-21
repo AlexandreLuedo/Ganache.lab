@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'screens_exportation_file.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
+import 'package:ganache_lab/models/change_notifier_ganache_name_input.dart';
+import 'package:provider/provider.dart';
 
 class CalculateGanache extends StatelessWidget {
   const CalculateGanache({super.key});
@@ -10,7 +12,9 @@ class CalculateGanache extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // TODO Remplacer la ganache par une variable récupérée grâce au nom.
-      appBar: AppBar(title: const Text("Ganache chocolat Callebaut 56%")),
+      appBar: AppBar(title: Consumer<TitleModel>(
+          builder: (_, model, _) => Text(model.title.isEmpty ? "Votre Ganache" : model.title),),
+      ),
       // TODO Rassembler les BottomAppbar
       bottomNavigationBar: BottomAppBar(
         elevation: 10,

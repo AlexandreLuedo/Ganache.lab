@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/screens/screens_exportation_file.dart';
+import 'package:provider/provider.dart';
+import 'package:ganache_lab/models/change_notifier_ganache_name_input.dart';
 
-void main() => runApp(const GanacheApp());
+void main() => runApp(
+ChangeNotifierProvider(create: (_) => TitleModel(),
+child: const GanacheApp(),
+)
+);
 
 class GanacheApp extends StatelessWidget {
   const GanacheApp({super.key});

@@ -36,7 +36,7 @@ class _CreateGanacheState extends State<CreateGanache> {
                   return AlertDialog(
                     title: const Text("Aide"),
                     content: const Text(
-                      "Dans cette page vous devez compléter toutes les informations proposés. \n Il n'est pas encore possible d'ajouter ses propres paramètres. \n Pour plus d'informations veuillez vous rendre sur le site internet.",
+                      "Dans la page \"Créer sa ganache\", vous devez compléter toutes les informations proposés. \n Il n'est pas encore possible d'ajouter ses propres paramètres. \n Pour plus d'informations veuillez vous rendre sur le site internet.",
                     ),
                     actions: <Widget>[
                       TextButton(

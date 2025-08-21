@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens_exportation_file.dart';
+import 'package:provider/provider.dart';
+import 'package:ganache_lab/models/change_notifier_ganache_name_input.dart';
 
 class Correction extends StatefulWidget {
   const Correction({super.key});
@@ -12,11 +14,14 @@ class _CorrectionState extends State<Correction> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Ganache chocolat Callebaut")),
+      appBar: AppBar(title: Consumer<TitleModel>(
+        builder: (_, model, __) => Text(model.title.isEmpty ? "Votre Ganache" : model.title),),),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFFEB8C36),
         foregroundColor: Colors.white,
         onPressed: () {
+          // ATTENTION à quand il faudra ajouter le stockage de TitleModel dans une recette !
+          context.read<TitleModel>().reset();
           Navigator.popUntil(
             context,
               (route) => route.isFirst,

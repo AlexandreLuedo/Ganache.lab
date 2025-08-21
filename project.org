@@ -73,9 +73,21 @@ CustomContainer(
 *** TODO Rassembler les floatingActrionButton en model :12mn:
 *** TODO Rassembler les BottomAppBar :7mn:
 * Notes
-**** Modification d'écriture des ExtendedWidgets
+** Modification d'écriture des ExtendedWidgets
 Il serai plus interessant de générer chaque widget extended à la chaîne et y ajouter des données en paramètres (titres, icons, explications).
 Utiliser[[TODO Déclarer :][ une classe personnalisée]]
+** Formulaire
+*** Original
+Ce logiciel s'inscrit dans la démarche de mon mémoire pour le BTM Chocolatier-Confiseur que je prépare. \n Mon mémoire portant sur la question suivante : "Comment rendre accessible l’accès a la création et l’équilibrage de la ganache". Pour ce faire, j'ai besoin d'obtenir des informations, et des réponses à différentes questions. Pour toucher le plus de professionnels possible. J'ai choisi de vous proposer un questionnaire en ligne facilement accessible et rapide à remplir. Grâce à votre collaboration, les résultat seront multiples : Gains de données pour agrémenter mon mémoire, apprentissage personnel sur les besoins des artisants chocolatiers, rassemblements d'idée pour apporter des améliorations à ce très jeune logiciel.
+Je vous remercie encore pour votre aide et vous enjoins à cliquer sur le bouton ci-dessous qui vous dirigera vers mon formulaire !
+*** Corrigé par lumo
+Ce logiciel s’inscrit dans la démarche de mon mémoire pour le BTM Chocolatier‑Confiseur que je prépare.\n
+Mon mémoire porte sur la question suivante : « Comment rendre accessible la création et l’équilibrage de la ganache ».\n
+Pour cela, j’ai besoin d’obtenir des informations et des réponses à différentes questions afin de toucher le plus grand nombre de professionnels possible.\n
+J’ai donc choisi de vous proposer un questionnaire en ligne, facile d’accès et rapide à remplir.\n
+Grâce à votre collaboration, les résultats seront multiples : des données précieuses pour enrichir mon mémoire, un apprentissage personnel sur les besoins des artisans chocolatiers, et un recueil d’idées permettant d’améliorer ce tout‑jeune logiciel.\n
+Je vous remercie vivement pour votre aide et vous invite à cliquer sur le bouton ci‑dessous, qui vous dirigera vers le formulaire !
+
 
 * Questionnaires
 ** Questions en vrac
