@@ -1,5 +1,10 @@
 #+title: Project
 * Todo
+** TODO Ajouter dans les paramètres l'option de changement de la température d'utilisation. :parameters:FabricationTemperature:
+** TODO Ajouter les différentes méthodes de fabrication dans les paramètres via une liste. :parameters:FabricationMethod:
+** TODO Dans ~create_ganache.dart~ déclarer le widget ~FabricationMethod()~. Ce widget stock en ~maps~ les différentes techniques de fabrication, pour le moment. :FabricationMethod:CreateGanache:
+*** TODO Faire une liste déroulante pour selectionner la méthode de fabrication. (la méthode peux être ajoutée depuis les paramètresk)
+
 ** WAIT Renseigner l'explication du pouvoir sucrant :extendedSweetening:
 
 ** WAIT Renseigner l'explication d'humidité :extendedHumidity:
@@ -8,25 +13,21 @@
 
 ** WAIT Renseigner l'explication de la conservation :extendedSweetening:
 
-** TODO Ajouter une nouvelle page :Correction:
+** DONE Ajouter une nouvelle page :Correction:
 Cette page s'affiche tel une todo-list, où l'utilisateur doit valider ou non les corrections proposés par le logiciel.
-*** TODO Titre de la page "Phase de correction" :TitleCorrection:Correction:
+*** DONE Titre de la page "Phase de correction" :TitleCorrection:Correction:
 **** DONE Utiliser route :TitleCorrection:
 
-*** TODO Implémenter le nom de la ganache :NameCorrection:Correction:
+*** DONE Implémenter le nom de la ganache :NameCorrection:Correction:
 Ajouter en "TODO" implémentation via provider
-
 *** DONE Implémenter un encadré pour le pourcentage :TasksCorrection:PercentRecommendationCorrection:Correction:
-
-*** TODO Impl. des modifications d'ingrédients :TasksCorrection:ModificationIngredientCorrection:Correction:
-
-*** TODO Impl. de la conservation avec possibilité d'extension ou diminution de la DLC :TasksCorrection:DLCCorrection:Correction:
-
+** TODO Impl. des modifications d'ingrédients :TasksCorrection:ModificationIngredientCorrection:Correction:
+** TODO Impl. de la conservation avec possibilité d'extension ou diminution de la DLC :TasksCorrection:DLCCorrection:Correction:
 *** DONE FAB SaveIcon :Correction:
 *** DONE bottomBar Share, Modify. :Correction:Correction:
-*** TODO Container réutilisables
-**** TODO Créer une classe CustomContainer en stateless
-**** TODO Déclarer :
+** TODO Container réutilisables
+*** DONE Créer une classe CustomContainer en stateless
+*** DONE Déclarer :
 #+begin_src dart
 import 'package:flutter/material.dart';
 
@@ -54,7 +55,7 @@ class CustomContainer extends StatelessWidget {
   }
 }
 #+end_src
-**** TODO Remplacer les container par custom container :
+*** TODO Remplacer les container par custom container :
 #+begin_src dart
 CustomContainer(
   color: Colors.blue,
@@ -70,8 +71,8 @@ CustomContainer(
   child: Text('Second Container'),
 ),
 #+end_src
-*** TODO Rassembler les floatingActrionButton en model :12mn:
-*** TODO Rassembler les BottomAppBar :7mn:
+** TODO Rassembler les floatingActrionButton en model :12mn:
+** TODO Rassembler les BottomAppBar :7mn:
 * Notes
 ** Modification d'écriture des ExtendedWidgets
 Il serai plus interessant de générer chaque widget extended à la chaîne et y ajouter des données en paramètres (titres, icons, explications).
@@ -87,7 +88,6 @@ Pour cela, j’ai besoin d’obtenir des informations et des réponses à diffé
 J’ai donc choisi de vous proposer un questionnaire en ligne, facile d’accès et rapide à remplir.\n
 Grâce à votre collaboration, les résultats seront multiples : des données précieuses pour enrichir mon mémoire, un apprentissage personnel sur les besoins des artisans chocolatiers, et un recueil d’idées permettant d’améliorer ce tout‑jeune logiciel.\n
 Je vous remercie vivement pour votre aide et vous invite à cliquer sur le bouton ci‑dessous, qui vous dirigera vers le formulaire !
-
 
 * Questionnaires
 ** Questions en vrac
