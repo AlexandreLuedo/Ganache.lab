@@ -1,6 +1,7 @@
 // Affiche la page principale
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class OnWelcomeScreen extends StatelessWidget {
@@ -41,7 +42,7 @@ class WelcomeScreen extends StatelessWidget {
             ),
             child: const Row(
               children: [
-                Icon(Icons.science_outlined, color: Colors.white),
+                Icon(Symbols.experiment, color: Colors.white),
                 SizedBox(width: 5),
                 Text(
                   "Alpha",
@@ -99,7 +100,7 @@ class WelcomeScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.assignment),
+                      Icon(Symbols.assignment, fill: 1),
                       SizedBox(width: 10),
                       Text(
                         "Formulaire",
@@ -114,7 +115,7 @@ class WelcomeScreen extends StatelessWidget {
                     onPressed: () {// Ferme le dialog
                       _launchUrl();
                     },
-                    icon: Icon(Icons.open_in_new),
+                    icon: Icon(Symbols.open_in_new),
                     label: const Text("Compléter"),
                     iconAlignment: IconAlignment.end,
                   ),

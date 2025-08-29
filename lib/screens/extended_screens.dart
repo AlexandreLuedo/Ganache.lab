@@ -4,6 +4,7 @@
 // ATENTION trouver un moyen de générer les widgets et stocker les variables avec provider
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/widgets/glossary_button.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 // TODO faire en sorte via provider de changer le nom de chaque appBar en fonction du nom de son "intinéraire de départ" (la route qui l'a emené ici).
 // TODO faire également correspondre les icones aux cartes.
@@ -17,7 +18,7 @@ class ExtendedHumidity extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            const Icon(Icons.water_drop),
+            const Icon(Symbols.water_drop),
             const SizedBox(width: 5),
             const Text("Humidité"),
           ],
@@ -81,7 +82,7 @@ class ExtendedTexture extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            const Icon(Icons.waves),
+            const Icon(Symbols.waves),
             const SizedBox(width: 5),
             const Text("Texture"),
           ],
@@ -145,7 +146,7 @@ class ExtendedSugarSweetening extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            const Icon(Icons.balance),
+            const Icon(Symbols.balance),
             const SizedBox(width: 5),
             const Text("Pouvoir sucrant"),
           ],
@@ -209,7 +210,7 @@ class ExtendedDLC extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            const Icon(Icons.kitchen),
+            const Icon(Symbols.kitchen),
             const SizedBox(width: 5),
             const Text("Durée de vie"),
           ],

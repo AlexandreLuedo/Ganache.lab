@@ -4,9 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:ganache_lab/models/change_notifier_ganache_name_input.dart';
 
 void main() => runApp(
-ChangeNotifierProvider(create: (_) => TitleModel(),
-child: const GanacheApp(),
-)
+  ChangeNotifierProvider(
+    create: (_) => TitleModel(),
+    child: const GanacheApp(),
+  ),
 );
 
 class GanacheApp extends StatelessWidget {
@@ -16,7 +17,10 @@ class GanacheApp extends StatelessWidget {
   build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(colorSchemeSeed: const Color(0xFFEB8C36)),
+      theme: ThemeData(
+        colorSchemeSeed: const Color(0xFFEB8C36),
+        useMaterial3: true,
+      ),
       home: const Navigation(),
     );
   }

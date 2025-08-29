@@ -2,6 +2,7 @@
 // Appel les différents widgets de paramétrage pour la ganache ~/ganache_dot_first/lib/widgets/...
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'calculate_ganache.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
@@ -59,7 +60,7 @@ class _CreateGanacheState extends State<CreateGanache> {
                 },
               );
             },
-            icon: const Icon(Icons.help_outline),
+            icon: const Icon(Symbols.help_outline),
           ),
         ],
         bottom: PreferredSize(
@@ -77,7 +78,7 @@ class _CreateGanacheState extends State<CreateGanache> {
           children: [
             IconButton(
               tooltip: "Rechercher des ingrédients",
-              icon: const Icon(Icons.search),
+              icon: const Icon(Symbols.search),
               onPressed: () {
                 showDialog(
                   context: context,
@@ -123,7 +124,7 @@ class _CreateGanacheState extends State<CreateGanache> {
                   ),
                 );
               },
-              icon: const Icon(Icons.bookmark_add),
+              icon: const Icon(Symbols.bookmark_add, fill: 1),
             ),
           ],
         ),
@@ -132,7 +133,7 @@ class _CreateGanacheState extends State<CreateGanache> {
         heroTag: "Calcule",
         tooltip: "Calculer la Ganache",
         label: Text("Calculer"),
-        icon: Icon(Icons.calculate),
+        icon: Icon(Symbols.calculate, fill: 1),
         backgroundColor: Color(0xFFEB8C36),
         foregroundColor: Colors.white,
         onPressed: () {
@@ -197,19 +198,15 @@ class _FabricationTemperatureSelector
     return TextField(
       keyboardType: TextInputType.number,
       inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.digitsOnly
-        ],
+        FilteringTextInputFormatter.digitsOnly,
+      ],
       decoration: const InputDecoration(
-        prefixIcon: Icon(Icons.device_thermostat),
+        prefixIcon: Icon(Symbols.device_thermostat),
         border: OutlineInputBorder(),
-        labelText: "Ex: 32°C",
-      )
+        labelText: "Renseignez la température °C",
+        hintText: "Ex: 32°C",
+      ),
     );
-      // Text field
-      /* keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly
-              ], */
   }
 }
 
@@ -228,6 +225,7 @@ class FabricationMethod extends StatelessWidget {
         SizedBox(height: 10),
         DropdownMenu(
           enableFilter: true,
+          leadingIcon: Icon(Symbols.design_services, fill: 1),
           label: const Text("Selectionnez la méthode de fabrication"),
           dropdownMenuEntries: [
             DropdownMenuEntry(value: Placeholder(), label: "Méthode 1"),

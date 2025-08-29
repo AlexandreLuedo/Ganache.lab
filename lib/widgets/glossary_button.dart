@@ -1,6 +1,7 @@
 // Affiche le bouton glossaire
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/screens/glossary.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 class GlossaryButton extends StatelessWidget {
   const GlossaryButton({super.key});
@@ -22,7 +23,7 @@ class GlossaryButton extends StatelessWidget {
             MaterialPageRoute(builder: (context) => Glossary()),
           );
         },
-        icon: const Icon(Icons.book_outlined),
+        icon: const Icon(Symbols.book),
         tooltip: "Glossaire",
       ),
     );

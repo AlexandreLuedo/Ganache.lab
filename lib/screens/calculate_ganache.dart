@@ -1,5 +1,6 @@
 // Affiche le résultat d'un calcul de ganache. Appelle les indicators.
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'screens_exportation_file.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
 import 'package:ganache_lab/models/change_notifier_ganache_name_input.dart';
@@ -22,7 +23,7 @@ class CalculateGanache extends StatelessWidget {
           children: [
             IconButton(
               tooltip: "Partager la ganache",
-              icon: const Icon(Icons.share),
+              icon: const Icon(Symbols.share, fill: 1),
               onPressed: () {},
             ),
             IconButton(
@@ -34,7 +35,7 @@ class CalculateGanache extends StatelessWidget {
                   // TODO va pas fonctionner (je pense)
                 );
               },
-              icon: const Icon(Icons.edit),
+              icon: const Icon(Symbols.edit, fill: 1),
             ),
           ],
         ),
@@ -43,7 +44,7 @@ class CalculateGanache extends StatelessWidget {
         heroTag: "Corriger",
         tooltip: "Corriger la ganache",
         label: Text("Corriger"),
-        icon: Icon(Icons.check),
+        icon: Icon(Symbols.check),
         backgroundColor: Color(0xFFEB8C36),
         foregroundColor: Colors.white,
         onPressed: () {
@@ -78,7 +79,7 @@ class CalculateGanache extends StatelessWidget {
                 ),
                 child: const Row(
                   children: [
-                    Icon(Icons.sentiment_very_satisfied),
+                    Icon(Symbols.sentiment_very_satisfied),
                     SizedBox(width: 10),
                     Expanded(
                       child: Text(
@@ -104,7 +105,7 @@ class CalculateGanache extends StatelessWidget {
                     children: [
                       const Row(
                         children: [
-                          Icon(Icons.info_outline),
+                          Icon(Symbols.info),
                           SizedBox(width: 10),
                           Expanded(
                             child: Text(

@@ -1,6 +1,7 @@
 // Page principale contenant la navigationBar.
 import 'package:flutter/material.dart';
 import 'screens_exportation_file.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
@@ -26,24 +27,25 @@ class _NavigationState extends State<Navigation> {
         },
         indicatorColor: Color(0xFFEB8C36),
         selectedIndex: currentPageIndex,
-        destinations: const <Widget>[
+        destinations: <Widget>[
           NavigationDestination(
-            selectedIcon: Icon(Icons.home, color: Colors.white),
-            icon: Icon(Icons.home_outlined),
+            selectedIcon: Icon(Symbols.home, fill: 1, // Why this big boy doesn't get filled
+                color: Colors.white),
+            icon: const Icon(Symbols.home),
             label: 'Accueil',
           ),
-          NavigationDestination(
+          const NavigationDestination(
             selectedIcon: Icon(
-              Icons.menu_book_outlined,
+              Symbols.menu_book, fill: 1,
               // Icons.collections_bookmark,
               color: Colors.white,
             ),
-            icon: Icon(Icons.menu_book_outlined),
+            icon: Icon(Icons.menu_book),
             label: 'Recettes',
           ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.settings, color: Colors.white),
-            icon: Icon(Icons.settings_outlined),
+          const NavigationDestination(
+            selectedIcon: Icon(Symbols.settings, fill: 1, color: Colors.white),
+            icon: Icon(Symbols.settings),
             label: 'Paramètres',
           ),
         ],

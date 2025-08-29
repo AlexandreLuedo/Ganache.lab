@@ -1,5 +1,6 @@
 // Selection d'ingrédients
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 class GanacheIngredients extends StatelessWidget {
   const GanacheIngredients({super.key});
@@ -53,7 +54,7 @@ class GanacheIngredients extends StatelessWidget {
                   },
                 );
               },
-              icon: const Icon(Icons.add),
+              icon: const Icon(Symbols.add),
             ),
           ],
         ),
@@ -68,8 +69,8 @@ class GanacheIngredients extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             child: ListTile(
-              // TODO Ajouter le swipe pour supprimer un ingrédient
-              leading: const Icon(Icons.widgets),
+              // TODO Ajouter le swipe pour supprimer un ingrédient et modifier la valeur !
+              leading: const Icon(Symbols.widgets, fill: 1),
               title: Text("${ingredient['title']}"),
               subtitle: Text("${ingredient['subtitle']}"),
               trailing: Text(

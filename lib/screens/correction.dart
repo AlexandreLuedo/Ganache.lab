@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'screens_exportation_file.dart';
 import 'package:provider/provider.dart';
 import 'package:ganache_lab/models/change_notifier_ganache_name_input.dart';
@@ -27,7 +28,7 @@ class _CorrectionState extends State<Correction> {
               (route) => route.isFirst,
           );
         },
-        child: Icon(Icons.save),
+        child: Icon(Symbols.save, fill: 1),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       bottomNavigationBar: BottomAppBar(
@@ -36,7 +37,7 @@ class _CorrectionState extends State<Correction> {
           children: [
             IconButton(
               tooltip: "Partager la ganache",
-              icon: const Icon(Icons.share),
+              icon: const Icon(Symbols.share, fill: 1),
               onPressed: () {},
             ),
             IconButton(
@@ -48,7 +49,7 @@ class _CorrectionState extends State<Correction> {
                   // TODO va pas fonctionner (je pense)
                 );
               },
-              icon: const Icon(Icons.edit),
+              icon: const Icon(Symbols.edit, fill: 1),
             ),
           ],
         ),
@@ -81,7 +82,7 @@ class _CorrectionState extends State<Correction> {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.percent),
+                            const Icon(Symbols.percent),
                             const SizedBox(width: 5),
                             Text(
                               "Pourcentages faussés",
@@ -96,7 +97,7 @@ class _CorrectionState extends State<Correction> {
                         SizedBox(height: 10),
                         FilledButton.icon(
                           onPressed: () {},
-                          icon: Icon(Icons.check),
+                          icon: Icon(Symbols.check),
                           label: const Text("Résoudre"),
                           iconAlignment: IconAlignment.end,
                         ),
@@ -121,7 +122,7 @@ class _CorrectionState extends State<Correction> {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.percent),
+                            const Icon(Symbols.percent),
                             const SizedBox(width: 5),
                             Text(
                               "Pourcentages faussés",
@@ -136,7 +137,7 @@ class _CorrectionState extends State<Correction> {
                         SizedBox(height: 10),
                         FilledButton.icon(
                           onPressed: () {},
-                          icon: Icon(Icons.check),
+                          icon: Icon(Symbols.check),
                           label: const Text("Résoudre"),
                           iconAlignment: IconAlignment.end,
                         ),
@@ -147,7 +148,7 @@ class _CorrectionState extends State<Correction> {
                     //   right: 10,
                     //   child: FilledButton.icon(
                     //     onPressed: () {},
-                    //     icon: Icon(Icons.check),
+                    //     icon: Icon(Symbols.check),
                     //     label: const Text("Résoudre"),
                     //     iconAlignment: IconAlignment.end,
                     //   ),
@@ -171,7 +172,7 @@ class _CorrectionState extends State<Correction> {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.percent),
+                            const Icon(Symbols.percent),
                             const SizedBox(width: 5),
                             Text(
                               "Pourcentages faussés",
@@ -186,7 +187,7 @@ class _CorrectionState extends State<Correction> {
                         SizedBox(height: 10),
                         FilledButton.icon(
                           onPressed: () {},
-                          icon: Icon(Icons.check),
+                          icon: Icon(Symbols.check),
                           label: const Text("Résoudre"),
                           iconAlignment: IconAlignment.end,
                         ),
@@ -197,7 +198,7 @@ class _CorrectionState extends State<Correction> {
                     //   right: 10,
                     //   child: FilledButton.icon(
                     //     onPressed: () {},
-                    //     icon: Icon(Icons.check),
+                    //     icon: Icon(Symbols.check),
                     //     label: const Text("Résoudre"),
                     //     iconAlignment: IconAlignment.end,
                     //   ),
