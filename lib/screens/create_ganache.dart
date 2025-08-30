@@ -226,7 +226,7 @@ class FabricationMethod extends StatelessWidget {
         DropdownMenu(
           enableFilter: true,
           leadingIcon: Icon(Symbols.design_services, fill: 1),
-          label: const Text("Selectionnez la méthode de fabrication"),
+          label: const Text("Selectionnez la méthode de fabrication",),
           dropdownMenuEntries: [
             DropdownMenuEntry(value: Placeholder(), label: "Méthode 1"),
             // TODO https://api.flutter.dev/flutter/material/DropdownMenu-class.html
