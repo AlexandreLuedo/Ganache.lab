@@ -1,5 +1,7 @@
 // Affiche la page principale
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -15,8 +17,11 @@ class OnWelcomeScreen extends StatelessWidget {
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
+
   Future<void> _launchUrl() async {
-    final Uri url = Uri.parse("https://www.microsoft.com/en-us/microsoft-365/online-surveys-polls-quizzes");
+    final Uri url = Uri.parse(
+      "https://www.microsoft.com/en-us/microsoft-365/online-surveys-polls-quizzes",
+    );
     if (!await launchUrl(url)) {
       throw Exception("Impossible d'$url");
     }
@@ -96,6 +101,7 @@ class WelcomeScreen extends StatelessWidget {
               borderRadius: 12,
               borderWidth: 1,
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
@@ -109,10 +115,18 @@ class WelcomeScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 30),
-                  Text("Ce logiciel s’inscrit dans la démarche de mon mémoire pour le BTM Chocolatier‑Confiseur que je prépare.\nMon mémoire porte sur la question suivante : « Comment rendre accessible la création et l’équilibrage de la ganache ».\nPour cela, j’ai besoin d’obtenir des informations et des réponses à différentes questions afin de toucher le plus grand nombre de professionnels possible.\nJ’ai donc choisi de vous proposer un questionnaire en ligne, facile d’accès et rapide à remplir.\nGrâce à votre collaboration, les résultats seront multiples : des données précieuses pour enrichir mon mémoire, un apprentissage personnel sur les besoins des artisans chocolatiers, et un recueil d’idées permettant d’améliorer ce tout‑jeune logiciel.\nJe vous remercie vivement pour votre aide et vous invite à cliquer sur le bouton ci‑dessous, qui vous dirigera vers le formulaire."),
+                  // TODO Implémenter ce sâcré form.md
+                  Text('''Ce logiciel s’inscrit dans la démarche de mon mémoire pour le BTM Chocolatier‑Confiseur que je prépare.
+Mon mémoire porte sur la question suivante : « Comment rendre accessible la création et l’équilibrage de la ganache ».
+Pour cela, j’ai besoin d’obtenir des informations et des réponses à différentes questions afin de toucher le plus grand nombre de professionnels possible.
+J’ai donc choisi de vous proposer un questionnaire en ligne, facile d’accès et rapide à remplir.
+Grâce à votre collaboration, les résultats seront multiples : des données précieuses pour enrichir mon mémoire, un apprentissage personnel sur les besoins des artisans chocolatiers, et un recueil d’idées permettant d’améliorer ce tout‑jeune logiciel.
+Je vous remercie vivement pour votre aide et vous invite à cliquer sur le bouton ci‑dessous, qui vous dirigera vers le formulaire.
+'''),
                   SizedBox(height: 10),
                   FilledButton.icon(
-                    onPressed: () {// Ferme le dialog
+                    onPressed: () {
+                      // Ferme le dialog
                       _launchUrl();
                     },
                     icon: Icon(Symbols.open_in_new),
@@ -126,5 +140,43 @@ class WelcomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class AnnouncePageScreen extends StatefulWidget {
+  const AnnouncePageScreen({super.key});
+
+  @override
+  _AnnouncePageScreenState createState() => _AnnouncePageScreenState();
+}
+
+class _AnnouncePageScreenState extends State<AnnouncePageScreen> {
+  String _announceText = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAnnounce();
+  }
+
+  Future<void> _loadAnnounce() async {
+    final text = await rootBundle.loadString('assets/announces/form.md');
+    setState(() {
+      _announceText = text;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Markdown(
+      data: _announceText,
+      padding: EdgeInsets.all(16),
+      styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
+        p: TextStyle(fontSize: 16),
+        h1: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        h2: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      ),
+    );
+    // ),
   }
 }

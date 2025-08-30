@@ -1,23 +1,23 @@
 
 # Table of Contents
 
-1.  [Bienvenue dans le glossaire.](#org57d3bd4)
-2.  [L&rsquo;humiditée / AW](#orgf0ddea8)
-3.  [Le point de rosé](#org5fd48b0)
-4.  [La texture](#org3a4772d)
-5.  [Le pouvoir sucrant](#org88f710f)
-6.  [Durée de vie](#orgbf09342)
+1.  [Bienvenue dans le glossaire.](#orge3179e9)
+2.  [L&rsquo;humiditée / AW](#orgeb8b1ca)
+3.  [Le point de rosé](#org1a56094)
+4.  [La texture](#org6a811d6)
+5.  [Le pouvoir sucrant](#org40ae222)
+6.  [Durée de vie](#orgbf1ea86)
 
 
 
-<a id="org57d3bd4"></a>
+
 
 # Bienvenue dans le glossaire.
 
 Vous trouverez toutes les informations relatives à l&rsquo;équilibrage des ganaches.
 
 
-<a id="orgf0ddea8"></a>
+
 
 # L&rsquo;humiditée / AW
 
@@ -25,19 +25,19 @@ L&rsquo;humiditée dite aW (*Activity Water*) ou eau libre. Désigne l&rsquo;ens
 Le but de ce logiciel est de vous permettre de contrôler votre aW. De la création de la recette à l&rsquo;enrobage ou l&rsquo;inclusion dans quelque autre forme.
 
 
-<a id="org5fd48b0"></a>
+
 
 # Le point de rosé
 
 
-<a id="org3a4772d"></a>
+
 
 # La texture
 
 Votre texture est calculée grâce à la différence de beurre de cacao et d&rsquo;eau présents dans votre recette. En fonction du calcul, nous pouvons donc prévoir une certaine tenue en admettant que vous utilisiez votre ganache à **32°C**. Vous pouvez changer cette valeur soit depuis les paramètres de l&rsquo;application, soit depuis la création de recette.
 
 
-<a id="org88f710f"></a>
+
 
 # Le pouvoir sucrant
 
@@ -45,7 +45,7 @@ Le pouvoir sucrant est une valeur indiquant le goût du sucre en bouche. Elle es
 Pour la ganache cet indice vous permet de représenter le goût plus ou moins sucré par apport au saccharose. Ainsi vous maîtriserez d&rsquo;avantage le goût du produit.
 
 
-<a id="orgbf09342"></a>
+
 
 # Durée de vie
 
