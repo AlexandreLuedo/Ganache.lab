@@ -1,10 +1,4 @@
-<div class="org-center">
-
-<div id="org167f61c" class="figure">
-<p><img src="https://github.com/AlexandreLuedo/Ganache.lab/blob/master/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png?raw=true" alt="ic_launcher.png?raw=true" />
-</p>
-</div>
-</div>
+![img](https://github.com/AlexandreLuedo/Ganache.lab/blob/master/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png?raw=true)
 
 
 # Ganache.lab
