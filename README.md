@@ -1,12 +1,26 @@
-# ganache_dot_first
+![img](https://github.com/AlexandreLuedo/Ganache.lab/blob/master/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png?raw=true)
+
+
+
+
+# Ganache.lab
+
 Le premier équilibreur de ganache multiplatformes !
 
-> ⚠️ Ceci est mon premier projet, il me permet d'apprendre Dart & Flutter !
+⚠️ Ceci est mon premier projet, il me permet d&rsquo;apprendre Dart & Flutter !
+
+
+
 
 ## Architecture
-`Coming soon`
+
+COMMING SOON
+
+
 
 
 ## Sources
-- Design des `indicators` : [WheatherMaster](https://github.com/PranshulGG/WeatherMaster)
-- Design en lui-même : [Material Design 3](https://m3.material.io)
+
+-   Design des `indicators`: [WeatherMaster](https://github.com/PranshulGG/WeatherMaster)
+-   Design en lui-même: [Material Design 3](https://m3.material.io)
+
