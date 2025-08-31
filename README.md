@@ -1,4 +1,7 @@
-![img](https://github.com/AlexandreLuedo/Ganache.lab/blob/master/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png?raw=true)
+
+<div> align="center"
+<img src="https://github.com/AlexandreLuedo/Ganache.lab/blob/master/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png?raw=true">
+</div>
 
 
 # Ganache.lab
