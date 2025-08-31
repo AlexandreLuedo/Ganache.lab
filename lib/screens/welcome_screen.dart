@@ -32,34 +32,7 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
-          Container(
-            padding: const EdgeInsets.only(
-              right: 10,
-              left: 10,
-              top: 5,
-              bottom: 5,
-            ),
-            //height: 10,
-            //width: 10,
-            decoration: BoxDecoration(
-              color: const Color(0xFFEB8C36),
-              borderRadius: BorderRadius.circular(100),
-            ),
-            child: const Row(
-              children: [
-                Icon(Symbols.experiment, color: Colors.white),
-                SizedBox(width: 5),
-                Text(
-                  "Alpha",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          VersionPill(),
           GlossaryButton(),
         ],
       ),
@@ -178,5 +151,42 @@ class _AnnouncePageScreenState extends State<AnnouncePageScreen> {
       ),
     );
     // ),
+  }
+}
+
+class VersionPill extends StatelessWidget {
+  const VersionPill({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(
+        right: 7,
+        left: 7,
+        top: 2,
+        bottom: 2,
+      ),
+      //height: 10,
+      //width: 10,
+      decoration: BoxDecoration(
+        color: const Color(0xFFEB8C36),
+        borderRadius: BorderRadius.circular(100),
+      ),
+      child: const Row(
+        children: [
+          Icon(Symbols.experiment, color: Colors.white),
+          SizedBox(width: 5),
+          Text(
+            "Alpha",
+            style: TextStyle(
+              fontSize: 17,
+              color: Colors.white,
+              fontStyle: FontStyle.italic,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

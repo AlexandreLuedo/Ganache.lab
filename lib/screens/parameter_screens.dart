@@ -1,5 +1,6 @@
 // Affiche les paramètres
 import 'package:flutter/material.dart';
+import 'package:ganache_lab/screens/screens_exportation_file.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -20,12 +21,12 @@ class Settings extends StatelessWidget {
             // Settings here
             ListTile(
               leading: CircleAvatar(child: Icon(Symbols.info)),
-              title: Text("À propos de Ganache.lab"),
-              subtitle: Text("En savoir plus sur l'application"),
+              title: Text('À propos de Ganache.lab'),
+              subtitle: Text('En savoir plus sur l\'application'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => LicensePageScreen()),
+                  MaterialPageRoute(builder: (_) => AboutApplication()),
                 );
               },
             ),
@@ -39,7 +40,7 @@ class Settings extends StatelessWidget {
             ),
             ElevatedButton.icon(
               icon: const Icon(Symbols.article),
-              label: const Text("Voir la licence"),
+              label: const Text('Voir la licence'),
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -65,7 +66,7 @@ class LicensePageScreen extends StatefulWidget {
 }
 
 class _LicensePageScreenState extends State<LicensePageScreen> {
-  String _licenseText = "";
+  String _licenseText = '';
 
   @override
   void initState() {
@@ -83,7 +84,7 @@ class _LicensePageScreenState extends State<LicensePageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("License")),
+      appBar: AppBar(title: Text('License')),
       body: // SingleChildScrollView(
           Markdown(
         data: _licenseText,
@@ -95,6 +96,72 @@ class _LicensePageScreenState extends State<LicensePageScreen> {
         ),
       ),
       // ),
+    );
+  }
+}
+
+class AboutApplication extends StatelessWidget {
+  const AboutApplication({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final infos = [
+      {"title": "Licence", "subtitle": "Propriétaire", "icon": "license"},
+      {"title": "Email", "subtitle": "hadrien.ganache@pm.me", "icon": "mail"},
+      {
+        "title": "Licences tierces",
+        "subtitle": "Relatives aux paquets",
+        "icon": "list_alt",
+      },
+    ];
+
+    IconData getIcon(String iconName) {
+      switch (iconName) {
+        case 'license':
+          return Symbols.license; // utilise une icône existante
+        case 'mail':
+          return Symbols.mail;
+        case 'list_alt':
+          return Symbols.list_alt;
+        default:
+          return Icons.help_outline;
+      }
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Row(
+          children: [
+            Text(
+              'Ganache',
+              style: TextStyle(
+                color: Color(0xFF422322),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              '.lab',
+              style: TextStyle(
+                color: Color(0xFFEB8C36),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+SizedBox(width: 10),
+            VersionPill()
+          ],
+        ),
+      ),
+      body: Column(
+        children: [
+          ...infos.map((infos) {
+            return ListTile(
+              leading: CircleAvatar(child: Icon(getIcon(infos['icon']!))),
+              title: Text('${infos["title"]}'),
+              subtitle: Text('${infos["subtitle"]}'),
+            );
+          }),
+        ],
+      ),
     );
   }
 }

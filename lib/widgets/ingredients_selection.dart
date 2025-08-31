@@ -34,7 +34,8 @@ class GanacheIngredients extends StatelessWidget {
                     return AlertDialog(
                       title: const Text("Ajouter un Ingrédient"),
                       content: const Text(
-                        /* TODO Ajouter l\'ajout d\'ingrédients */ "",
+                        /* TODO Ajouter l\'ajout d\'ingrédients */
+                        "",
                       ),
                       actions: <Widget>[
                         TextButton(
