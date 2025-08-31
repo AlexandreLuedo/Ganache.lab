@@ -1,10 +1,8 @@
 // Affiche les paramètres
 import 'package:flutter/material.dart';
-import 'package:ganache_lab/widgets/custom_container.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
@@ -20,26 +18,40 @@ class Settings extends StatelessWidget {
         child: Column(
           children: [
             // Settings here
-
-
+            ListTile(
+              leading: CircleAvatar(child: Icon(Symbols.info)),
+              title: Text("À propos de Ganache.lab"),
+              subtitle: Text("En savoir plus sur l'application"),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => LicensePageScreen()),
+                );
+              },
+            ),
             Divider(color: Colors.grey),
-            Text(''' Ganache.lab est un calculateur de ganaches ayant pour but d\'équilibrer vos recettes. \n
+            Text(
+              ''' Ganache.lab est un calculateur de ganaches ayant pour but d\'équilibrer vos recettes. \n
             © 2025 Hadrien Klotz. Tous droits réservés. L’application Ganache.lab est distribuée sous licence propriétaire. Toute reproduction, modification ou diffusion non autorisée est strictement interdite. En téléchargeant ou en utilisant l’application, vous acceptez les termes de notre contrat de licence.
-            ''', textAlign: TextAlign.center, style: TextStyle(color: Colors.grey)),
+            ''',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.grey),
+            ),
             ElevatedButton.icon(
               icon: const Icon(Symbols.article),
               label: const Text("Voir la licence"),
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (_) => LicensePageScreen(), // LicensePage() ouvre la page des licences
-                  )
+                    builder:
+                        (_) =>
+                            LicensePageScreen(), // LicensePage() ouvre la page des licences
+                  ),
                 );
               },
-            )
+            ),
           ],
         ),
-
       ),
     );
   }
@@ -73,12 +85,15 @@ class _LicensePageScreenState extends State<LicensePageScreen> {
     return Scaffold(
       appBar: AppBar(title: Text("License")),
       body: // SingleChildScrollView(
-        Markdown(data: _licenseText, padding: EdgeInsets.all(16),
+          Markdown(
+        data: _licenseText,
+        padding: EdgeInsets.all(16),
         styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
-            p: TextStyle(fontSize: 16),
-            h1: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            h2: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),)
+          p: TextStyle(fontSize: 16),
+          h1: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          h2: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
       // ),
     );
   }
