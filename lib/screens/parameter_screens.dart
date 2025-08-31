@@ -4,6 +4,7 @@ import 'package:ganache_lab/screens/screens_exportation_file.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
@@ -20,7 +21,7 @@ class Settings extends StatelessWidget {
           children: [
             // Settings here
             ListTile(
-              leading: CircleAvatar(child: Icon(Symbols.info)),
+              leading: CircleAvatar(child: Icon(Symbols.info, fill: 1)),
               title: Text('À propos de Ganache.lab'),
               subtitle: Text('En savoir plus sur l\'application'),
               onTap: () {
@@ -37,19 +38,6 @@ class Settings extends StatelessWidget {
             ''',
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey),
-            ),
-            ElevatedButton.icon(
-              icon: const Icon(Symbols.article),
-              label: const Text('Voir la licence'),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder:
-                        (_) =>
-                            LicensePageScreen(), // LicensePage() ouvre la page des licences
-                  ),
-                );
-              },
             ),
           ],
         ),
@@ -99,35 +87,78 @@ class _LicensePageScreenState extends State<LicensePageScreen> {
     );
   }
 }
+// Bloque qui sert à faire le lien pour l'email
+void openEmail() async {
+  final subject = Uri.encodeComponent('Contact - Application Ganache.lab');
+  final body = Uri.encodeComponent('Bonjour,\n Je vous contacte car ');
+
+  final Uri emailUri = Uri.parse('mailto:hadrien.ganache@pm.me?subject=$subject&body=$body');
+
+  if (!await launchUrl(
+    emailUri,
+    mode: LaunchMode.externalApplication,
+  )) {
+    print('Impossible d\'ouvrir l\'application mail');
+  }
+}
+// TODO Mauvaise architecture, revoir l'ensemble pour générer des sous catégories avec sens.
+class ListItem {
+  final Widget? leading;
+  final String title;
+  final String subtitle;
+  final bool isClickable;
+  final void Function(BuildContext context)? onTap;
+
+  ListItem({
+    this.leading,
+    required this.title,
+    this.subtitle = '',
+    this.isClickable = true,
+    this.onTap,
+  });
+}
+
+// Liste pour ajouter les
+final items = [
+  ListItem(
+    leading: CircleAvatar(child: Icon(Symbols.license)),
+    title: "Licence",
+    subtitle: "Propriétaire",
+    isClickable: true,
+    onTap: (context) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => LicensePageScreen()),
+      );
+    },
+  ),
+  ListItem(
+    leading: CircleAvatar(child: Icon(Symbols.mail)),
+    title: "Contact",
+    subtitle: "hadrien.ganache@pm.me",
+    isClickable: true,
+    onTap: (context) => openEmail(),
+  ),
+  ListItem(
+    leading: CircleAvatar(child: Icon(Symbols.license)),
+    title: "Licences tierces",
+    subtitle: "Relatives à chaques paquets employés par l'application",
+    isClickable: true,
+    onTap: (context) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => LicensePage()),
+      );
+    },
+  ),
+];
+
 
 class AboutApplication extends StatelessWidget {
   const AboutApplication({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final infos = [
-      {"title": "Licence", "subtitle": "Propriétaire", "icon": "license"},
-      {"title": "Email", "subtitle": "hadrien.ganache@pm.me", "icon": "mail"},
-      {
-        "title": "Licences tierces",
-        "subtitle": "Relatives aux paquets",
-        "icon": "list_alt",
-      },
-    ];
-
-    IconData getIcon(String iconName) {
-      switch (iconName) {
-        case 'license':
-          return Symbols.license; // utilise une icône existante
-        case 'mail':
-          return Symbols.mail;
-        case 'list_alt':
-          return Symbols.list_alt;
-        default:
-          return Icons.help_outline;
-      }
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Row(
@@ -146,20 +177,30 @@ class AboutApplication extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-SizedBox(width: 10),
-            VersionPill()
+            SizedBox(width: 10),
+            VersionPill(),
           ],
         ),
       ),
       body: Column(
         children: [
-          ...infos.map((infos) {
-            return ListTile(
-              leading: CircleAvatar(child: Icon(getIcon(infos['icon']!))),
-              title: Text('${infos["title"]}'),
-              subtitle: Text('${infos["subtitle"]}'),
-            );
-          }),
+          Expanded(
+            child: ListView.builder(
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                final item = items[index];
+
+                return ListTile(
+                  leading: item.leading,
+                  title: Text(item.title),
+                  subtitle:
+                      item.subtitle.isNotEmpty ? Text(item.subtitle) : null,
+                  onTap:
+                      item.isClickable ? () => item.onTap?.call(context) : null,
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
