@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ruleValues extends ChangeNotifier{
+class RuleValues extends ChangeNotifier{
 
   double _CocoaButterTotal = 30;
 }
