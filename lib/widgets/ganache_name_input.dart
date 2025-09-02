@@ -12,33 +12,33 @@ class GanacheNameInput extends StatefulWidget {
 }
 
 class _GanacheNameInputState extends State<GanacheNameInput> {
-  late TextEditingController controller;
+  late TextEditingController _controller;
 
   @override
   void initState() {
     super.initState();
-    // Initialisation du controller avec la valeur actuelle de TitleModel
-    controller = TextEditingController(text: context.read<TitleModel>().title);
+    // Initialisation du controller avec la valeur de TitleModel
+    _controller = TextEditingController(text: context.read<TitleModel>().title);
   }
 
   @override
   void dispose() {
-    controller.dispose(); // Libération du controller pour éviter les fuites mémoire
+    _controller.dispose(); // Libération du controller pour éviter des fuites mémoire
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Utiliser context.watch pour que le widget se reconstruise lorsqu'il y a un changement
+    // Observer les changements de `TitleModel`
     final title = context.watch<TitleModel>().title;
 
-    // On met à jour le texte du TextField si la valeur a changé dans le modèle
-    if (controller.text != title) {
-      controller.text = title;
+    // Si la valeur de `TitleModel` change, mettre à jour le TextEditingController
+    if (_controller.text != title) {
+      _controller.text = title;
     }
 
     return TextField(
-      controller: controller,
+      controller: _controller,
       autofocus: true,
       decoration: InputDecoration(
         prefixIcon: const Icon(Symbols.label, fill: 1),
