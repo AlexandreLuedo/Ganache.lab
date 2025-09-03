@@ -54,6 +54,8 @@ class CustomContainer extends StatelessWidget {
 Column(
   children: [
     CustomContainer(
+      borderRadius: 12,
+      borderWidth: 1,
       child: Text('Texte 1'),
     ),
     CustomContainer(

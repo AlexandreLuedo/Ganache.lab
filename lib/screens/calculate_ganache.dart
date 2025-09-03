@@ -13,8 +13,12 @@ class CalculateGanache extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // TODO Remplacer la ganache par une variable récupérée grâce au nom.
-      appBar: AppBar(title: Consumer<TitleModel>(
-          builder: (_, model, _) => Text(model.title.isEmpty ? "Votre Ganache" : model.title),),
+      appBar: AppBar(
+        title: Consumer<TitleModel>(
+          builder:
+              (_, model, _) =>
+                  Text(model.title.isEmpty ? "Votre Ganache" : model.title),
+        ),
       ),
       // TODO Rassembler les BottomAppbar
       bottomNavigationBar: BottomAppBar(
@@ -90,7 +94,7 @@ class CalculateGanache extends StatelessWidget {
                   ],
                 ),
               ),
-          //    TotalWeightGanache(),
+              TotalWeightGanache(),
               Indicator(),
               Container(
                 margin: const EdgeInsets.all(10.0),
@@ -98,7 +102,6 @@ class CalculateGanache extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(width: 1),
-                  // border: Border.all(width: 1),
                   color: Theme.of(context).colorScheme.primaryContainer,
                 ),
                 child: SizedBox(
@@ -131,34 +134,32 @@ class CalculateGanache extends StatelessWidget {
   }
 }
 
-
-// class TotalWeightGanache extends StatefulWidget {
-//   const TotalWeightGanache({super.key});
-//
-//   @override
-//   State<TotalWeightGanache> createState() => _TotalWeightGanacheState();
-// }
-//
-// class _TotalWeightGanacheState extends State<TotalWeightGanache> {
-//   final double totalWeightGanache = Consumer<>(
-//     builder: (_, model, _) => Text(model.title.isEmpty ? "Votre Ganache" : model.title),),
-//   ),
-//
-//   if
-//
+class TotalWeightGanache extends StatefulWidget {
+  const TotalWeightGanache({super.key});
 
   @override
+  State<TotalWeightGanache> createState() => _TotalWeightGanacheState();
+}
+
+class _TotalWeightGanacheState extends State<TotalWeightGanache> {
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          "Poids total",
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
-        Text(
-"blabalbaa"
-        )
-      ],
+    return CustomContainer(
+      borderRadius: 12,
+      borderWidth: 1,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Symbols.all_inclusive, fill: 1),
+              SizedBox(width: 10),
+              Text("Poids total", style: Theme.of(context).textTheme.headlineSmall),
+            ],
+          ),
+          Text("2550g", style: TextStyle(fontSize: 45))
+        ],
+      ),
     );
   }
-
+}
