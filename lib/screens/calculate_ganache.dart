@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'screens_exportation_file.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
-import 'package:ganache_lab/models/change_notifier_ganache_name_input.dart';
+import 'package:ganache_lab/models/change_notifier.dart';
 import 'package:provider/provider.dart';
 
 class CalculateGanache extends StatelessWidget {

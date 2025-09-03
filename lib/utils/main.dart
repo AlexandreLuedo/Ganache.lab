@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/screens/screens_exportation_file.dart';
 import 'package:provider/provider.dart';
-import 'package:ganache_lab/models/change_notifier_ganache_name_input.dart';
+import 'package:ganache_lab/models/change_notifier.dart';
 
 void main() => runApp(
   ChangeNotifierProvider(

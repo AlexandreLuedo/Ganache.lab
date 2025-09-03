@@ -33,7 +33,7 @@ class Settings extends StatelessWidget {
             ),
             Divider(color: Colors.grey),
             Text(
-              ''' Ganache.lab est un calculateur de ganaches ayant pour but d\'équilibrer vos recettes. \n
+              ''' Ganache.lab est un calculateur de ganaches ayant pour but d'équilibrer vos recettes. \n
             © 2025 Hadrien Klotz. Tous droits réservés. L’application Ganache.lab est distribuée sous licence propriétaire. Toute reproduction, modification ou diffusion non autorisée est strictement interdite. En téléchargeant ou en utilisant l’application, vous acceptez les termes de notre contrat de licence.
             ''',
               textAlign: TextAlign.center,
