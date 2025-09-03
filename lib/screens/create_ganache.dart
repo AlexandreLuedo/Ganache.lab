@@ -159,6 +159,7 @@ class _CreateGanacheState extends State<CreateGanache> {
           SizedBox(height: 16),
           GanacheIngredients(),
           SizedBox(height: 16),
+
         ],
       ),
     );

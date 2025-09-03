@@ -4,10 +4,16 @@ import 'package:provider/provider.dart';
 import 'package:ganache_lab/models/change_notifier.dart';
 
 void main() => runApp(
-  ChangeNotifierProvider(
-    create: (_) => TitleModel(),
+  MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => Total()),
+    ChangeNotifierProvider(create: (_) => TitleModel()),
+    ChangeNotifierProvider(create: (_) => MouleModel()),
+    ChangeNotifierProvider(create: (_) => CadreModel()),
+    ChangeNotifierProvider(create: (_) => AutreModel()),
+  ],
     child: const GanacheApp(),
-  ),
+  )
+
 );
 
 class GanacheApp extends StatelessWidget {

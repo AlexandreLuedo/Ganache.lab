@@ -90,6 +90,7 @@ class CalculateGanache extends StatelessWidget {
                   ],
                 ),
               ),
+          //    TotalWeightGanache(),
               Indicator(),
               Container(
                 margin: const EdgeInsets.all(10.0),
@@ -129,3 +130,35 @@ class CalculateGanache extends StatelessWidget {
     );
   }
 }
+
+
+// class TotalWeightGanache extends StatefulWidget {
+//   const TotalWeightGanache({super.key});
+//
+//   @override
+//   State<TotalWeightGanache> createState() => _TotalWeightGanacheState();
+// }
+//
+// class _TotalWeightGanacheState extends State<TotalWeightGanache> {
+//   final double totalWeightGanache = Consumer<>(
+//     builder: (_, model, _) => Text(model.title.isEmpty ? "Votre Ganache" : model.title),),
+//   ),
+//
+//   if
+//
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          "Poids total",
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+        Text(
+"blabalbaa"
+        )
+      ],
+    );
+  }
+
