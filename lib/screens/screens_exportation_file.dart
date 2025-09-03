@@ -2,7 +2,6 @@
 export 'calculate_ganache.dart';
 export 'create_ganache.dart';
 export 'navigation.dart';
-export 'parameter_screens.dart';
 export 'recipes_screen.dart';
 export 'screens_exportation_file.dart';
 export 'welcome_screen.dart';

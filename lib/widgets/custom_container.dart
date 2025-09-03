@@ -27,47 +27,22 @@ class CustomContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color background = color ?? Theme.of(context).colorScheme.primaryContainer;
-    final Color backgroundColor = borderColor ?? Theme.of(context).dividerColor;
+    final Color resolvedBorderColor = borderColor ?? Theme.of(context).dividerColor;
 
     return Container(
       width: width,
       height: height,
       margin: EdgeInsets.all(margin),
       padding: EdgeInsets.all(padding),
-
       decoration: BoxDecoration(
         color: background,
         borderRadius: BorderRadius.circular(borderRadius),
-        border:
-            borderWidth != null
-                ? Border.all(width: borderWidth!, color: backgroundColor)
-                : null,
+        border: borderWidth != null
+            ? Border.all(width: borderWidth!, color: resolvedBorderColor)
+            : null,
       ),
-      // Coupe le contenu qui dépasse les coins arrondis.
       clipBehavior: Clip.hardEdge,
       child: child,
     );
   }
 }
-
-/* DOC
-Column(
-  children: [
-    CustomContainer(
-      borderRadius: 12,
-      borderWidth: 1,
-      child: Text('Texte 1'),
-    ),
-    CustomContainer(
-      color: Colors.amber,
-      padding: 20.0,
-      child: Text('Texte 2 avec plus de padding'),
-    ),
-    CustomContainer(
-      margin: 0,
-      child: Icon(Icons.star, size: 40),
-    ),
-  ],
-);
-
- */

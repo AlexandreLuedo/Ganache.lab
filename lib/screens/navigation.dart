@@ -1,5 +1,6 @@
 // Page principale contenant la navigationBar.
 import 'package:flutter/material.dart';
+import 'package:ganache_lab/screens/settings/settings_screens.dart';
 import 'screens_exportation_file.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
@@ -56,7 +57,7 @@ class _NavigationState extends State<Navigation> {
             // Gestuelle de glissement pour chaques cartouches de recettes : https://docs.flutter.dev/cookbook/gestures/dismissible
             // Quand l'on clique sur une recette : https://api.flutter.dev/flutter/material/ZoomPageTransitionsBuilder-class.html?_gl=1*1jeu0qs*_ga*NjY1MTkxNDE1LjE3NDg5NTI1NDc.*_ga_04YGWK0175*czE3NTMyNzE3MTAkbzgkZzEkdDE3NTMyNzE5MTIkajMxJGwwJGgw
             RecipeList(),
-            Settings(),
+            SettingsScreen(),
           ][currentPageIndex],
     );
   }
