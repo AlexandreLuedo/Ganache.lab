@@ -50,13 +50,9 @@ final settingsItems = [
     subtitle: "Français",
     isClickable: false,
     onTap: (context) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => Placeholder()),
-      );
+      Navigator.push(context, MaterialPageRoute(builder: (_) => Placeholder()));
     },
   ),
-
 ];
 
 final aboutItems = [
@@ -94,19 +90,35 @@ final apparenceItems = [
   ListItem(
     leading: CircleAvatar(child: Icon(Symbols.contrast)),
     title: "Thème de l'application",
-    subtitle: "Sombre/Clair/Automatique"
-  )
+    subtitle: "Sombre/Clair/Automatique",
+    isClickable: false,
+    trailing: StatefulBuilder(
+      builder: (context, setState) {
+        bool isDark = false; // valeur initiale
+
+        return Switch(
+          value: isDark,
+          onChanged: (value) {
+            setState(() {
+              isDark = value;
+            });
+            // Ici tu pourrais appeler un Provider, un ThemeMode, etc.
+          },
+        );
+      },
+    ),
+  ),
 ];
 
 final measurementsUnitsItems = [
   ListItem(
     leading: CircleAvatar(child: Icon(Symbols.device_thermostat)),
     title: "Unités de température",
-    subtitle: "Celsius"
+    subtitle: "Celsius",
   ),
   ListItem(
     leading: CircleAvatar(child: Icon(Symbols.square_foot)),
     title: "Unité de mesure",
-    subtitle: "Cm"
-  )
+    subtitle: "Cm",
+  ),
 ];

@@ -4,12 +4,14 @@ class ListItem {
   final Widget? leading;
   final String title;
   final String subtitle;
+  final Widget? trailing;
   final bool isClickable;
   final void Function(BuildContext context)? onTap;
 
   ListItem({
     this.leading,
     required this.title,
+    this.trailing,
     this.subtitle = '',
     this.isClickable = true,
     this.onTap,

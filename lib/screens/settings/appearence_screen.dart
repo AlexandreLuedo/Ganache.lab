@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import '../../data/parameters.dart';
 import '../../models/list_item.dart';
 
-class AppearenceScreen extends StatelessWidget {
+class AppearenceScreen extends StatefulWidget {
   const AppearenceScreen({super.key});
+
+  @override
+  State<AppearenceScreen> createState() => _AppearenceScreenState();
+}
+
+class _AppearenceScreenState extends State<AppearenceScreen> {
+  bool _isDarkMode = false;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +26,7 @@ class AppearenceScreen extends StatelessWidget {
             leading: item.leading,
             title: Text(item.title),
             subtitle: item.subtitle.isNotEmpty ? Text(item.subtitle) : null,
+            trailing: item.trailing,
             onTap: item.isClickable ? () => item.onTap?.call(context) : null,
           );
         },

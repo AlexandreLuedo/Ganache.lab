@@ -24,9 +24,14 @@ class GanacheApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorSchemeSeed: const Color(0xFFEB8C36),
+        colorSchemeSeed: const Color(0xFFEB8C36), // Brun: 0xFF422322 Orange: 0xFFEB8C36
         useMaterial3: true,
+        brightness: Brightness.light,
       ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+      ),
+      themeMode: ThemeMode.light,
       home: const Navigation(),
     );
   }
