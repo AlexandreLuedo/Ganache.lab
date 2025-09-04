@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import '../../data/parameters.dart';
 import '../../models/list_item.dart';
 
-class AboutApplicationScreen extends StatelessWidget {
-  const AboutApplicationScreen({super.key});
+class AppearenceScreen extends StatelessWidget {
+  const AppearenceScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('À propos'),
+        title: const Text('Apparence'),
       ),
       body: ListView.builder(
-        itemCount: aboutItems.length,
+        itemCount: apparenceItems.length,
         itemBuilder: (context, index) {
-          final item = aboutItems[index];
+          final item = apparenceItems[index];
           return ListTile(
             leading: item.leading,
             title: Text(item.title),

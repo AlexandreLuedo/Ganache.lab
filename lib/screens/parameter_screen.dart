@@ -22,7 +22,7 @@ class ParameterScreen extends StatelessWidget {
             child: ListTile(
               leading: item.icon != null ? Icon(item.icon) : null,
               title: Text(item.title),
-              subtitle: item.subtitle != null ? Text(item.subtitle!) : null,
+              subtitle: Text(item.subtitle),
               onTap: item.onTap,
               trailing: const Icon(Symbols.chevron_right),
             ),
