@@ -46,7 +46,6 @@ class _CorrectionState extends State<Correction> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => CreateGanache()),
-                  // TODO va pas fonctionner (je pense)
                 );
               },
               icon: const Icon(Symbols.edit, fill: 1),

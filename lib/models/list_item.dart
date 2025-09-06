@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+// Affiche les parameters.dart
 class ListItem {
   final Widget? leading;
   final String title;
@@ -18,6 +20,7 @@ class ListItem {
   });
 }
 
+// Affiche les containaires sur fond orange clair.
 class CustomContainerItem {
   final String title;
   final String subtitle;

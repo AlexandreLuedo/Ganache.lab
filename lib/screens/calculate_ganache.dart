@@ -12,7 +12,6 @@ class CalculateGanache extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // TODO Remplacer la ganache par une variable récupérée grâce au nom.
       appBar: AppBar(
         title: Consumer<TitleModel>(
           builder:
@@ -36,7 +35,6 @@ class CalculateGanache extends StatelessWidget {
                 Navigator.pop(
                   context,
                   MaterialPageRoute(builder: (context) => CreateGanache()),
-                  // TODO va pas fonctionner (je pense)
                 );
               },
               icon: const Icon(Symbols.edit, fill: 1),

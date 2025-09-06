@@ -14,25 +14,45 @@ class Glossary extends StatefulWidget {
 
 class _GlossaryState extends State<Glossary> {
   String _glossaryText = "";
+  String _allGLossaryDatas = "";
 
   @override
   void initState() {
     super.initState();
     _loadGlossary();
   }
-
   Future<void> _loadGlossary() async {
-    final text = await rootBundle.loadString('assets/documentations/doc.md');
+    final files = [
+      'assets/documentations/welcome.md',
+      'assets/documentations/Humidity.md',
+      'assets/documentations/DewPoint.md',
+      'assets/documentations/SweeteningPower.md',
+      'assets/documentations/LifeTime.md',
+      'assets/documentations/Footer.md',
+    ];
+
+    final texts = await Future.wait(files.map((file) => rootBundle.loadString(file)));
+
     setState(() {
-      _glossaryText = text;
+      _glossaryText = texts.join("\n\n"); // concatène tous les textes
     });
   }
+
+  //  final humidity = await rootBundle.loadString('assets/documentations/Humidity.md');
+  //  final dewPoint = await rootBundle.loadString('assets/documentations/DewPoint.md');
+  //  final sweeteningPower = await rootBundle.loadString('assets/documentations/SweeteningPower.md');
+  //  final lifeTime = await rootBundle.loadString('assets/documentations/LifeTime.md');
+  //  final footer = await rootBundle.loadString('assets/documentations/Footer.md');
+  // final texte = welcome + humidity + dewPoint + sweeteningPower + lifeTime + footer;
 
   Future<void> _openLink(String url) async {
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
+      // TODO générer la snackbar
+      // SNACKBAR ICI
+
       print("Impossible d’ouvrir $url");
     }
   }
