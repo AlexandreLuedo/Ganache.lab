@@ -1,7 +1,5 @@
 <p align="center"><img src="https://github.com/AlexandreLuedo/Ganache.lab/blob/master/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png?raw=true" /></p>
 
-![img](https://github.com/AlexandreLuedo/Ganache.lab/blob/master/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png?raw=true)
-
 
 # Ganache.lab
 
