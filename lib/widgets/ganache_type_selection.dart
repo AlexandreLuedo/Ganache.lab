@@ -61,6 +61,7 @@ class _MoulageState extends State<Moulage> {
   late TextEditingController _weightController;
   late TextEditingController _numberMusslesController;
   late TextEditingController _numberMouleController;
+
   @override
   void initState() {
     super.initState();
@@ -179,49 +180,43 @@ class _CadrageState extends State<Cadrage> {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 10),
-        Row(
-          children: [
-            Expanded(
-              child: TextField(
-                controller: _lenghtController,
-                keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Symbols.open_in_full, fill: 1),
-                  border: OutlineInputBorder(),
-                  labelText: "Longueur - largeur",
-                  hintText: "Ex: 12 cm",
-                ),
-                onChanged: (value) {
-                  final number = double.tryParse(value);
-                  if (number != null) {
-                    context.read<CadreModel>().updateLenght(number);
-                  }
-                },
-              ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: TextField(
-                controller: _heightController,
-                keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Symbols.height, fill: 1),
-                  border: OutlineInputBorder(),
-                  labelText: "Hauteur",
-                  hintText: "Ex: 1.5",
-                ),
-                onChanged: (value) {
-                  final number2 = double.tryParse(value);
-                  if (number2 != null) {
-                    context.read<CadreModel>().updateHeight(number2);
-                  }
-                },
-              ),
-            ),
-          ],
+
+        TextField(
+          controller: _lenghtController,
+          keyboardType: TextInputType.number,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          decoration: const InputDecoration(
+            prefixIcon: Icon(Symbols.open_in_full, fill: 1),
+            border: OutlineInputBorder(),
+            labelText: "Longueur - largeur",
+            hintText: "Ex: 12 cm",
+          ),
+          onChanged: (value) {
+            final number = double.tryParse(value);
+            if (number != null) {
+              context.read<CadreModel>().updateLenght(number);
+            }
+          },
         ),
+        const SizedBox(height: 10),
+        TextField(
+          controller: _heightController,
+          keyboardType: TextInputType.number,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          decoration: const InputDecoration(
+            prefixIcon: Icon(Symbols.height, fill: 1),
+            border: OutlineInputBorder(),
+            labelText: "Hauteur",
+            hintText: "Ex: 1.5",
+          ),
+          onChanged: (value) {
+            final number2 = double.tryParse(value);
+            if (number2 != null) {
+              context.read<CadreModel>().updateHeight(number2);
+            }
+          },
+        ),
+
         SizedBox(height: 10),
         TextField(
           controller: _numberCadresController,
