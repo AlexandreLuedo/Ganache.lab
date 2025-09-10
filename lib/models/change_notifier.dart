@@ -23,9 +23,11 @@ class MouleModel extends ChangeNotifier {
   int _weight = 0;
   int _numberMussles = 0; // C'est le nombre d'empreintes de moules (au cas où).
   int _mouleResult = 0;
+  int _numberMoule = 0;
 
   int get weight => _weight;
   int get numberMussles => _numberMussles;
+  int get numberMoule => _numberMoule;
   int get mouleResult => _mouleResult;
 
   void updateWeight(int newWeight) {
@@ -35,6 +37,11 @@ class MouleModel extends ChangeNotifier {
 
   void updateNumberMussles(int newNumberMussles) {
     _numberMussles = newNumberMussles;
+    notifyListeners();
+  }
+
+  void updateNumberMoule(int newNumberMoule) {
+    _numberMoule = newNumberMoule;
     notifyListeners();
   }
 

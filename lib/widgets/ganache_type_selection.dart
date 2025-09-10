@@ -37,6 +37,7 @@ class _ApplicationTypeSelectionState extends State<ApplicationTypeSelection> {
           },
         ),
         const SizedBox(height: 20),
+        // Affiche les widgets Pour le paramétrage, cadrage, moulage et autre.
         if (applicationView == Application.moulage)
           CustomContainer(borderRadius: 12, borderWidth: 1, child: Moulage())
         else if (applicationView == Application.cadrage)
@@ -59,7 +60,7 @@ class Moulage extends StatefulWidget {
 class _MoulageState extends State<Moulage> {
   late TextEditingController _weightController;
   late TextEditingController _numberMusslesController;
-
+  late TextEditingController _numberMouleController;
   @override
   void initState() {
     super.initState();
@@ -68,6 +69,9 @@ class _MoulageState extends State<Moulage> {
     );
     _numberMusslesController = TextEditingController(
       text: context.read<MouleModel>().numberMussles.toString(),
+    );
+    _numberMouleController = TextEditingController(
+      text: context.read<MouleModel>().numberMoule.toString(),
     );
   }
 
@@ -81,48 +85,58 @@ class _MoulageState extends State<Moulage> {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 10),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: TextField(
-                controller: _weightController,
-                keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Symbols.scale, fill: 1),
-                  border: OutlineInputBorder(),
-                  labelText: "Empreinte",
-                  hintText: "Ex: 8g",
-                ),
-                onChanged: (value) {
-                  final number = int.tryParse(value);
-                  if (number != null) {
-                    context.read<MouleModel>().updateWeight(number);
-                  }
-                },
-              ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: TextField(
-                controller: _numberMusslesController,
-                keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Symbols.view_module, fill: 1),
-                  border: OutlineInputBorder(),
-                  labelText: "Nomb. Empreintes",
-                  hintText: "Ex: 24",
-                ),
-                onChanged: (value) {
-                  final number1 = int.tryParse(value);
-                  if (number1 != null) {
-                    context.read<MouleModel>().updateNumberMussles(number1);
-                  }
-                },
-              ),
-            ),
-          ],
+        TextField(
+          controller: _weightController,
+          keyboardType: TextInputType.number,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          decoration: const InputDecoration(
+            prefixIcon: Icon(Symbols.scale, fill: 1),
+            border: OutlineInputBorder(),
+            labelText: "Empreinte",
+            hintText: "Ex: 8g",
+          ),
+          onChanged: (value) {
+            final number = int.tryParse(value);
+            if (number != null) {
+              context.read<MouleModel>().updateWeight(number);
+            }
+          },
+        ),
+        const SizedBox(height: 10),
+        TextField(
+          controller: _numberMusslesController,
+          keyboardType: TextInputType.number,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          decoration: const InputDecoration(
+            prefixIcon: Icon(Symbols.view_module, fill: 1),
+            border: OutlineInputBorder(),
+            labelText: "Nomb. Empreintes",
+            hintText: "Ex: 24",
+          ),
+          onChanged: (value) {
+            final number1 = int.tryParse(value);
+            if (number1 != null) {
+              context.read<MouleModel>().updateNumberMussles(number1);
+            }
+          },
+        ),
+        const SizedBox(height: 10),
+        TextField(
+          controller: _numberMouleController,
+          keyboardType: TextInputType.number,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          decoration: const InputDecoration(
+            prefixIcon: Icon(Symbols.numbers, fill: 1),
+            border: OutlineInputBorder(),
+            labelText: "Nombre de moules mis en œuvres mis en œuvres",
+            hintText: "Ex: 1",
+          ),
+          onChanged: (value) {
+            final number3 = int.tryParse(value);
+            if (number3 != null) {
+              context.read<MouleModel>().updateNumberMoule(number3);
+            }
+          },
         ),
       ],
     );
