@@ -17,13 +17,13 @@ class RecipeList extends StatelessWidget {
         style: TextStyle(fontWeight: FontWeight.bold)*/,
         ),
       ),
-      body: NoRecipeMessage()
+      body: EmptyRecipeMessage()
     );
   }
 }
 
-class NoRecipeMessage extends StatelessWidget {
-  const NoRecipeMessage({super.key});
+class EmptyRecipeMessage extends StatelessWidget {
+  const EmptyRecipeMessage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class NoRecipeMessage extends StatelessWidget {
           SizedBox(height: 100),
           Text(
             'Aucune recette n\'est calculée pour le moment. \n Vous pouvez en créer une en cliquant sur "Créer sa ganache"',
-            style: TextStyle(color: Colors.grey, fontSize: 25),
+            style: TextStyle(color: Colors.grey, fontSize: 15),
             textAlign: TextAlign.center,
           ),
         ],

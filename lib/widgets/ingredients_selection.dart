@@ -9,9 +9,8 @@ class GanacheIngredients extends StatelessWidget {
   Widget build(BuildContext context) {
     // Exemple de données d’ingrédients
     final ingredients = [
-      {'title': 'Chocolat', 'subtitle': 'Callebaut 58% min.', 'value': 1000},
-      {'title': 'Crème', 'subtitle': '35% MG', 'value': 900},
-      // Ajoute d’autres si besoin…
+      {'title': 'Chocolat', 'subtitle': 'Callebaut 58% min.'},
+      {'title': 'Crème', 'subtitle': '35% MG'},
     ];
 
     return Column(
@@ -74,10 +73,6 @@ class GanacheIngredients extends StatelessWidget {
               leading: const Icon(Symbols.widgets, fill: 1),
               title: Text("${ingredient['title']}"),
               subtitle: Text("${ingredient['subtitle']}"),
-              trailing: Text(
-                "${ingredient['value']}g",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-              ),
             ),
           );
         }),
