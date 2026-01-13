@@ -10,7 +10,7 @@ class GanacheTypeSelection extends StatefulWidget {
 }
 
 class _GanacheTypeSelectionState extends State<GanacheTypeSelection> {
-  int? chocolateTypeValue = 0;
+  int? chocolateTypeValue;
   final noms = ["Noir", "Lait", "Noir/Lait", "Blanc", "Autre"];
 
   @override
