@@ -5,8 +5,11 @@ import '../utils/email_helper.dart';
 
 
 // TODO add all data containers here
+
+/// List stockant le contenu des containers avec quelques options.
 final List<CustomContainerItem> customContainerItems = [
   CustomContainerItem(
+    /// Utiliser dans paramètres
     title: 'Contact',
     subtitle: 'hadrien.ganache@pm.me',
     icon: Symbols.mail,
@@ -14,6 +17,7 @@ final List<CustomContainerItem> customContainerItems = [
     onTap: openEmail,
   ),
   CustomContainerItem(
+    /// License
     title: 'Licence',
     subtitle: 'Propriétaire',
     icon: Symbols.license,
