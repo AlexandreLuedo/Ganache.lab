@@ -5,7 +5,7 @@
 #+OPTIONS: toc:nil num:nil
 
 #+ATTR_ORG: :align center
-#+html: <p align="center"><img src="https://github.com/AlexandreLuedo/Ganache.lab/blob/master/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png?raw=true" /></p>
+#+html: <p align="center"><img src="https://github.com/AlexandreLuedo/Ganache.lab/blob/master/assets/png/Icon_app_material_bg_2.png?raw=true" /></p>
 * Ganache.lab
 Le premier équilibreur de ganache multiplatformes !
 #+begin_quote
