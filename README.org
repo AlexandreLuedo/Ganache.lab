@@ -5,44 +5,62 @@
 
 #+ATTR_ORG: :align center
 #+html: <p align="center"><img src="https://github.com/AlexandreLuedo/Ganache.lab/blob/master/assets/png/Icon_app_material_bg_2.png?raw=true" width="200" /></p>
+
 * Ganache.lab
-Le premier équilibreur de ganache multiplatformes !
+Le premier équilibreur de ganache multiplateforme !
+
 #+begin_quote
-[!WARNING]
-Ceci est mon premier projet, il me permet d'apprendre Dart & Flutter !
+[!NOTE]
+Ceci est mon premier projet, il sert de support à mon apprentissage de Dart & Flutter. L'architecture est donc amenée à évoluer régulièrement.
 #+end_quote
-** Architecture
-*** Vue globale de l'application
-L'application Ganache.lab permet l'équilibrage de ganaches. Via deux manières différentes. La génération de recette, et l'importation de recettes.
-**** Génération de recette
-C'est dans cette optique là que j'ai créé l'application. L'utilisateur renseigne ses besoins pour une ganache, ex: utilisation, grammage final etc... Puis l'application se charge de générer une recette en fonction des données renseignés dans le fichier de paramètres de variables.
-**** Importation de recette
-L'utilisateur renseigne ingrédient par ingrédients sa propre recette de ganache, puis peux consulter son équilibrage et corriger celui-ci si besoin. Cette approche n'est clairement pas développer au niveau de l'application. Cela sera apporté dans un second temps.
-*** Commentaires
-Les commentaires sont rédigés en français (pour la plus part) sinon je changerai les commentaires rédigés en anglais vers le français.
-*** Variables
-Le nom des variables est en anglais, mêmes si certaines (pour l'instant) possèdent des parties anglais comme ~numberCadres~ utilisée pour stocker le nombre de cadre que l'utilisateur renseigne.
-Le nom des variable est réellement courts, peux être à terme je serai plus claire pour leurs rédcation.
-*** Architecture de code
-- =GanacheApp()= est le début du programme.
-- =navigation.dart= la "home page".
-- =privateConfig.yaml= le fichier qui stocke l'ensemble des variables servants de réglages à la table analytique.
-- =engine.dart= est le moteur de calcule qui va utiliser les données de
-**** MIGRATION
-J'essaie de donner une organisation plus logique à mon projet. Certaines parties du code ne sont pour l'instant même pas utilisés. La transition vers une architecture clean se fera en plusieurs commits qui ne seront pas spécialements dédiés à l'achitecture du projet.
-**** Provider
-Pour l'instant je déclare les principales variable dans ~models/change_notifier.dart~, sinon le reste prendra le nom de se qu'ils contiennent et finiron par ~_notifier.dart~
+
+** Fonctionnalités
+L'application Ganache.lab permet l'équilibrage précis de ganaches via deux approches principales :
+
+*** 1. Génération de recette (Mode principal)
+C'est le cœur de l'application. L'utilisateur définit ses contraintes (type d'utilisation, grammage final désiré, etc.). L'application se charge ensuite de générer une recette équilibrée en s'appuyant sur les paramètres définis dans le fichier de configuration.
+
+*** 2. Importation de recette (Roadmap)
+/Fonctionnalité non implémentée pour le moment./
+L'objectif est de permettre à l'utilisateur de saisir ingrédient par ingrédient sa propre recette pour vérifier son équilibrage et le corriger si nécessaire.
+
+** Architecture Technique
+
+*** Conventions de code
+- *Commentaires :* Rédigés majoritairement en **Français**.
+- *Variables :* Nommées en *Anglais* (camelCase).
+  - *Note :* Certaines variables historiques possèdent encore des noms hybrides (ex: ~numberCadres~). Un nettoyage progressif est en cours pour uniformiser le tout.
+
+*** Structure du projet
+- =GanacheApp()= : Point d'entrée de l'application.
+- =navigation.dart= : Gestion de la navigation principale ("Home page").
+- =privateConfig.yaml= : Fichier de configuration stockant les constantes et variables d'ajustement pour la table analytique.
+- =engine.dart= : Moteur de calcul utilisant les données de configuration.
+
+*** Gestion d'état (Provider)
+Les états sont gérés via ~ChangeNotifier~.
+- Les variables principales sont actuellement dans ~models/change_notifier.dart~.
+- Convention de nommage future : les fichiers prendront le nom de l'entité gérée suivi de ~_notifier.dart~.
+
+*** Refactoring & Migration
+Une transition vers une "Clean Architecture" est en cours. L'organisation du code va devenir plus logique au fil des commits, bien que certaines parties du code actuel soient dépréciées ou non utilisées.
+
 ** Documentation
-Les commentaires sont rédigés en Français. Les pages de documentation sont des commentaires contenants ~// DOC~ en préambule.
-*Ex*
+La documentation technique est intégrée directement dans le code via des commentaires précédés du tag ~// DOC~.
+
 #+begin_src dart
 // DOC
 // La valeur var ganache = 1; permet un calcul de celle-ci.
 #+end_src
-*** TODO Une documentation sera générée grâce à dart
-*** Glossaire
-Le glossaire est une documentation destinée aux utilisateurs. Elle permet d'expliquer à ceux-ci comment fonctionne la ganache. Cette documentation a été exprès rédigée en markdown pour une modification plus accessible (à voir comment je ferai pour rendre la modification possible pour les utilisateurs).
-Le glossaire est disponible dans ~assets/documentations/doc.md~
-** Sources
-- Design des ~indicators~: [[https://github.com/PranshulGG/WeatherMaster][WeatherMaster]]
-- Design en lui-même: [[https://m3.material.io][Material Design 3]]
+
+*** TODO Génération automatique
+Une documentation complète sera générée ultérieurement via les outils Dart (~dart doc~).
+
+*** Glossaire utilisateur
+Un guide explicatif sur le fonctionnement technique d'une ganache est disponible pour les utilisateurs.
+- Format : Markdown (pour faciliter la contribution et l'édition).
+- Emplacement : ~assets/documentations/doc.md~
+
+** Crédits & Sources
+- *Design des indicateurs :* Inspiré de [[https://github.com/PranshulGG/WeatherMaster][WeatherMaster]]
+- *Interface Utilisateur :* Basée sur [[https://m3.material.io][Material Design 3]]
