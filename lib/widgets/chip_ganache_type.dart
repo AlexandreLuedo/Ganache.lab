@@ -1,5 +1,6 @@
 // Widget pour la nature de la ganache (noir/lait/blanc)
 import 'package:flutter/material.dart';
+int? chocolateTypeValue;
 
 class GanacheTypeSelection extends StatefulWidget {
   const GanacheTypeSelection({super.key});
