@@ -7,7 +7,9 @@ import '../screens/settings/appearence_screen.dart';
 import '../screens/settings/license_screen.dart';
 import '../utils/email_helper.dart';
 
+/// List des catégories de la page paramètres.
 final settingsItems = [
+  /// Section à propos
   ListItem(
     leading: CircleAvatar(child: Icon(Symbols.info, fill: 1)),
     title: "À propos de Ganache.lab",
@@ -20,6 +22,7 @@ final settingsItems = [
       );
     },
   ),
+  /// Section apparence
   ListItem(
     leading: CircleAvatar(child: Icon(Symbols.format_paint, fill: 1)),
     title: "Apparence",
@@ -32,6 +35,7 @@ final settingsItems = [
       );
     },
   ),
+  /// Section unité de mesure
   ListItem(
     leading: CircleAvatar(child: Icon(Symbols.discover_tune, fill: 1)),
     title: "Unités du mesures",
@@ -44,6 +48,7 @@ final settingsItems = [
       );
     },
   ),
+  /// Section langue de l'application
   ListItem(
     leading: CircleAvatar(child: Icon(Symbols.language, fill: 1)),
     title: "Langue de l'application",
