@@ -32,6 +32,7 @@ class _GanacheTypeSelectionState extends State<GanacheTypeSelection> {
                   onSelected: (bool selected) {
                     setState(() {
                       chocolateTypeValue = selected ? index : null;
+                      // Faire en sorte que chocolateTypeValue fonctionne avec provider.
                       // _value = condition ? valeurSiVrai : valeurSiFaux;
                     });
                   },
