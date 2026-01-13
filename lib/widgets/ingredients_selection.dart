@@ -58,7 +58,6 @@ class GanacheIngredients extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 8),
         // Génération dynamique de containers + ListTile
         ...ingredients.map((ingredient) {
           return Container(
