@@ -1,15 +1,14 @@
 :PROPERTIES:
 :ID:       ce11e863-cac5-4cb5-a296-fabd1a2b3845
 :END:
-#+title: Readme
 #+OPTIONS: toc:nil num:nil
 
 #+ATTR_ORG: :align center
-#+html: <p align="center"><img src="https://github.com/AlexandreLuedo/Ganache.lab/blob/master/assets/png/Icon_app_material_bg_2.png?raw=true" /></p>
+#+html: <p align="center"><img src="https://github.com/AlexandreLuedo/Ganache.lab/blob/master/assets/png/Icon_app_material_bg_2.png?raw=true" width="200" /></p>
 * Ganache.lab
 Le premier équilibreur de ganache multiplatformes !
 #+begin_quote
-[ !WARNING ]
+[!WARNING]
 Ceci est mon premier projet, il me permet d'apprendre Dart & Flutter !
 #+end_quote
 ** Architecture
