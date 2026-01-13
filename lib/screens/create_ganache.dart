@@ -223,7 +223,6 @@ class FabricationMethod extends StatelessWidget {
           "Méthode de fabrication",
           style: Theme.of(context).textTheme.headlineSmall,
         ),
-        SizedBox(height: 10),
         DropdownMenu(
           enableFilter: true,
           leadingIcon: Icon(Symbols.design_services, fill: 1),
