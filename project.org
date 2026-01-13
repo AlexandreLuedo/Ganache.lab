@@ -28,6 +28,7 @@ Ajouter en "TODO" implémentation via provider
 ** TODO Container réutilisables
 *** DONE Créer une classe CustomContainer en stateless
 *** DONE Déclarer :
+
 #+begin_src dart
 import 'package:flutter/material.dart';
 
@@ -76,7 +77,7 @@ CustomContainer(
 * Notes
 ** Modification d'écriture des ExtendedWidgets
 Il serai plus interessant de générer chaque widget extended à la chaîne et y ajouter des données en paramètres (titres, icons, explications).
-Utiliser[[TODO Déclarer :][ une classe personnalisée]]
+Utiliser une classe personnalisée.
 ** Formulaire
 *** Original
 Ce logiciel s'inscrit dans la démarche de mon mémoire pour le BTM Chocolatier-Confiseur que je prépare. \n Mon mémoire portant sur la question suivante : "Comment rendre accessible l’accès a la création et l’équilibrage de la ganache". Pour ce faire, j'ai besoin d'obtenir des informations, et des réponses à différentes questions. Pour toucher le plus de professionnels possible. J'ai choisi de vous proposer un questionnaire en ligne facilement accessible et rapide à remplir. Grâce à votre collaboration, les résultat seront multiples : Gains de données pour agrémenter mon mémoire, apprentissage personnel sur les besoins des artisants chocolatiers, rassemblements d'idée pour apporter des améliorations à ce très jeune logiciel.
