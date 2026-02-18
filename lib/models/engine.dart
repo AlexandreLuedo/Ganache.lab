@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/widgets/chip_ganache_type.dart';
 
-int whatIsThisType = chocolateTypeVal€ue;
+int whatIsThisType = chocolateTypeValue;
 
 if (chocolateTypeValue == 0) {
 whatIsThisType = privateConfig['dark'];

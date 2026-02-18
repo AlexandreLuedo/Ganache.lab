@@ -13,8 +13,7 @@ final settingsItems = [
   ListItem(
     leading: CircleAvatar(child: Icon(Symbols.info, fill: 1)),
     title: "À propos de Ganache.lab",
-    subtitle: "En savoir plus sur l'application",
-    isClickable: true,
+    subtitle: "En savoir plus sur l'application", isClickable: true,
     onTap: (context) {
       Navigator.push(
         context,
