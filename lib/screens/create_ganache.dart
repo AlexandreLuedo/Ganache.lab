@@ -42,14 +42,14 @@ class _CreateGanacheState extends State<CreateGanache> {
                       "Dans la page \"Créer sa ganache\", vous devez compléter toutes les informations proposés. \n Il n'est pas encore possible d'ajouter ses propres paramètres. \n Pour plus d'informations veuillez vous rendre sur le site internet.",
                     ),
                     actions: <Widget>[
-                      TextButton(
+                      FilledButton(
                         onPressed: () {
                           Navigator.of(context).pop(); // Ferme le dialog
                           _launchUrl();
                         },
                         child: const Text("Visiter la page d'aide"),
                       ),
-                      TextButton(
+                      OutlinedButton(
                         onPressed: () {
                           Navigator.of(context).pop(); // Ferme le dialog
                         },
@@ -90,14 +90,14 @@ class _CreateGanacheState extends State<CreateGanache> {
                         "",
                       ),
                       actions: <Widget>[
-                        TextButton(
+                        OutlinedButton(
                           onPressed: () {
                             Navigator.of(context).pop(); // Ferme le dialog
                             _launchUrl(); // )
                           },
                           child: const Text("Rechercher"),
                         ),
-                        TextButton(
+                        FilledButton(
                           onPressed: () {
                             Navigator.of(context).pop(); // Ferme le dialog
                           },
@@ -159,7 +159,6 @@ class _CreateGanacheState extends State<CreateGanache> {
           SizedBox(height: 16),
           GanacheIngredients(),
           SizedBox(height: 16),
-
         ],
       ),
     );
@@ -226,7 +225,7 @@ class FabricationMethod extends StatelessWidget {
         DropdownMenu(
           enableFilter: true,
           leadingIcon: Icon(Symbols.design_services, fill: 1),
-          label: const Text("Selectionnez la méthode de fabrication",),
+          label: const Text("Selectionnez la méthode de fabrication"),
           dropdownMenuEntries: [
             DropdownMenuEntry(value: Placeholder(), label: "Méthode 1"),
             // TODO https://api.flutter.dev/flutter/material/DropdownMenu-class.html

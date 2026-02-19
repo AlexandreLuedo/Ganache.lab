@@ -37,13 +37,13 @@ class GanacheIngredients extends StatelessWidget {
                         "",
                       ),
                       actions: <Widget>[
-                        TextButton(
+                        FilledButton(
                           onPressed: () {
                             Navigator.of(context).pop(); // Ferme le dialog
                           },
                           child: const Text("Ajouter"),
                         ),
-                        TextButton(
+                        OutlinedButton(
                           onPressed: () {
                             Navigator.of(context).pop(); // Ferme le dialog
                           },
