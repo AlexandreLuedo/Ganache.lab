@@ -60,6 +60,31 @@ Une documentation complète sera générée ultérieurement via les outils Dart 
 Un guide explicatif sur le fonctionnement technique d'une ganache est disponible pour les utilisateurs.
 - Format : Markdown (pour faciliter la contribution et l'édition).
 - Emplacement : ~assets/documentations/doc.md~
+*** Les attribus
+L'idée des attribus, c'est de définir des étiquettes (/tags/). A une recette, pour indiqué en premier plan à l'utilisateur des informations complémentaires clées pour l'élaboration de ses recettes.
+**** Les attribus de fabrications
+***** Attribus microbiens
+Les attribus microbiens est une étiquette assignée à chaques technique de fabrication de ganache, possédant une valeure variant de 1 à 3. En fonction du risque d'apport de développement de m-o non désirés.
+=Assignation unique=
+****** Valeurs
+- Propice (au développement bactérien)
+- Moyennement propice
+- Non-propice
+1 à 3 (pour l'instant)
+***** Attribus temporels
+Les attribus temporels sont un lot d'étiquettes assignés à chaques technique de fabrication de ganache, il y a trois différents types de valeurs définissant le temps pris pour l'élaboration d'une recette.
+=Assignation unique=
+****** Valeurs
+- Rapide
+- Moyen
+- Lent
+***** Attribus difficulté
+Les attribus de diffculté sont un lot d'étiquette assignés à chaquer technique de fabrication de ganache, il y a trois différents types de valeurs définissant la difficulté/l'expérience requis pour l'élaboration d'une recette.
+=Assignation unique=
+****** Valeurs
+- Facile/abordable
+- Normal/classique
+- Complexe/technique
 
 ** Crédits & Sources
 - *Design des indicateurs :* Inspiré de [[https://github.com/PranshulGG/WeatherMaster][WeatherMaster]]

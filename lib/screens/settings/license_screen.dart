@@ -10,7 +10,7 @@ class LicenseScreen extends StatefulWidget {
 }
 
 class _LicenseScreenState extends State<LicenseScreen> {
-  String _licenseText = '';
+  late String _licenseText; // Can also define with String _licenseText = '';
 
   @override
   void initState() {
@@ -29,10 +29,7 @@ class _LicenseScreenState extends State<LicenseScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Licence')),
-      body: Markdown(
-        data: _licenseText,
-        padding: EdgeInsets.all(16),
-      ),
+      body: Markdown(data: _licenseText, padding: EdgeInsets.all(16)),
     );
   }
 }
