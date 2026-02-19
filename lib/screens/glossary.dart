@@ -21,6 +21,7 @@ class _GlossaryState extends State<Glossary> {
     super.initState();
     _loadGlossary();
   }
+
   Future<void> _loadGlossary() async {
     final files = [
       'assets/documentations/welcome.md',
@@ -31,7 +32,9 @@ class _GlossaryState extends State<Glossary> {
       'assets/documentations/Footer.md',
     ];
 
-    final texts = await Future.wait(files.map((file) => rootBundle.loadString(file)));
+    final texts = await Future.wait(
+      files.map((file) => rootBundle.loadString(file)),
+    );
 
     setState(() {
       _glossaryText = texts.join("\n\n"); // concatène tous les textes
@@ -60,22 +63,32 @@ class _GlossaryState extends State<Glossary> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Glossaire")),
-      body: // SingleChildScrollView(
-          Markdown(
-        data: _glossaryText,
-        selectable: true,
-        onTapLink: (text, href, title) {
-          if (href != null) _openLink(href);
-        },
-        padding: EdgeInsets.all(16),
-        styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
-          p: TextStyle(fontSize: 16),
-          h1: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          h2: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-      ),
-      // ),
+      appBar: AppBar(title: const Text("Glossaire")),
+      // On vérifie si le texte est chargé avant d'afficher le Markdown
+      body:
+          _glossaryText.isEmpty
+              ? const Center(child: CircularProgressIndicator())
+              : Markdown(
+                data: _glossaryText,
+                selectable: true,
+                onTapLink: (text, href, title) {
+                  if (href != null) _openLink(href);
+                },
+                padding: const EdgeInsets.all(16),
+                styleSheet: MarkdownStyleSheet.fromTheme(
+                  Theme.of(context),
+                ).copyWith(
+                  p: const TextStyle(fontSize: 16),
+                  h1: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  h2: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
     );
   }
 }
