@@ -47,11 +47,27 @@ Une transition vers une "Clean Architecture" est en cours. L'organisation du cod
 
 ** Documentation
 La documentation technique est intégrée directement dans le code via des commentaires précédés du tag ~// DOC~.
+*** Nombres & déclaration
+Les pourcentages ont été déclarer déjà divisés, dans l'idée d'avoir un code plus propre
+#+begin_src 
+15% = 0.15
+#+end_src
+*** Nom de variables
+**** pointOfOverum
+Sur les logiciels de formulation professionnelle (comme ceux utilisés en chocolaterie ou en glacerie), le Pouvoir Sucrant se traduit par :
 
+POD (Point of Overrun / Power of Sweetness)
+C’est le terme technique le plus utilisé. POD vient de l'italien Potere Dolcificante. Dans le monde de la formulation internationale, on garde souvent cet acronyme.
 #+begin_src dart
 // DOC
 // La valeur var ganache = 1; permet un calcul de celle-ci.
 #+end_src
+**** totalSolids
+EST - Extrait Sec Total
+**** milkSolidsNotFat
+MSNF - Milk Solids-Not-Fat
+ESDL - Extrait Sec Dégraissé du Lait
+
 
 *** TODO Génération automatique
 Une documentation complète sera générée ultérieurement via les outils Dart (~dart doc~).
@@ -60,6 +76,10 @@ Une documentation complète sera générée ultérieurement via les outils Dart 
 Un guide explicatif sur le fonctionnement technique d'une ganache est disponible pour les utilisateurs.
 - Format : Markdown (pour faciliter la contribution et l'édition).
 - Emplacement : ~assets/documentations/doc.md~
+*** Les règles d'équilibrage
+Les classes stockants les règles d'équilibrage sont déclarées dans leurs fichiers respectifs par catégorie d'ingrédients :
+Sucres - ~/lib/data/sugar_type.dart
+Chocolat - ~/lib/data/sugar_type.dart
 *** Les attribus
 L'idée des attribus, c'est de définir des étiquettes (/tags/). A une recette, pour indiqué en premier plan à l'utilisateur des informations complémentaires clées pour l'élaboration de ses recettes.
 **** Les attribus de fabrications
