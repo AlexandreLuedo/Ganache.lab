@@ -26,8 +26,10 @@ class CustomContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color background = color ?? Theme.of(context).colorScheme.primaryContainer;
-    final Color resolvedBorderColor = borderColor ?? Theme.of(context).dividerColor;
+    final Color background =
+        color ?? Theme.of(context).colorScheme.primaryContainer;
+    final Color resolvedBorderColor =
+        borderColor ?? Theme.of(context).dividerColor;
 
     return Container(
       width: width,
@@ -37,9 +39,10 @@ class CustomContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: background,
         borderRadius: BorderRadius.circular(borderRadius),
-        border: borderWidth != null
-            ? Border.all(width: borderWidth!, color: resolvedBorderColor)
-            : null,
+        border:
+            borderWidth != null
+                ? Border.all(width: borderWidth!, color: resolvedBorderColor)
+                : null,
       ),
       clipBehavior: Clip.hardEdge,
       child: child,
