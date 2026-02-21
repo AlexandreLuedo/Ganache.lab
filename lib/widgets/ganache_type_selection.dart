@@ -9,20 +9,25 @@ import 'package:ganache_lab/models/mold_setting_notifier.dart';
 // Enum pour les types d'application
 enum Application { moulage, cadrage, autre }
 
+class ApplicationModel extends ChangeNotifier {
+  Application _currentView = Application.moulage;
+  Application get currentView => _currentView;
+
+  void updateView(Application newView) {
+    _currentView = newView;
+    notifyListeners();
+  }
+}
+
 // Widget principal
-class ApplicationTypeSelection extends StatefulWidget {
+class ApplicationTypeSelection extends StatelessWidget {
   const ApplicationTypeSelection({super.key});
 
   @override
-  State<ApplicationTypeSelection> createState() =>
-      _ApplicationTypeSelectionState();
-}
-
-class _ApplicationTypeSelectionState extends State<ApplicationTypeSelection> {
-  Application applicationView = Application.moulage;
-
-  @override
   Widget build(BuildContext context) {
+    // On écoute quelle est la vue actuelle
+    final currentView = context.watch<ApplicationModel>().currentView;
+
     return Column(
       children: [
         SegmentedButton<Application>(
@@ -31,19 +36,33 @@ class _ApplicationTypeSelectionState extends State<ApplicationTypeSelection> {
             ButtonSegment(value: Application.cadrage, label: Text("Cadrage")),
             ButtonSegment(value: Application.autre, label: Text("Autre")),
           ],
-          selected: {applicationView},
+          selected: {currentView}, // Utilise la vue du Provider
           onSelectionChanged: (selection) {
-            setState(() => applicationView = selection.first);
+            // Met à jour la vue dans le Provider
+            context.read<ApplicationModel>().updateView(selection.first);
           },
         ),
         const SizedBox(height: 20),
-        // Affiche les widgets Pour le paramétrage, cadrage, moulage et autre.
-        if (applicationView == Application.moulage)
-          CustomContainer(borderRadius: 12, borderWidth: 1, child: Moulage())
-        else if (applicationView == Application.cadrage)
-          CustomContainer(borderRadius: 12, borderWidth: 1, child: Cadrage())
+
+        // Affichage du bon widget selon la sélection
+        if (currentView == Application.moulage)
+          const CustomContainer(
+            borderRadius: 12,
+            borderWidth: 1,
+            child: Moulage(),
+          )
+        else if (currentView == Application.cadrage)
+          const CustomContainer(
+            borderRadius: 12,
+            borderWidth: 1,
+            child: Cadrage(),
+          )
         else
-          CustomContainer(borderRadius: 12, borderWidth: 1, child: Autre()),
+          const CustomContainer(
+            borderRadius: 12,
+            borderWidth: 1,
+            child: Autre(),
+          ),
       ],
     );
   }
@@ -60,19 +79,19 @@ class Moulage extends StatefulWidget {
 class _MoulageState extends State<Moulage> {
   late TextEditingController _weightController;
   late TextEditingController _numberMusslesController;
-  late TextEditingController _numberMouleController;
+  late TextEditingController _numberMoldController;
 
   @override
   void initState() {
     super.initState();
     _weightController = TextEditingController(
-      text: context.read<MouleModel>().weight.toString(),
+      text: context.read<MoldModel>().weight.toString(),
     );
     _numberMusslesController = TextEditingController(
-      text: context.read<MouleModel>().numberMussles.toString(),
+      text: context.read<MoldModel>().numberMussles.toString(),
     );
-    _numberMouleController = TextEditingController(
-      text: context.read<MouleModel>().numberMoule.toString(),
+    _numberMoldController = TextEditingController(
+      text: context.read<MoldModel>().numberMold.toString(),
     );
   }
 
@@ -93,13 +112,13 @@ class _MoulageState extends State<Moulage> {
           decoration: const InputDecoration(
             prefixIcon: Icon(Symbols.scale, fill: 1),
             border: OutlineInputBorder(),
-            labelText: "Empreinte",
+            labelText: "Poids par empreinte",
             hintText: "Ex: 8g",
           ),
           onChanged: (value) {
             final number = int.tryParse(value);
             if (number != null) {
-              context.read<MouleModel>().updateWeight(number);
+              context.read<MoldModel>().updateWeight(number);
             }
           },
         ),
@@ -111,31 +130,31 @@ class _MoulageState extends State<Moulage> {
           decoration: const InputDecoration(
             prefixIcon: Icon(Symbols.view_module, fill: 1),
             border: OutlineInputBorder(),
-            labelText: "Nomb. Empreintes",
+            labelText: "Nombre d'empreinte par moule",
             hintText: "Ex: 24",
           ),
           onChanged: (value) {
             final number1 = int.tryParse(value);
             if (number1 != null) {
-              context.read<MouleModel>().updateNumberMussles(number1);
+              context.read<MoldModel>().updateNumberMussles(number1);
             }
           },
         ),
         const SizedBox(height: 10),
         TextField(
-          controller: _numberMouleController,
+          controller: _numberMoldController,
           keyboardType: TextInputType.number,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: const InputDecoration(
             prefixIcon: Icon(Symbols.numbers, fill: 1),
             border: OutlineInputBorder(),
-            labelText: "Nombre de moules mis en œuvres mis en œuvres",
+            labelText: "Nombre de moules",
             hintText: "Ex: 1",
           ),
           onChanged: (value) {
             final number3 = int.tryParse(value);
             if (number3 != null) {
-              context.read<MouleModel>().updateNumberMoule(number3);
+              context.read<MoldModel>().updateNumberMold(number3);
             }
           },
         ),
@@ -154,19 +173,19 @@ class Cadrage extends StatefulWidget {
 class _CadrageState extends State<Cadrage> {
   late TextEditingController _lenghtController;
   late TextEditingController _heightController;
-  late TextEditingController _numberCadresController;
+  late TextEditingController _numberFramesController;
 
   @override
   void initState() {
     super.initState();
     _lenghtController = TextEditingController(
-      text: context.read<CadreModel>().lenght.toString(),
+      text: context.read<FrameModel>().lenght.toString(),
     );
     _heightController = TextEditingController(
-      text: context.read<CadreModel>().height.toString(),
+      text: context.read<FrameModel>().height.toString(),
     );
-    _numberCadresController = TextEditingController(
-      text: context.read<CadreModel>().numberCadres.toString(),
+    _numberFramesController = TextEditingController(
+      text: context.read<FrameModel>().numberFrames.toString(),
     );
   }
 
@@ -194,7 +213,7 @@ class _CadrageState extends State<Cadrage> {
           onChanged: (value) {
             final number = double.tryParse(value);
             if (number != null) {
-              context.read<CadreModel>().updateLenght(number);
+              context.read<FrameModel>().updateLenght(number);
             }
           },
         ),
@@ -212,14 +231,14 @@ class _CadrageState extends State<Cadrage> {
           onChanged: (value) {
             final number2 = double.tryParse(value);
             if (number2 != null) {
-              context.read<CadreModel>().updateHeight(number2);
+              context.read<FrameModel>().updateHeight(number2);
             }
           },
         ),
 
         SizedBox(height: 10),
         TextField(
-          controller: _numberCadresController,
+          controller: _numberFramesController,
           keyboardType: TextInputType.number,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: const InputDecoration(
@@ -231,7 +250,7 @@ class _CadrageState extends State<Cadrage> {
           onChanged: (value) {
             final number3 = int.tryParse(value);
             if (number3 != null) {
-              context.read<CadreModel>().updateNumberCadres(number3);
+              context.read<FrameModel>().updateNumberFrames(number3);
             }
           },
         ),
@@ -254,7 +273,7 @@ class _AutreState extends State<Autre> {
   void initState() {
     super.initState();
     _totalWeightController = TextEditingController(
-      text: context.read<AutreModel>().totalWeight.toString(),
+      text: context.read<OtherModel>().otherWeight.toString(),
     );
   }
 
@@ -281,7 +300,7 @@ class _AutreState extends State<Autre> {
           onChanged: (value) {
             final number3 = int.tryParse(value);
             if (number3 != null) {
-              context.read<AutreModel>().updateTotalAutre(number3);
+              context.read<OtherModel>().updateTotalOther(number3);
             }
           },
         ),

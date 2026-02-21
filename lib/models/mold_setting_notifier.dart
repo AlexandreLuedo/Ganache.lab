@@ -1,99 +1,102 @@
 import 'package:flutter/material.dart';
 
 // Moulage
-class MouleModel extends ChangeNotifier {
+class MoldModel extends ChangeNotifier {
   int _weight = 0;
-  int _numberMussles = 0; // C'est le nombre d'empreintes de moules (au cas où).
-  int _mouleResult = 0;
-  int _numberMoule = 0;
+  int _numberMussles = 0; // nombre d'empreintes de moules
+  int _moldResult = 0;
+  int _numberMold = 0;
 
   int get weight => _weight;
   int get numberMussles => _numberMussles;
-  int get numberMoule => _numberMoule;
-  int get mouleResult => _mouleResult;
+  int get numberMold => _numberMold;
+  int get moldResult => _moldResult;
 
   void updateWeight(int newWeight) {
     _weight = newWeight;
+    calculate();
     notifyListeners();
   }
 
   void updateNumberMussles(int newNumberMussles) {
     _numberMussles = newNumberMussles;
+    calculate();
     notifyListeners();
   }
 
-  void updateNumberMoule(int newNumberMoule) {
-    _numberMoule = newNumberMoule;
+  void updateNumberMold(int newNumberMold) {
+    _numberMold = newNumberMold;
+    calculate();
     notifyListeners();
   }
 
-  void calculate(int newMouleResult) {
-    _mouleResult = _weight * _numberMussles;
+  void calculate() {
+    _moldResult = _weight * _numberMussles;
     notifyListeners();
   }
 }
 
 // Cadrage
-class CadreModel extends ChangeNotifier {
+class FrameModel extends ChangeNotifier {
   double _lenght = 0;
   double _height = 0;
-  int _numberCadres = 0; // Nom de variable peux-être à revoir
-  double _cadreResult = 0;
+  int _numberFrames = 0; // Nom de variable peux-être à revoir
+  double _frameResult = 0;
   final double ratioNumber = 1.13636364; // DOC ratio masse/volume
 
   double get lenght => _lenght;
   double get height => _height;
-  int get numberCadres => _numberCadres;
-  double get cadreResult => _cadreResult;
+  int get numberFrames => _numberFrames;
+  double get frameResult => _frameResult;
 
   void updateLenght(double newLenght) {
     _lenght = newLenght;
+    calculate();
     notifyListeners();
   }
 
   void updateHeight(double newHeight) {
     _height = newHeight;
+    calculate();
     notifyListeners();
   }
 
-  void updateNumberCadres(int newNumberCadres) {
-    _numberCadres = newNumberCadres;
+  void updateNumberFrames(int newNumberFrames) {
+    _numberFrames = newNumberFrames;
+    calculate();
     notifyListeners();
   }
 
-  void calculate(int newCadreResult) {
-    if (_numberCadres == 0) {
-      _numberCadres == 1;
+  void calculate() {
+    if (_numberFrames == 0) {
+      _numberFrames = 1;
     }
-    _cadreResult = (_lenght * 2) * _height * _numberCadres;
-    _cadreResult = _cadreResult*ratioNumber;
-    notifyListeners();
+    _frameResult = (_lenght * 2) * _height * _numberFrames;
+    _frameResult = _frameResult * ratioNumber;
   }
 }
 
 // Autre
-class AutreModel extends ChangeNotifier {
-  int _totalWeight = 0;
-  int get totalWeight => _totalWeight;
+class OtherModel extends ChangeNotifier {
+  int _otherWeight = 0;
+  int get otherWeight => _otherWeight;
 
-  void updateTotalAutre(int newTotalWeight) {
+  void updateTotalOther(int newOtherWeight) {
+    _otherWeight = newOtherWeight;
+    notifyListeners();
+  }
+}
+
+class TotalModel extends ChangeNotifier {
+  double _totalWeight =
+      MoldModel().moldResult +
+      FrameModel().frameResult +
+      OtherModel()
+          .otherWeight; // On utilise final car le ProxyProvider en crée un nouveau à chaque fois
+  double get totalWeight => _totalWeight;
+
+  void updateTotalWeight(double newTotalWeight) {
     _totalWeight = newTotalWeight;
     notifyListeners();
   }
 }
-
-class Total extends ChangeNotifier {
-  double _total = 0;
-  double get total => _total;
-
-  void updateTotal(double value) {
-    _total = value;
-    notifyListeners();
-  }
-
-  void reset() {
-    _total = 0;
-    notifyListeners();
-  }
-}
-

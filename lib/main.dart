@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/screens/screens_exportation_file.dart';
+import 'package:ganache_lab/widgets/ganache_type_selection.dart';
 import 'package:provider/provider.dart';
 import 'package:ganache_lab/models/change_notifier.dart';
 import 'package:ganache_lab/models/mold_setting_notifier.dart';
@@ -7,11 +8,12 @@ import 'package:ganache_lab/models/mold_setting_notifier.dart';
 void main() => runApp(
   MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (_) => Total()),
       ChangeNotifierProvider(create: (_) => TitleModel()),
-      ChangeNotifierProvider(create: (_) => MouleModel()),
-      ChangeNotifierProvider(create: (_) => CadreModel()),
-      ChangeNotifierProvider(create: (_) => AutreModel()),
+      ChangeNotifierProvider(create: (_) => ApplicationModel()),
+      ChangeNotifierProvider(create: (_) => MoldModel()),
+      ChangeNotifierProvider(create: (_) => FrameModel()),
+      ChangeNotifierProvider(create: (_) => OtherModel()),
+      ChangeNotifierProvider(create: (_) => TotalModel()),
     ],
     child: const GanacheApp(),
   ),

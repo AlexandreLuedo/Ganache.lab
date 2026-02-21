@@ -1,5 +1,6 @@
 // Affiche le résultat d'un calcul de ganache. Appelle les indicators.
 import 'package:flutter/material.dart';
+import 'package:ganache_lab/widgets/total_weight.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'screens_exportation_file.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
@@ -127,36 +128,6 @@ class CalculateGanache extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class TotalWeightGanache extends StatefulWidget {
-  const TotalWeightGanache({super.key});
-
-  @override
-  State<TotalWeightGanache> createState() => _TotalWeightGanacheState();
-}
-
-class _TotalWeightGanacheState extends State<TotalWeightGanache> {
-  @override
-  Widget build(BuildContext context) {
-    return CustomContainer(
-      borderRadius: 12,
-      borderWidth: 1,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(Symbols.all_inclusive, fill: 1),
-              SizedBox(width: 10),
-              Text("Poids total", style: Theme.of(context).textTheme.headlineSmall),
-            ],
-          ),
-          Text("2550g", style: TextStyle(fontSize: 45))
-        ],
       ),
     );
   }
