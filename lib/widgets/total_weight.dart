@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ganache_lab/models/weight_setting_notifier.dart';
+import 'package:ganache_lab/models/weight_ganache_notifier.dart';
 import 'package:ganache_lab/widgets/custom_container.dart';
 import 'package:ganache_lab/widgets/ganache_type_selection.dart';
 import 'package:material_symbols_icons/symbols.dart';

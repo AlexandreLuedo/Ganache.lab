@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:provider/provider.dart';
 import 'custom_container.dart';
-import 'package:ganache_lab/models/weight_setting_notifier.dart';
+import 'package:ganache_lab/models/weight_ganache_notifier.dart';
 
 // Enum pour les types d'application
 enum Application { moulage, cadrage, autre }

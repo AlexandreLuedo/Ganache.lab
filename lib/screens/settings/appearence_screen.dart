@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../data/parameters.dart';
-import '../../models/list_item.dart';
 
 class AppearenceScreen extends StatefulWidget {
   const AppearenceScreen({super.key});
@@ -15,9 +14,7 @@ class _AppearenceScreenState extends State<AppearenceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Apparence'),
-      ),
+      appBar: AppBar(title: const Text('Apparence')),
       body: ListView.builder(
         itemCount: apparenceItems.length,
         itemBuilder: (context, index) {
