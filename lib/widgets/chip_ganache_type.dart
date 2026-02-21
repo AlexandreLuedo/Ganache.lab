@@ -1,6 +1,5 @@
 // Widget pour la nature de la ganache (noir/lait/blanc)
 import 'package:flutter/material.dart';
-int? chocolateTypeValue;
 
 class GanacheTypeSelection extends StatefulWidget {
   const GanacheTypeSelection({super.key});
@@ -11,7 +10,7 @@ class GanacheTypeSelection extends StatefulWidget {
 
 class _GanacheTypeSelectionState extends State<GanacheTypeSelection> {
   int? chocolateTypeValue;
-  final noms = ["Noir", "Lait", "Noir/Lait", "Blanc", "Autre"];
+  final chocolateType = ["Noir", "Lait", "Noir/Lait", "Blanc", "Autre"];
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +24,9 @@ class _GanacheTypeSelectionState extends State<GanacheTypeSelection> {
         Wrap(
           spacing: 5.0,
           children:
-              List<Widget>.generate(noms.length, (int index) {
+              List<Widget>.generate(chocolateType.length, (int index) {
                 return ChoiceChip(
-                  label: Text(noms[index]),
+                  label: Text(chocolateType[index]),
                   selected: chocolateTypeValue == index,
                   onSelected: (bool selected) {
                     setState(() {
