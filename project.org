@@ -79,6 +79,8 @@ CustomContainer(
 *** rootBundle - Données disponibles que depuis la dernière compilation (non dynamique)
 See also: [[https://api.flutter.dev/flutter/services/rootBundle.html][dart doc]]
 J'utilise rootBundle pour tout ce qui est license. Un truc qui va pas bouger. Utiliser [[https://api.flutter.dev/flutter/services/AssetBundle-class.html][assetBundle]].
+** Afficher des nombres
+Utiliser le package : [[file:~/INFOR/DOCU/FLUTTER/flutter.org::*Afficher les nombres d'une certaine façon][intl (voir doc)]]
 ** Modification d'écriture des ExtendedWidgets
 Il serai plus interessant de générer chaque widget extended à la chaîne et y ajouter des données en paramètres (titres, icons, explications).
 Utiliser une classe personnalisée.
