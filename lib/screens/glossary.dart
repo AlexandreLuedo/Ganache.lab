@@ -13,8 +13,7 @@ class Glossary extends StatefulWidget {
 }
 
 class _GlossaryState extends State<Glossary> {
-  String _glossaryText = "";
-  String _allGLossaryDatas = "";
+  String _glossaryText = '';
 
   @override
   void initState() {
@@ -24,7 +23,7 @@ class _GlossaryState extends State<Glossary> {
 
   Future<void> _loadGlossary() async {
     final files = [
-      'assets/documentations/welcome.md',
+      'assets/documentations/Welcome.md',
       'assets/documentations/Humidity.md',
       'assets/documentations/DewPoint.md',
       'assets/documentations/SweeteningPower.md',
