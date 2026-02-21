@@ -42,18 +42,20 @@ class _CreateGanacheState extends State<CreateGanache> {
                       "Dans la page \"Créer sa ganache\", vous devez compléter toutes les informations proposés. \n Il n'est pas encore possible d'ajouter ses propres paramètres. \n Pour plus d'informations veuillez vous rendre sur le site internet.",
                     ),
                     actions: <Widget>[
-                      FilledButton(
-                        onPressed: () {
-                          Navigator.of(context).pop(); // Ferme le dialog
-                          _launchUrl();
-                        },
-                        child: const Text("Visiter la page d'aide"),
-                      ),
                       OutlinedButton(
                         onPressed: () {
                           Navigator.of(context).pop(); // Ferme le dialog
                         },
                         child: const Text("Fermer"),
+                      ),
+                      FilledButton.icon(
+                        onPressed: () {
+                          // Ferme le dialog
+                          _launchUrl();
+                        },
+                        icon: Icon(Symbols.open_in_new),
+                        label: const Text("Visiter la page d'aide"),
+                        iconAlignment: IconAlignment.end,
                       ),
                     ],
                   );
