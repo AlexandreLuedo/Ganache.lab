@@ -1,4 +1,4 @@
-import 'package:ganache_lab/models/chocolate_item_type.dart';
+import 'package:ganache_lab/models/chocolate/chocolate_item_type.dart';
 
 final ChocolateTypes = [
   // Framed
@@ -29,6 +29,6 @@ final ChocolateTypes = [
     isMolded: false,
     cocoaButter: 0.20,
   ),
-]; // Pls change that. Because it can't calculate the basic cocoabutter percent based on any chocolate automaticly.
+]; // It can't calculate the basic cocoabutter percent based on any chocolate automaticly. I think it is not important at all.
 /// DOC
 /// The better way to create an basic cocoabutter value for the starting point of ganache calculation is to start with an
