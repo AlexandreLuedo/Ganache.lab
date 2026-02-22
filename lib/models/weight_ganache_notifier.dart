@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ganache_lab/widgets/ganache_type_selection.dart';
 
 // Moulage
 class MoldModel extends ChangeNotifier {
@@ -87,16 +88,4 @@ class OtherModel extends ChangeNotifier {
   }
 }
 
-class TotalModel extends ChangeNotifier {
-  double _totalWeight =
-      MoldModel().moldResult +
-      FrameModel().frameResult +
-      OtherModel()
-          .otherWeight; // On utilise final car le ProxyProvider en crée un nouveau à chaque fois
-  double get totalWeight => _totalWeight;
-
-  void updateTotalWeight(double newTotalWeight) {
-    _totalWeight = newTotalWeight;
-    notifyListeners();
-  }
-}
+// The TotalModel is in calculation.dart file.

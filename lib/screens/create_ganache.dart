@@ -2,7 +2,10 @@
 // Appel les différents widgets de paramétrage pour la ganache ~/ganache_dot_first/lib/widgets/...
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ganache_lab/models/weight_ganache_notifier.dart';
+import 'package:ganache_lab/services/calculation.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'calculate_ganache.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
@@ -133,12 +136,17 @@ class _CreateGanacheState extends State<CreateGanache> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         heroTag: "Calcule",
-        tooltip: "Calculer la Ganache",
         label: Text("Calculer"),
         icon: Icon(Symbols.calculate, fill: 1),
         backgroundColor: Color(0xFFEB8C36),
         foregroundColor: Colors.white,
         onPressed: () {
+          final frame = context.read<FrameModel>();
+          final mold = context.read<MoldModel>();
+          final other = context.read<OtherModel>();
+          final app = context.read<ApplicationModel>();
+
+          context.read<TotalModel>().calculateTotal(frame, mold, other, app);
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => CalculateGanache()),
