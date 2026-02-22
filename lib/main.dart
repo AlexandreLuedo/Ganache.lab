@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/screens/screens_exportation_file.dart';
+import 'package:ganache_lab/services/calculation.dart';
 import 'package:ganache_lab/widgets/ganache_type_selection.dart';
 import 'package:provider/provider.dart';
 import 'package:ganache_lab/models/change_notifier.dart';
