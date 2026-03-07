@@ -4,7 +4,7 @@
         android:enableOnBackInvokedCallback="true"
         android:label="Ganache.lab"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/launcher_icon"
         tools:targetApi="33">
         <activity
             android:name=".MainActivity"
