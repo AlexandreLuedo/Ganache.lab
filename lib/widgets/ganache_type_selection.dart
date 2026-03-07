@@ -107,8 +107,10 @@ class _MoulageState extends State<Moulage> {
         const SizedBox(height: 10),
         TextField(
           controller: _weightController,
-          keyboardType: TextInputType.number,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          keyboardType: TextInputType.numberWithOptions(decimal: true),
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+          ],
           decoration: const InputDecoration(
             prefixIcon: Icon(Symbols.scale, fill: 1),
             border: OutlineInputBorder(),
@@ -116,9 +118,12 @@ class _MoulageState extends State<Moulage> {
             hintText: "Ex: 8g",
           ),
           onChanged: (value) {
-            final number = int.tryParse(value);
+            final cleanValue = value.replaceAll(',', '.');
+            var number = double.tryParse(cleanValue);
             if (number != null) {
               context.read<MoldModel>().updateWeight(number);
+            } else {
+              number = 0;
             }
           },
         ),
@@ -134,17 +139,21 @@ class _MoulageState extends State<Moulage> {
             hintText: "Ex: 24",
           ),
           onChanged: (value) {
-            final number1 = int.tryParse(value);
-            if (number1 != null) {
-              context.read<MoldModel>().updateNumberMussles(number1);
+            var number = int.tryParse(value);
+            if (number != null) {
+              context.read<MoldModel>().updateNumberMussles(number);
+            } else {
+              number = 0;
             }
           },
         ),
         const SizedBox(height: 10),
         TextField(
           controller: _numberMoldController,
-          keyboardType: TextInputType.number,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          keyboardType: TextInputType.numberWithOptions(decimal: true),
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+          ],
           decoration: const InputDecoration(
             prefixIcon: Icon(Symbols.numbers, fill: 1),
             border: OutlineInputBorder(),
@@ -152,9 +161,12 @@ class _MoulageState extends State<Moulage> {
             hintText: "Ex: 1",
           ),
           onChanged: (value) {
-            final number3 = int.tryParse(value);
-            if (number3 != null) {
-              context.read<MoldModel>().updateNumberMold(number3);
+            final cleanValue = value.replaceAll(',', '.');
+            var number = double.tryParse(cleanValue);
+            if (number != null) {
+              context.read<MoldModel>().updateNumberMold(number);
+            } else {
+              number = 0;
             }
           },
         ),
@@ -172,6 +184,7 @@ class Cadrage extends StatefulWidget {
 
 class _CadrageState extends State<Cadrage> {
   late TextEditingController _lenghtController;
+  late TextEditingController _widthController;
   late TextEditingController _heightController;
   late TextEditingController _numberFramesController;
 
@@ -180,6 +193,9 @@ class _CadrageState extends State<Cadrage> {
     super.initState();
     _lenghtController = TextEditingController(
       text: context.read<FrameModel>().lenght.toString(),
+    );
+    _widthController = TextEditingController(
+      text: context.read<FrameModel>().width.toString(),
     );
     _heightController = TextEditingController(
       text: context.read<FrameModel>().height.toString(),
@@ -202,26 +218,58 @@ class _CadrageState extends State<Cadrage> {
 
         TextField(
           controller: _lenghtController,
-          keyboardType: TextInputType.number,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          keyboardType: TextInputType.numberWithOptions(decimal: true),
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+          ],
           decoration: const InputDecoration(
-            prefixIcon: Icon(Symbols.open_in_full, fill: 1),
+            prefixIcon: Icon(Symbols.arrow_range, fill: 1),
             border: OutlineInputBorder(),
-            labelText: "Longueur - largeur",
+            labelText: "Longueur",
             hintText: "Ex: 12 cm",
           ),
           onChanged: (value) {
-            final number = double.tryParse(value);
+            final cleanValue = value.replaceAll(',', '.');
+            var number = double.tryParse(cleanValue);
             if (number != null) {
               context.read<FrameModel>().updateLenght(number);
+            } else {
+              number = 0;
             }
           },
         ),
         const SizedBox(height: 10),
+
+        TextField(
+          controller: _widthController,
+          keyboardType: TextInputType.numberWithOptions(decimal: true),
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+          ],
+          decoration: const InputDecoration(
+            prefixIcon: Icon(Symbols.open_in_full, fill: 1),
+            border: OutlineInputBorder(),
+            labelText: "Largeur",
+            hintText: "Ex: 12 cm",
+          ),
+          onChanged: (value) {
+            final cleanValue = value.replaceAll(',', '.');
+            var number = double.tryParse(cleanValue);
+            if (number != null) {
+              context.read<FrameModel>().updateWidth(number);
+            } else {
+              number = 0;
+            }
+          },
+        ),
+
+        const SizedBox(height: 10),
         TextField(
           controller: _heightController,
-          keyboardType: TextInputType.number,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          keyboardType: TextInputType.numberWithOptions(decimal: true),
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+          ],
           decoration: const InputDecoration(
             prefixIcon: Icon(Symbols.height, fill: 1),
             border: OutlineInputBorder(),
@@ -229,9 +277,12 @@ class _CadrageState extends State<Cadrage> {
             hintText: "Ex: 1.5",
           ),
           onChanged: (value) {
-            final number2 = double.tryParse(value);
-            if (number2 != null) {
-              context.read<FrameModel>().updateHeight(number2);
+            final cleanValue = value.replaceAll(',', '.');
+            var number = double.tryParse(cleanValue);
+            if (number != null) {
+              context.read<FrameModel>().updateHeight(number);
+            } else {
+              number = 0;
             }
           },
         ),
@@ -239,8 +290,10 @@ class _CadrageState extends State<Cadrage> {
         SizedBox(height: 10),
         TextField(
           controller: _numberFramesController,
-          keyboardType: TextInputType.number,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          keyboardType: TextInputType.numberWithOptions(decimal: true),
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+          ],
           decoration: const InputDecoration(
             prefixIcon: Icon(Symbols.numbers, fill: 1),
             border: OutlineInputBorder(),
@@ -248,9 +301,12 @@ class _CadrageState extends State<Cadrage> {
             hintText: "Ex: 1",
           ),
           onChanged: (value) {
-            final number3 = int.tryParse(value);
-            if (number3 != null) {
-              context.read<FrameModel>().updateNumberFrames(number3);
+            final cleanValue = value.replaceAll(',', '.');
+            var number = double.tryParse(cleanValue);
+            if (number != null) {
+              context.read<FrameModel>().updateNumberFrames(number);
+            } else {
+              number = 0;
             }
           },
         ),
@@ -289,8 +345,10 @@ class _AutreState extends State<Autre> {
         const SizedBox(height: 10),
         TextField(
           controller: _totalWeightController,
-          keyboardType: TextInputType.number,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          keyboardType: TextInputType.numberWithOptions(decimal: true),
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+          ],
           decoration: const InputDecoration(
             prefixIcon: Icon(Symbols.all_inclusive, fill: 1),
             border: OutlineInputBorder(),
@@ -298,9 +356,12 @@ class _AutreState extends State<Autre> {
             hintText: "Ex: 1649g",
           ),
           onChanged: (value) {
-            final number3 = int.tryParse(value);
-            if (number3 != null) {
-              context.read<OtherModel>().updateTotalOther(number3);
+            final cleanValue = value.replaceAll(',', '.');
+            var number = double.tryParse(cleanValue);
+            if (number != null) {
+              context.read<OtherModel>().updateTotalOther(number);
+            } else {
+              number = 0;
             }
           },
         ),
