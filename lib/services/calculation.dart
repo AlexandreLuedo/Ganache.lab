@@ -7,7 +7,7 @@ import 'package:ganache_lab/widgets/total_weight.dart';
 class TotalModel extends ChangeNotifier {
   double total = 0.0;
 
-  calculateTotal(
+  void calculateTotal(
     FrameModel frame,
     MoldModel mold,
     OtherModel other,

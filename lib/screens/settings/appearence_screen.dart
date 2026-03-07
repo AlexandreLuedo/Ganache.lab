@@ -9,7 +9,7 @@ class AppearenceScreen extends StatefulWidget {
 }
 
 class _AppearenceScreenState extends State<AppearenceScreen> {
-  bool _isDarkMode = false;
+  final bool _isDarkMode = false;
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../data/parameters.dart';
-import '../../models/list_item.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
@@ -8,9 +7,7 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Paramètres'),
-      ),
+      appBar: AppBar(title: const Text('Paramètres')),
       body: ListView.builder(
         itemCount: settingsItems.length,
         itemBuilder: (context, index) {

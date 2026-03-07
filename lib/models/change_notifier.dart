@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'config_loader.dart';
-import 'package:ganache_lab/widgets/chip_ganache_type.dart';
 
 /// class pouvant stocker le Titre de la ganache
 class TitleModel extends ChangeNotifier {

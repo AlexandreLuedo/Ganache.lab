@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../data/parameters.dart';
-import '../../models/list_item.dart';
 
 class MeasurementUnitsScreen extends StatelessWidget {
   const MeasurementUnitsScreen({super.key});
@@ -8,9 +7,7 @@ class MeasurementUnitsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Unités de mesures'),
-      ),
+      appBar: AppBar(title: const Text('Unités de mesures')),
       body: ListView.builder(
         itemCount: measurementsUnitsItems.length,
         itemBuilder: (context, index) {

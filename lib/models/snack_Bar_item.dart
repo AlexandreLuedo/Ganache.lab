@@ -1,5 +1,1 @@
-import 'package:flutter/material.dart';
-
-class SnackBar{
-  
-}
+class SnackBar {}
