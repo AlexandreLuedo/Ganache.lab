@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "ganache_dot_first" "\0"
+            VALUE "CompanyName", "Hadrien KLOTZ" "\0"
+            VALUE "FileDescription", "Ganache.lab" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "ganache_dot_first" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2025 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "ganache_dot_first.exe" "\0"
-            VALUE "ProductName", "ganache_dot_first" "\0"
+            VALUE "InternalName", "Ganache.lab" "\0"
+            VALUE "LegalCopyright", "Copyright © 2026-2026 Hadrien KLOTZ. All Rights Reserverd" "\0"
+            VALUE "OriginalFilename", "ganache_lab.exe" "\0"
+            VALUE "ProductName", "Ganache.lab" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

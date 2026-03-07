@@ -1,0 +1,31 @@
+package_rename_config:
+  android:
+    app_name: "Ganache.lab" # Display name
+    package_name: "app.hk.ganache" # Package name
+    lang: "kotlin" # Optional: "kotlin" (default) or "java"
+
+  ios:
+    app_name: "Ganache.lab" # Display name
+    bundle_name: "app.hk.ganache" # Bundle name
+    package_name: "app.hk.ganache" # Product Bundle Identifier
+
+  linux:
+    app_name: "Ganache.lab" # Window title
+    package_name: "app.hk.ganache" # Application ID
+    exe_name: "ganache_lab" # Executable name (binary)
+
+  macos:
+    app_name: "Ganache.lab" # Product name
+    package_name: "app.hk.ganache" # Product Bundle Identifier
+    copyright_notice: "Copyright © 2026-2026 Hadrien KLOTZ. All Rights Reserved" # Copyright notice
+
+  web:
+    app_name: "Ganache.lab" # App title & PWA name
+    short_app_name: "Ganache.lab" # PWA short name (defaults to app_name)
+    description: "Le premier équilibreur de Ganache multiplatformes" # Web app description
+
+  windows:
+    app_name: "Ganache.lab" # Window title & Software name
+    organization: "Hadrien KLOTZ" # Organization/Company name
+    copyright_notice: "Copyright © 2026-2026 Hadrien KLOTZ. All Rights Reserved" # Legal copyright
+    exe_name: "ganache_lab" # Executable name (binary)
