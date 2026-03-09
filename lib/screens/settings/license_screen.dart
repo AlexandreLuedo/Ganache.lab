@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:ganache_lab/data/parameters.dart';
 
 class LicenseScreen extends StatefulWidget {
   const LicenseScreen({super.key});
@@ -10,7 +11,7 @@ class LicenseScreen extends StatefulWidget {
 }
 
 class _LicenseScreenState extends State<LicenseScreen> {
-  late String _licenseText; // Can also define with String _licenseText = '';
+  String _licenseText = '';
 
   @override
   void initState() {
@@ -28,7 +29,7 @@ class _LicenseScreenState extends State<LicenseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Licence')),
+      appBar: AppBar(title: const Text('Licence - Ganache.lab')),
       body: Markdown(data: _licenseText, padding: EdgeInsets.all(16)),
     );
   }
