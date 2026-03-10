@@ -4,16 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-class OnWelcomeScreen extends StatelessWidget {
-  const OnWelcomeScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(body: WelcomeScreen(), floatingActionButton: CreateFab());
-  }
-}
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -28,14 +20,10 @@ class WelcomeScreen extends StatelessWidget {
   }
 
   @override
-  build(BuildContext context) {
+  Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 600; // Yes it's dumb
     return Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          VersionPill(),
-          GlossaryButton(),
-        ],
-      ),
+      appBar: AppBar(actions: <Widget>[VersionPill(), GlossaryButton()]),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -89,13 +77,15 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 30),
                   // TODO Implémenter ce sâcré form.md
-                  Text('''Ce logiciel s’inscrit dans la démarche de mon mémoire pour le BTM Chocolatier‑Confiseur que je prépare.
+                  Text(
+                    '''Ce logiciel s’inscrit dans la démarche de mon mémoire pour le BTM Chocolatier‑Confiseur que je prépare.
 Mon mémoire porte sur la question suivante : « Comment rendre accessible la création et l’équilibrage de la ganache ».
 Pour cela, j’ai besoin d’obtenir des informations et des réponses à différentes questions afin de toucher le plus grand nombre de professionnels possible.
 J’ai donc choisi de vous proposer un questionnaire en ligne, facile d’accès et rapide à remplir.
 Grâce à votre collaboration, les résultats seront multiples : des données précieuses pour enrichir mon mémoire, un apprentissage personnel sur les besoins des artisans chocolatiers, et un recueil d’idées permettant d’améliorer ce tout‑jeune logiciel.
 Je vous remercie vivement pour votre aide et vous invite à cliquer sur le bouton ci‑dessous, qui vous dirigera vers le formulaire.
-'''),
+''',
+                  ),
                   SizedBox(height: 10),
                   FilledButton.icon(
                     onPressed: () {
@@ -112,6 +102,7 @@ Je vous remercie vivement pour votre aide et vous invite à cliquer sur le bouto
           ],
         ),
       ),
+      floatingActionButton: isMobile ? CreateFab() : null,
     );
   }
 }
@@ -160,12 +151,7 @@ class VersionPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(
-        right: 7,
-        left: 7,
-        top: 2,
-        bottom: 2,
-      ),
+      padding: const EdgeInsets.only(right: 7, left: 7, top: 2, bottom: 2),
       //height: 10,
       //width: 10,
       decoration: BoxDecoration(
