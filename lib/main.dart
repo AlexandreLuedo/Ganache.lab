@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:ganache_lab/models/notifiers/chocolate_type_notifier.dart';
 import 'package:ganache_lab/screens/screens_exportation_file.dart';
 import 'package:ganache_lab/services/calculation.dart';
 import 'package:ganache_lab/widgets/ganache_type_selection.dart';
 import 'package:provider/provider.dart';
-import 'package:ganache_lab/models/change_notifier.dart';
-import 'package:ganache_lab/models/weight_ganache_notifier.dart';
+import 'package:ganache_lab/models/notifiers/ganache_title_notifier.dart';
+import 'package:ganache_lab/models/notifiers/weight_ganache_notifier.dart';
 
 void main() => runApp(
   MultiProvider(
@@ -15,6 +16,7 @@ void main() => runApp(
       ChangeNotifierProvider(create: (_) => FrameModel()),
       ChangeNotifierProvider(create: (_) => OtherModel()),
       ChangeNotifierProvider(create: (_) => TotalModel()),
+      ChangeNotifierProvider(create: (_) => ChocolateTypeModel()),
     ],
     child: const GanacheApp(),
   ),

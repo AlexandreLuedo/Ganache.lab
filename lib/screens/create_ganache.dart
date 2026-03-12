@@ -2,7 +2,8 @@
 // Appel les différents widgets de paramétrage pour la ganache ~/ganache_dot_first/lib/widgets/...
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ganache_lab/models/weight_ganache_notifier.dart';
+import 'package:ganache_lab/models/notifiers/chocolate_type_notifier.dart';
+import 'package:ganache_lab/models/notifiers/weight_ganache_notifier.dart';
 import 'package:ganache_lab/services/calculation.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:provider/provider.dart';
@@ -145,8 +146,15 @@ class _CreateGanacheState extends State<CreateGanache> {
           final mold = context.read<MoldModel>();
           final other = context.read<OtherModel>();
           final app = context.read<ApplicationModel>();
+          final totalCocoaButter = context.read<ChocolateTypeModel>();
 
-          context.read<TotalModel>().calculateTotal(frame, mold, other, app);
+          context.read<TotalModel>().calculateTotal(
+            frame,
+            mold,
+            other,
+            app,
+            totalCocoaButter,
+          );
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => CalculateGanache()),
