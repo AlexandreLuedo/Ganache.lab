@@ -35,8 +35,7 @@ L'objectif est de permettre à l'utilisateur de saisir ingrédient par ingrédie
 - =GanacheApp()= : Point d'entrée de l'application.
 - =navigation.dart= : Gestion de la navigation principale ("Home page").
 - =privateConfig.yaml= : Fichier de configuration stockant les constantes et variables d'ajustement pour la table analytique.
-- =engine.dart= : Moteur de calcul utilisant les données de configuration.
-
+- formluation.dart : Fait la série de calculs pour équilibrer la ganache.
 *** Gestion d'état (Provider)
 Les états sont gérés via ~ChangeNotifier~.
 - Les variables principales sont actuellement dans ~models/change_notifier.dart~.
