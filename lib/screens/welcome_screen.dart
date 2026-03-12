@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:responsive_builder/responsive_builder.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -89,7 +89,6 @@ Je vous remercie vivement pour votre aide et vous invite à cliquer sur le bouto
                   SizedBox(height: 10),
                   FilledButton.icon(
                     onPressed: () {
-                      // Ferme le dialog
                       _launchUrl();
                     },
                     icon: Icon(Symbols.open_in_new),

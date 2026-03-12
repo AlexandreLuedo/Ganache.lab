@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:provider/provider.dart';
-import 'package:ganache_lab/models/change_notifier.dart';
+import 'package:ganache_lab/models/notifiers/ganache_title_notifier.dart';
 
 class GanacheNameInput extends StatefulWidget {
   const GanacheNameInput({super.key});
@@ -23,7 +23,8 @@ class _GanacheNameInputState extends State<GanacheNameInput> {
 
   @override
   void dispose() {
-    _controller.dispose(); // Libération du controller pour éviter des fuites mémoire
+    _controller
+        .dispose(); // Libération du controller pour éviter des fuites mémoire
     super.dispose();
   }
 

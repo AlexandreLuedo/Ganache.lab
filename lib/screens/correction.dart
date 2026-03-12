@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'screens_exportation_file.dart';
 import 'package:provider/provider.dart';
-import 'package:ganache_lab/models/change_notifier.dart';
+import 'package:ganache_lab/models/notifiers/ganache_title_notifier.dart';
 
 class Correction extends StatefulWidget {
   const Correction({super.key});

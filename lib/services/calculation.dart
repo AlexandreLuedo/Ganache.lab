@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ganache_lab/models/weight_ganache_notifier.dart';
-import 'package:ganache_lab/screens/calculate_ganache.dart';
+import 'package:ganache_lab/models/notifiers/weight_ganache_notifier.dart';
 import 'package:ganache_lab/widgets/ganache_type_selection.dart';
-import 'package:ganache_lab/widgets/total_weight.dart';
 
 class TotalModel extends ChangeNotifier {
   double total = 0.0;
