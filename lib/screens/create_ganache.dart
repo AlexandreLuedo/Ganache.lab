@@ -146,8 +146,15 @@ class _CreateGanacheState extends State<CreateGanache> {
           final mold = context.read<MoldModel>();
           final other = context.read<OtherModel>();
           final app = context.read<ApplicationModel>();
+          final totalCocoaButter = context.read<ChocolateTypeModel>();
 
-          context.read<TotalModel>().calculateTotal(frame, mold, other, app);
+          context.read<TotalModel>().calculateTotal(
+            frame,
+            mold,
+            other,
+            app,
+            totalCocoaButter,
+          );
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => CalculateGanache()),
