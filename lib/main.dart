@@ -16,6 +16,7 @@ void main() => runApp(
       ChangeNotifierProvider(create: (_) => FrameModel()),
       ChangeNotifierProvider(create: (_) => OtherModel()),
       ChangeNotifierProvider(create: (_) => TotalModel()),
+      ChangeNotifierProvider(create: (_) => ChocolateTypeModel()),
     ],
     child: const GanacheApp(),
   ),

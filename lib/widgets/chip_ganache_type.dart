@@ -1,5 +1,7 @@
 // Widget pour la nature de la ganache (noir/lait/blanc)
 import 'package:flutter/material.dart';
+import 'package:ganache_lab/models/notifiers/chocolate_type_notifier.dart';
+import 'package:provider/provider.dart';
 
 class GanacheTypeSelection extends StatefulWidget {
   const GanacheTypeSelection({super.key});
@@ -30,10 +32,14 @@ class _GanacheTypeSelectionState extends State<GanacheTypeSelection> {
                   selected: chocolateTypeValue == index,
                   onSelected: (bool selected) {
                     setState(() {
-                      chocolateTypeValue = selected ? index : null;
-                      // Faire en sorte que chocolateTypeValue fonctionne avec provider.
-                      // _value = condition ? valeurSiVrai : valeurSiFaux;
+                      chocolateTypeValue =
+                          selected ? index : null; // Just for UI
                     });
+                    String? newValue = selected ? chocolateType[index] : null;
+                    Provider.of<ChocolateTypeModel>(
+                      context,
+                      listen: false,
+                    ).updateSelection(newValue);
                   },
                 );
               }).toList(),
