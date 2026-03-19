@@ -2,9 +2,9 @@ class MilksnEggItemType {
   // I don't know how to name this class, maybe in the future I will rewrite it.
   final String title;
   final double water;
-  final double totalSolids;
+  final double totalSolids; // EST - Extrait sec total
   final double fat;
-  final double milkSolidsNotFat;
+  final double milkSolidsNotFat; // ESDL - Extrait Sec dégraissé du lait
   final double litterWeight;
 
   MilksnEggItemType({
