@@ -35,9 +35,9 @@ class TotalModel extends ChangeNotifier {
         break;
     }
     // Determine the needed chocolate weight
-    chocolateWeight =
-        (totalCocoaButter.cocoaButterType * total) *
-        (total * cocoaButterChocolate!); // Temporary non-nullable
+    // chocolateWeight =
+    //     (totalCocoaButter.cocoaButterType * total) *
+    //     (total * cocoaButterChocolate!); // Temporary non-nullable
 
     // Determine the needed sugar weight
     // Temporary non-nullable

@@ -27,7 +27,7 @@ L'objectif est de permettre à l'utilisateur de saisir ingrédient par ingrédie
 ** Architecture Technique
 
 *** Conventions de code
-- *Commentaires :* Rédigés majoritairement en **Français**.
+- *Commentaires :* Rédigés majoritairement en **Englais**.
 - *Variables :* Nommées en *Anglais* (camelCase).
   - *Note :* Certaines variables historiques possèdent encore des noms hybrides (ex: ~numberCadres~). Un nettoyage progressif est en cours pour uniformiser le tout.
 

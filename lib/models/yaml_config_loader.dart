@@ -1,20 +1,20 @@
 import 'dart:io';
 import 'package:yaml/yaml.dart';
 
-/// Charge la configuration depuis privateConfig.yaml
+/// Loads the configuration from privateConfig.yaml
 Future<Map<String, int>> loadConfig(String path) async {
   final file = File(path);
   final contents = await file.readAsString();
   final yamlMap = loadYaml(contents) as YamlMap;
 
-  // Conversion en Map<String, int>
+  // Conversion to Map<String, int>
   return yamlMap.map((key, value) => MapEntry(key.toString(), value as int));
 }
 
-/// Sers à retourner les variables stockés dans le fichier privateConfig.yaml
+/// Used to return the variables stored in the privateConfig.yaml file
 /*
 void main() async {
   final config = await loadConfig('config/PrivateConfig.yaml');
-  print(config['darkChocolateCocoaButter']); // devrait afficher 18
+  print(config['darkChocolateCocoaButter']); // should display 18
 }
 */

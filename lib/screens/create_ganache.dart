@@ -92,7 +92,7 @@ class _CreateGanacheState extends State<CreateGanache> {
                     return AlertDialog(
                       title: const Text("Rechercher un Ingrédient"),
                       content: const Text(
-                        /* TODO Ajouter la recherche d\'ingrédients */
+                        /* TODO Add ingredient search */
                         "",
                       ),
                       actions: <Widget>[
@@ -124,7 +124,7 @@ class _CreateGanacheState extends State<CreateGanache> {
                     action: SnackBarAction(
                       label: 'Annuler',
                       onPressed: () {
-                        // TODO Implémenter annuler
+                        // TODO Implement cancel
                       },
                     ),
                   ),
@@ -251,5 +251,16 @@ class FabricationMethod extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+  );
+  }
+}
+  );
+  }
+}
+
+  );
   }
 }

@@ -1,13 +1,13 @@
-// Ce fichier stock toutes les pages affichés lors du clique sur quelquonque indicators.
-// Il étend les indactor pour permettre des explications plus approfondies.
+// This file stores all the pages displayed when clicking on any indicators.
+// It extends the indicators to allow more detailed explanations.
 
-// ATENTION trouver un moyen de générer les widgets et stocker les variables avec provider
+// WARNING find a way to generate the widgets and store the variables with provider
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/widgets/glossary_button.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
-// TODO faire en sorte via provider de changer le nom de chaque appBar en fonction du nom de son "intinéraire de départ" (la route qui l'a emené ici).
-// TODO faire également correspondre les icones aux cartes.
+// TODO make sure via provider to change the name of each appBar based on the name of its "starting itinerary" (the route that brought it here).
+// TODO also match the icons to the cards.
 
 class ExtendedHumidity extends StatelessWidget {
   const ExtendedHumidity({super.key});
@@ -24,8 +24,8 @@ class ExtendedHumidity extends StatelessWidget {
           ],
         ),
         actions: [
-          // Ajouter ça aux trois autres indicators
-         // Attention à la répétition !! (il y a son homonyme originel dans "welcome_screen.dart :5
+          // Add this to the other three indicators
+         // Beware of repetition !! (there is its original namesake in "welcome_screen.dart :5
           GlossaryButton(),
         ],
       ),
@@ -58,7 +58,7 @@ class ExtendedHumidity extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              // TODO Ajouter le glossaire ou une description personnalisée qui parle de la texture
+              // TODO Add the glossary or a custom description that talks about the texture
               children: [
                 Text(
                   "Ceci est un texte d'explication qui sera attribué soit à une partie du glossaire, soit à une description personnalisée.",
@@ -88,8 +88,8 @@ class ExtendedTexture extends StatelessWidget {
           ],
         ),
         actions: [
-          // Ajouter ça aux trois autres indicators
-          // Attention à la répétition !! (il y a son homonyme originel dans "welcome_screen.dart :5
+          // Add this to the other three indicators
+          // Beware of repetition !! (there is its original namesake in "welcome_screen.dart :5
           GlossaryButton(),
         ],
       ),
@@ -122,7 +122,7 @@ class ExtendedTexture extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              // TODO Ajouter le glossaire ou une description personnalisée qui parle de la texture
+              // TODO Add the glossary or a custom description that talks about the texture
               children: [
                 Text(
                   "Ceci est un texte d'explication qui sera attribué soit à une partie du glossaire, soit à une description personnalisée.",
@@ -152,8 +152,8 @@ class ExtendedSugarSweetening extends StatelessWidget {
           ],
         ),
         actions: [
-          // Ajouter ça aux trois autres indicators
-          // Attention à la répétition !! (il y a son homonyme originel dans "welcome_screen.dart :5
+          // Add this to the other three indicators
+          // Beware of repetition !! (there is its original namesake in "welcome_screen.dart :5
           GlossaryButton(),
         ],
       ),
@@ -186,7 +186,7 @@ class ExtendedSugarSweetening extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              // TODO Ajouter le glossaire ou une description personnalisée qui parle de la texture
+              // TODO Add the glossary or a custom description that talks about the texture
               children: [
                 Text(
                   "Ceci est un texte d'explication qui sera attribué soit à une partie du glossaire, soit à une description personnalisée.",
@@ -216,8 +216,8 @@ class ExtendedDLC extends StatelessWidget {
           ],
         ),
         actions: [
-          // Ajouter ça aux trois autres indicators
-          // Attention à la répétition !! (il y a son homonyme originel dans "welcome_screen.dart :5
+          // Add this to the other three indicators
+          // Beware of repetition !! (there is its original namesake in "welcome_screen.dart :5
           GlossaryButton(),
         ],
       ),
@@ -250,7 +250,7 @@ class ExtendedDLC extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              // TODO Ajouter le glossaire ou une description personnalisée qui parle de la texture
+              // TODO Add the glossary or a custom description that talks about the texture
               children: [
                 Text(
                   "Ceci est un texte d'explication qui sera attribué soit à une partie du glossaire, soit à une description personnalisée.",
@@ -261,6 +261,15 @@ class ExtendedDLC extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+  ],
+      ),
+    );
+  }
+}
+  ),
     );
   }
 }

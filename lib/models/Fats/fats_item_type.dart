@@ -12,17 +12,17 @@ class FatsItemType {
   double calculateFatPercentage(double total) {
     if (total == 0) return 0;
     return (totalOthersFats / total) *
-        100; // Mauvaise utilisation des pourcentagescd
+        100; // Bad use of percentagescd
   }
 
   /// DOC
-  /// Exemples de ce que je peux faire pour calculer la matière grasse.
+  /// Examples of what I can do to calculate fat.
   /// WARN
-  /// Les utilisations des pourcentages sont à revoir
+  /// The use of percentages needs to be reviewed
   String get fatDiagnostic {
-    double fat = totalOthersFats; // Ici il faudrait le % par rapport au total
-    // Imaginons que nous avons le pourcentage :
-    double percent = 14.0; // À remplacer par ton calcul réel
+    double fat = totalOthersFats; // Here it should be the % compared to the total
+    // Let's imagine we have the percentage:
+    double percent = 14.0; // To be replaced by your actual calculation
 
     if (percent < 10) return "Trop maigre : manque de fondant";
     if (percent > 18) {

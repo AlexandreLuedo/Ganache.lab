@@ -7,11 +7,11 @@ import '../screens/settings/appearence_screen.dart';
 import '../screens/settings/license_screen.dart';
 import '../utils/email_helper.dart';
 
-/// List des catégories de la page paramètres.
+/// List of categories on the settings page
 final settingsItems = [
-  /// Section à propos
+  /// About section
 
-  /// Section apparence
+  /// Appearance section
   ListItem(
     leading: CircleAvatar(child: Icon(Symbols.format_paint, fill: 1)),
     title: "Apparence",
@@ -25,7 +25,7 @@ final settingsItems = [
     },
   ),
 
-  /// Section unité de mesure
+  /// Measurement unit section
   ListItem(
     leading: CircleAvatar(child: Icon(Symbols.discover_tune, fill: 1)),
     title: "Unités du mesures",
@@ -39,7 +39,7 @@ final settingsItems = [
     },
   ),
 
-  /// Section langue de l'application
+  /// Application language section
   ListItem(
     leading: CircleAvatar(child: Icon(Symbols.language, fill: 1)),
     title: "Langue de l'application",
@@ -101,7 +101,7 @@ final apparenceItems = [
     isClickable: false,
     trailing: StatefulBuilder(
       builder: (context, setState) {
-        bool isDark = false; // valeur initiale
+        bool isDark = false; // initial value
 
         return Switch(
           value: isDark,
@@ -109,7 +109,7 @@ final apparenceItems = [
             setState(() {
               isDark = value;
             });
-            // Ici tu pourrais appeler un Provider, un ThemeMode, etc.
+            // Here you could call a Provider, a ThemeMode, etc.
           },
         );
       },

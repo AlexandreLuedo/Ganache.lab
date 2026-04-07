@@ -1,4 +1,4 @@
-// Affiche les recettes via la bdd
+// Displays recipes via the db
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
 import 'package:material_symbols_icons/symbols.dart';

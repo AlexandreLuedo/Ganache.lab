@@ -19,11 +19,11 @@ class MilksnEggItemType {
   double get pointOfOverum => (milkSolidsNotFat / 2 * 0.16);
 
   ///DOC
-  ///Sugggestion :
-  ///// Somme des matières sèches (EST)
+  ///Suggestion:
+  ///// Sum of total solids (EST)
   /* double get totalSolids => fat + msnf;
 
-  // Calcul du pouvoir sucrant (POD) apporté par le lactose de l'ESDL
-  // On prend ~50% de l'ESDL multiplié par le POD du lactose (0.16)
+  // Calculation of the sweetening power (POD) provided by the lactose of the MSNF
+  // We take ~50% of the MSNF multiplied by the POD of lactose (0.16)
   double get pointOfOverrun => (msnf * 0.5) * 0.16; */
 }

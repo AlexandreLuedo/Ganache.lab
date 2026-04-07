@@ -20,7 +20,7 @@ class CalculateGanache extends StatelessWidget {
                   Text(model.title.isEmpty ? "Votre Ganache" : model.title),
         ),
       ),
-      // TODO Rassembler les BottomAppbar
+      // TODO Gather the BottomAppbars
       bottomNavigationBar: BottomAppBar(
         elevation: 10,
         child: Row(
@@ -131,4 +131,5 @@ class CalculateGanache extends StatelessWidget {
       ),
     );
   }
+}
 }

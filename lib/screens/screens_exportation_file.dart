@@ -1,4 +1,4 @@
-// Est-ce la meilleure façon de faire ?
+// Is this the best way to do it?
 export 'calculate_ganache.dart';
 export 'create_ganache.dart';
 export 'navigation.dart';

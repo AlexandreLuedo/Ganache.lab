@@ -52,8 +52,8 @@ class _GlossaryState extends State<Glossary> {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
-      // TODO générer la snackbar
-      // SNACKBAR ICI
+      // TODO generate the snackbar
+      // SNACKBAR HERE
 
       print("Impossible d’ouvrir $url");
     }

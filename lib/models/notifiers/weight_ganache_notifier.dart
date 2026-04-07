@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // Moulage
 class MoldModel extends ChangeNotifier {
   double _weight = 0;
-  int _numberMussles = 0; // nombre d'empreintes de moules
+  int _numberMussles = 0; // number of mussles per molds
   double _moldResult = 0;
   double _numberMold = 0;
 
@@ -44,7 +44,7 @@ class FrameModel extends ChangeNotifier {
   double _lenght = 0;
   double _width = 0;
   double _height = 0;
-  double _numberFrames = 0; // Nom de variable peux-être à revoir
+  double _numberFrames = 0; // Maybe rewrite var name ?
   double _frameResult = 0;
   final double ratioNumber = 1.13636364; // DOC ratio masse/volume
 

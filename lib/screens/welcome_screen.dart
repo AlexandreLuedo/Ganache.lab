@@ -76,7 +76,7 @@ class WelcomeScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 30),
-                  // TODO Implémenter ce sâcré form.md
+                  // TODO Implement this darn form.md
                   Text(
                     '''Ce logiciel s’inscrit dans la démarche de mon mémoire pour le BTM Chocolatier‑Confiseur que je prépare.
 Mon mémoire porte sur la question suivante : « Comment rendre accessible la création et l’équilibrage de la ganache ».

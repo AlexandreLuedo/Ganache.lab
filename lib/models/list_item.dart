@@ -20,7 +20,7 @@ class ListItem {
   });
 }
 
-// Affiche les containaires sur fond orange clair.
+// Displays the containers on a light orange background.
 class CustomContainerItem {
   final String title;
   final String subtitle;

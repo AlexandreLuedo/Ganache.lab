@@ -1,4 +1,4 @@
-// Page principale contenant la navigationBar.
+// Main page containing the navigationBar.
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/screens/settings/settings_screen.dart';
 import 'package:ganache_lab/widgets/create_fab.dart';

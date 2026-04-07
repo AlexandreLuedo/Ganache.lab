@@ -26,7 +26,7 @@ class _CorrectionState extends State<Correction> {
         backgroundColor: Color(0xFFEB8C36),
         foregroundColor: Colors.white,
         onPressed: () {
-          // ATTENTION à quand il faudra ajouter le stockage de TitleModel dans une recette !
+          // WARNING when you need to add the storage of TitleModel in a recipe!
           context.read<TitleModel>().reset();
           Navigator.popUntil(context, (route) => route.isFirst);
         },
