@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:ganache_lab/screens/settings/measurement_units.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import '../models/list_item.dart';
@@ -81,19 +82,59 @@ final settingsItems = [
             onPressed: () async {
               final licenseText = await rootBundle.loadString('assets/licenses/LICENSE.md');
               if (context.mounted) {
-                showDialog(
+                showModalBottomSheet(
                   context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text("Licence propriétaire"),
-                    content: SingleChildScrollView(
-                      child: Text(licenseText),
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  builder: (context) => Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surface,
+                      borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
                     ),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: const Text("Fermer"),
-                      ),
-                    ],
+                    child: DraggableScrollableSheet(
+                      initialChildSize: 0.8,
+                      minChildSize: 0.5,
+                      maxChildSize: 0.95,
+                      expand: false,
+                      builder: (context, scrollController) {
+                        return Column(
+                          children: [
+                            const SizedBox(height: 8),
+                            Container(
+                              width: 40,
+                              height: 4,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.4),
+                                borderRadius: BorderRadius.circular(2),
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Text(
+                                "Licence propriétaire",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Markdown(
+                                controller: scrollController,
+                                data: licenseText,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: FilledButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text("Fermer"),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
                   ),
                 );
               }
