@@ -6,6 +6,7 @@ import 'package:ganache_lab/widgets/ganache_type_selection.dart';
 import 'package:provider/provider.dart';
 import 'package:ganache_lab/models/notifiers/ganache_title_notifier.dart';
 import 'package:ganache_lab/models/notifiers/weight_ganache_notifier.dart';
+import 'package:ganache_lab/models/notifiers/temperature_notifier.dart';
 
 void main() => runApp(
   MultiProvider(
@@ -18,6 +19,7 @@ void main() => runApp(
       ChangeNotifierProvider(create: (_) => TotalModel()),
       ChangeNotifierProvider(create: (_) => ChocolateTypeModel()),
       ChangeNotifierProvider(create: (_) => RecipeNotifier()),
+      ChangeNotifierProvider(create: (_) => TemperatureModel()),
     ],
     child: const GanacheApp(),
   ),

@@ -5,6 +5,8 @@ import 'package:material_symbols_icons/symbols.dart';
 import 'screens_exportation_file.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
 import 'package:ganache_lab/models/notifiers/ganache_title_notifier.dart';
+import 'package:ganache_lab/models/notifiers/temperature_notifier.dart';
+import 'package:ganache_lab/models/notifiers/chocolate_type_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:ganache_lab/services/calculation.dart';
 
@@ -17,6 +19,18 @@ class CalculateGanache extends StatelessWidget {
       children: [
         Text(name, style: const TextStyle(fontSize: 16)),
         Text("${weight.toStringAsFixed(1)} g", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+      ],
+    );
+  }
+
+  Widget _buildSummaryRow({required IconData icon, required String title, required String value}) {
+    return Row(
+      children: [
+        Icon(icon, size: 20),
+        const SizedBox(width: 8),
+        Text("$title :", style: const TextStyle(fontWeight: FontWeight.w500)),
+        const Spacer(),
+        Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
       ],
     );
   }
@@ -121,6 +135,52 @@ class CalculateGanache extends StatelessWidget {
                 },
               ),
               TotalWeightGanache(),
+              CustomContainer(
+                borderRadius: 12,
+                borderWidth: 1,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Résumé des paramètres",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    const SizedBox(height: 15),
+                    Consumer<ApplicationModel>(
+                      builder: (context, app, child) {
+                        String appName = "Autre";
+                        if (app.currentView == Application.cadrage) appName = "Cadrage";
+                        if (app.currentView == Application.moulage) appName = "Moulage";
+                        return _buildSummaryRow(
+                          icon: Symbols.grid_view,
+                          title: "Application",
+                          value: appName,
+                        );
+                      },
+                    ),
+                    const Divider(),
+                    Consumer<ChocolateTypeModel>(
+                      builder: (context, choco, child) {
+                        return _buildSummaryRow(
+                          icon: Symbols.cookie,
+                          title: "Chocolat",
+                          value: choco.selection ?? "Non défini",
+                        );
+                      },
+                    ),
+                    const Divider(),
+                    Consumer<TemperatureModel>(
+                      builder: (context, temp, child) {
+                        return _buildSummaryRow(
+                          icon: Symbols.device_thermostat,
+                          title: "Température",
+                          value: "${temp.temperature.toStringAsFixed(0)} °C",
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
               Indicator(),
               Container(
                 margin: const EdgeInsets.all(10.0),

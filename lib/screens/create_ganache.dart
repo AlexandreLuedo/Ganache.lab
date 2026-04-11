@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ganache_lab/models/notifiers/chocolate_type_notifier.dart';
 import 'package:ganache_lab/models/notifiers/weight_ganache_notifier.dart';
+import 'package:ganache_lab/models/notifiers/temperature_notifier.dart';
 import 'package:ganache_lab/services/calculation.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:provider/provider.dart';
@@ -211,9 +212,26 @@ class FabricationTemperatureSelector extends StatefulWidget {
 
 class _FabricationTemperatureSelector
     extends State<FabricationTemperatureSelector> {
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(
+      text: context.read<TemperatureModel>().temperature.toStringAsFixed(0),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: _controller,
       keyboardType: TextInputType.number,
       inputFormatters: <TextInputFormatter>[
         FilteringTextInputFormatter.digitsOnly,
@@ -224,6 +242,12 @@ class _FabricationTemperatureSelector
         labelText: "Renseignez la température °C",
         hintText: "Ex: 32°C",
       ),
+      onChanged: (value) {
+        var number = double.tryParse(value);
+        if (number != null) {
+          context.read<TemperatureModel>().updateTemperature(number);
+        }
+      },
     );
   }
 }
