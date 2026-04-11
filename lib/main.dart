@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/models/notifiers/chocolate_type_notifier.dart';
 import 'package:ganache_lab/screens/screens_exportation_file.dart';
@@ -8,8 +10,14 @@ import 'package:ganache_lab/models/notifiers/ganache_title_notifier.dart';
 import 'package:ganache_lab/models/notifiers/weight_ganache_notifier.dart';
 import 'package:ganache_lab/models/notifiers/temperature_notifier.dart';
 
-void main() => runApp(
-  MultiProvider(
+void main() {
+  LicenseRegistry.addLicense(() async* {
+    final license = await rootBundle.loadString('assets/licenses/LICENSE.md');
+    yield LicenseEntryWithLineBreaks(['Ganache.lab'], license);
+  });
+
+  runApp(
+    MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => TitleModel()),
       ChangeNotifierProvider(create: (_) => ApplicationModel()),
@@ -22,8 +30,8 @@ void main() => runApp(
       ChangeNotifierProvider(create: (_) => TemperatureModel()),
     ],
     child: const GanacheApp(),
-  ),
-);
+  ));
+}
 
 class GanacheApp extends StatelessWidget {
   const GanacheApp({super.key});

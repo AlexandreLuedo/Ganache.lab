@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ganache_lab/screens/settings/about_application_screen.dart';
 import 'package:ganache_lab/screens/settings/measurement_units.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import '../models/list_item.dart';
 import '../screens/settings/appearence_screen.dart';
-import '../screens/settings/license_screen.dart';
-import '../utils/email_helper.dart';
 
 /// List of categories on the settings page
 final settingsItems = [
@@ -55,40 +52,17 @@ final settingsItems = [
     subtitle: "En savoir plus sur l'application",
     isClickable: true,
     onTap: (context) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => AboutApplicationScreen()),
+      showAboutDialog(
+        context: context,
+        applicationName: "Ganache.lab",
+        applicationVersion: "2.0.0",
+        applicationLegalese: "© 2026 Alexandre Luedo\ncontact.ganache@pm.me",
+        applicationIcon: Image.asset(
+          'assets/icon/Ganache.lab_logo_256.png',
+          width: 50,
+          height: 50,
+        ),
       );
-    },
-  ),
-];
-final aboutItems = [
-  ListItem(
-    leading: CircleAvatar(child: Icon(Symbols.license)),
-    title: "Licence Ganache.lab",
-    subtitle: "Propriétaire",
-    isClickable: true,
-    onTap: (context) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => LicenseScreen()),
-      );
-    },
-  ),
-  ListItem(
-    leading: CircleAvatar(child: Icon(Symbols.mail)),
-    title: "Contact",
-    subtitle: "contact.ganache@pm.me",
-    isClickable: true,
-    onTap: (context) => openEmail(),
-  ),
-  ListItem(
-    leading: CircleAvatar(child: Icon(Symbols.license)),
-    title: "Licences tierces",
-    subtitle: "Relatives à chaques paquets employés par l'application",
-    isClickable: true,
-    onTap: (context) {
-      Navigator.push(context, MaterialPageRoute(builder: (_) => LicensePage()));
     },
   ),
 ];
