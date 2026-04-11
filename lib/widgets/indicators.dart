@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ganache_lab/screens/screens_exportation_file.dart';
+import 'package:provider/provider.dart';
+import 'package:ganache_lab/services/calculation.dart';
 
 double indicatorsScale = 170;
 double spacings = 20;
@@ -11,6 +13,16 @@ class Indicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final recipe = context.watch<TotalModel>();
+    // For MVP, we use standard values based on our fixed ratio generated recipe
+    final humidity = "28"; // ~28% d'eau dans une crème 35% MG
+    final fat = 16.0; // 16% de MG est équilibré
+    final sugar = "86";
+
+    String textureLabel = "Équilibré";
+    if (fat < 13) textureLabel = "Maigre";
+    if (fat > 18) textureLabel = "Gras";
+
     return Container(
       alignment: Alignment.center,
       margin: const EdgeInsets.all(10.0),
@@ -27,7 +39,7 @@ class Indicator extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ExtendedHumidity()),
+                MaterialPageRoute(builder: (context) => const ExtendedHumidity()),
               );
             },
             child: Container(
@@ -69,11 +81,11 @@ class Indicator extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
-                        child: const Row(
+                        child: Row(
                           children: [
                             Text(
-                              "28%",
-                              style: TextStyle(
+                              "$humidity%",
+                              style: const TextStyle(
                                 //  fontWeight: FontWeight.bold,
                                 fontSize: 55,
                               ),
@@ -140,14 +152,14 @@ class Indicator extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(top: 35.0),
-                        child: const Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.waves, color: Colors.white),
-                            SizedBox(width: 5),
+                            const Icon(Icons.waves, color: Colors.white),
+                            const SizedBox(width: 5),
                             Text(
                               "Texture",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 19,
                                 color: Colors.white,
                               ),
@@ -155,12 +167,12 @@ class Indicator extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Fluide",
-                            style: TextStyle(
+                            textureLabel,
+                            style: const TextStyle(
                               //  fontWeight: FontWeight.bold,
                               fontSize: 38,
                               color: Colors.white,
@@ -180,7 +192,7 @@ class Indicator extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ExtendedSugarSweetening(),
+                  builder: (context) => const ExtendedSugarSweetening(),
                 ),
               );
             },
@@ -215,15 +227,15 @@ class Indicator extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.start,
 
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(left: 20.0),
+                            padding: const EdgeInsets.only(left: 20.0),
                             child: Text(
-                              "86",
-                              style: TextStyle(
+                              sugar,
+                              style: const TextStyle(
                                 //  fontWeight: FontWeight.bold,
                                 fontSize: 45,
                               ),

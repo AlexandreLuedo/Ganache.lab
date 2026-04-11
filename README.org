@@ -17,93 +17,47 @@ Ceci est mon premier projet, il sert de support à mon apprentissage de Dart & F
 ** Fonctionnalités
 L'application Ganache.lab permet l'équilibrage précis de ganaches via deux approches principales :
 
-*** 1. Génération de recette (Mode principal)
-C'est le cœur de l'application. L'utilisateur définit ses contraintes (type d'utilisation, grammage final désiré, etc.). L'application se charge ensuite de générer une recette équilibrée en s'appuyant sur les paramètres définis dans le fichier de configuration.
+*** 1. Calcul du poids cible (Mode Géométrique)
+L'utilisateur définit ses contraintes physiques (moulage, cadrage ou poids libre). L'application calcule alors le poids total nécessaire pour remplir le volume demandé.
 
-*** 2. Importation de recette (Roadmap)
-/Fonctionnalité non implémentée pour le moment./
-L'objectif est de permettre à l'utilisateur de saisir ingrédient par ingrédient sa propre recette pour vérifier son équilibrage et le corriger si nécessaire.
+*** 2. Équilibrage de la recette (Mode Algorithmique)
+C'est le cœur du MVP. L'utilisateur saisit ses ingrédients un par un. L'application calcule en temps réel :
+- **Humidité (%)** : Taux d'eau total dans la recette.
+- **Texture / Matière Grasse (%)** : Équilibre des graisses (beurre de cacao + gras lactique).
+- **Pouvoir Sucrant (PS/POD)** : Intensité sucrée de la ganache.
+- **Extrait Sec Total (EST)** : Pourcentage de matières solides.
 
-** Architecture Technique
+** Architecture Technique (v2.0)
+
+*** Modèle d'Ingrédients Unifié
+Pour permettre des calculs précis, tous les ingrédients implémentent désormais l'interface ~Ingredient~ dans ~lib/services/calculation.dart~ :
+#+begin_src dart
+abstract class Ingredient {
+  String get name;
+  double get waterContent;  // % (0.0 to 1.0)
+  double get fatContent;    // % (0.0 to 1.0)
+  double get sugarContent;  // % (0.0 to 1.0)
+  double get solidsContent; // % (0.0 to 1.0)
+}
+#+end_src
+
+*** Gestion d'état (Provider)
+L'application utilise le pattern **Observer** via ~ChangeNotifier~ :
+- ~RecipeNotifier~ : Gère la liste des ingrédients sélectionnés et leurs poids respectifs.
+- ~TotalModel~ : Gère les calculs géométriques (cadres/moules).
+- ~ApplicationModel~ : Gère l'état de la navigation entre les modes.
 
 *** Conventions de code
-- *Commentaires :* Rédigés majoritairement en **Englais**.
-- *Variables :* Nommées en *Anglais* (camelCase).
-  - *Note :* Certaines variables historiques possèdent encore des noms hybrides (ex: ~numberCadres~). Un nettoyage progressif est en cours pour uniformiser le tout.
-
-*** Structure du projet
-- =GanacheApp()= : Point d'entrée de l'application.
-- =navigation.dart= : Gestion de la navigation principale ("Home page").
-- =privateConfig.yaml= : Fichier de configuration stockant les constantes et variables d'ajustement pour la table analytique.
-- formluation.dart : Fait la série de calculs pour équilibrer la ganache.
-*** Gestion d'état (Provider)
-Les états sont gérés via ~ChangeNotifier~.
-- Les fichiers principaux sont actuellement dans ~models/notifiers~.
-- Convention de nommage future : les fichiers prendront le nom de l'entité gérée suivi de ~_notifier.dart~.
-
-*** Refactoring & Migration
-Une transition vers une "Clean Architecture" est en cours. L'organisation du code va devenir plus logique au fil des commits, bien que certaines parties du code actuel soient dépréciées ou non utilisées.
+- *Langue :* Commentaires et variables en **Anglais** (standard industriel).
+- *Pourcentages :* Toujours exprimés entre ~0.0~ et ~1.0~ pour simplifier les calculs (ex: 15% = 0.15).
 
 ** Documentation
-La documentation technique est intégrée directement dans le code via des commentaires précédés du tag ~// DOC~.
-*** Nombres & déclaration
-Les pourcentages ont été déclarer déjà divisés, dans l'idée d'avoir un code plus propre
-#+begin_src 
-15% = 0.15
-#+end_src
-*** Nom de variables
-**** pointOfOverum
-Sur les logiciels de formulation professionnelle (comme ceux utilisés en chocolaterie ou en glacerie), le Pouvoir Sucrant se traduit par :
+La documentation technique est intégrée via le tag ~// DOC~.
 
-POD (Point of Overrun / Power of Sweetness)
-C’est le terme technique le plus utilisé. POD vient de l'italien Potere Dolcificante. Dans le monde de la formulation internationale, on garde souvent cet acronyme.
-#+begin_src dart
-// DOC
-// La valeur var ganache = 1; permet un calcul de celle-ci.
-#+end_src
-**** totalSolids
-EST - Extrait Sec Total
-**** milkSolidsNotFat
-MSNF - Milk Solids-Not-Fat
-ESDL - Extrait Sec Dégraissé du Lait
-
-
-*** TODO Génération automatique
-Une documentation complète sera générée ultérieurement via les outils Dart (~dart doc~).
-
-*** Glossaire utilisateur
-Un guide explicatif sur le fonctionnement technique d'une ganache est disponible pour les utilisateurs.
-- Format : Markdown (pour faciliter la contribution et l'édition).
-- Emplacement : ~assets/documentations/doc.md~
-*** Les règles d'équilibrage
-Les classes stockants les règles d'équilibrage sont déclarées dans leurs fichiers respectifs par catégorie d'ingrédients :
-Sucres - ~/lib/data/sugar_type.dart
-Chocolat - ~/lib/data/sugar_type.dart
-*** Les attribus
-L'idée des attribus, c'est de définir des étiquettes (/tags/). A une recette, pour indiqué en premier plan à l'utilisateur des informations complémentaires clées pour l'élaboration de ses recettes.
-**** Les attribus de fabrications
-***** Attribus microbiens
-Les attribus microbiens est une étiquette assignée à chaques technique de fabrication de ganache, possédant une valeure variant de 1 à 3. En fonction du risque d'apport de développement de m-o non désirés.
-=Assignation unique=
-****** Valeurs
-- Propice (au développement bactérien)
-- Moyennement propice
-- Non-propice
-1 à 3 (pour l'instant)
-***** Attribus temporels
-Les attribus temporels sont un lot d'étiquettes assignés à chaques technique de fabrication de ganache, il y a trois différents types de valeurs définissant le temps pris pour l'élaboration d'une recette.
-=Assignation unique=
-****** Valeurs
-- Rapide
-- Moyen
-- Lent
-***** Attribus difficulté
-Les attribus de diffculté sont un lot d'étiquette assignés à chaquer technique de fabrication de ganache, il y a trois différents types de valeurs définissant la difficulté/l'expérience requis pour l'élaboration d'une recette.
-=Assignation unique=
-****** Valeurs
-- Facile/abordable
-- Normal/classique
-- Complexe/technique
+*** Glossaire technique
+- **POD (Point of Overrun)** : Pouvoir Sucrant. Vient du terme italien *Potere Dolcificante*.
+- **EST** : Extrait Sec Total (Total Solids).
+- **MSNF** : Milk Solids-Not-Fat (Extrait Sec Dégraissé du Lait).
 
 ** Crédits & Sources
 - *Design des indicateurs :* Inspiré de [[https://github.com/PranshulGG/WeatherMaster][WeatherMaster]]

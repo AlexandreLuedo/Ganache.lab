@@ -9,7 +9,7 @@ class TotalWeightGanache extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double total = context.read<TotalModel>().total;
+    final double total = context.watch<TotalModel>().total;
 
     return CustomContainer(
       borderRadius: 12,

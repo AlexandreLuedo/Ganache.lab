@@ -1,4 +1,6 @@
-class SugarTypeItem {
+import 'package:ganache_lab/services/calculation.dart';
+
+class SugarTypeItem implements Ingredient {
   final String title;
   final double saccharoseRule = 0.15;
   final double glucoseRuleMin = 0.05;
@@ -12,4 +14,19 @@ class SugarTypeItem {
     required this.totalSolids,
     required this.pointOfOverrun,
   });
+
+  @override
+  String get name => title;
+
+  @override
+  double get waterContent => 1.0 - totalSolids;
+
+  @override
+  double get fatContent => 0.0; // Sugars usually have no fat
+
+  @override
+  double get sugarContent => pointOfOverrun;
+
+  @override
+  double get solidsContent => totalSolids;
 }

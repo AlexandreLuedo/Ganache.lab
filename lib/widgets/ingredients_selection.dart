@@ -9,8 +9,10 @@ class GanacheIngredients extends StatelessWidget {
   Widget build(BuildContext context) {
     // Exemple de données d’ingrédients
     final ingredients = [
-      {'title': 'Chocolat', 'subtitle': 'Callebaut 58% min.'},
-      {'title': 'Crème', 'subtitle': '35% MG'},
+      {'title': 'Chocolat', 'subtitle': 'Selon sélection'},
+      {'title': 'Crème Liquide', 'subtitle': '35% MG'},
+      {'title': 'Sucre Inverti / Miel', 'subtitle': 'Sucre'},
+      {'title': 'Beurre Doux', 'subtitle': 'Matière grasse'},
     ];
 
     return Column(
@@ -20,34 +22,26 @@ class GanacheIngredients extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Liste des ingrédients",
+              "Ingrédients calculés",
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             IconButton(
               tooltip: "Ajouter un ingrédient",
               onPressed: () {
-                /* TODO Ajouter le onPressed */
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: const Text("Ajouter un Ingrédient"),
+                      title: const Text("Mode Manuel (Roadmap)"),
                       content: const Text(
-                        /* TODO Ajouter l\'ajout d\'ingrédients */
-                        "",
+                        "L'ajout d'ingrédients manuels sera disponible dans une prochaine version pour analyser vos propres recettes. Actuellement, Ganache.lab génère la recette pour vous !",
                       ),
                       actions: <Widget>[
-                        OutlinedButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(); // Ferme le dialog
-                          },
-                          child: const Text("Fermer"),
-                        ),
                         FilledButton(
                           onPressed: () {
-                            Navigator.of(context).pop(); // Ferme le dialog
+                            Navigator.of(context).pop();
                           },
-                          child: const Text("Ajouter"),
+                          child: const Text("Fermer"),
                         ),
                       ],
                     );
@@ -68,7 +62,6 @@ class GanacheIngredients extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             child: ListTile(
-              // TODO Ajouter le swipe pour supprimer un ingrédient et modifier la valeur !
               leading: const Icon(Symbols.widgets, fill: 1),
               title: Text("${ingredient['title']}"),
               subtitle: Text("${ingredient['subtitle']}"),

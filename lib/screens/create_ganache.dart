@@ -253,14 +253,3 @@ class FabricationMethod extends StatelessWidget {
     );
   }
 }
-
-  );
-  }
-}
-  );
-  }
-}
-
-  );
-  }
-}

@@ -25,7 +25,7 @@ class ExtendedHumidity extends StatelessWidget {
         ),
         actions: [
           // Add this to the other three indicators
-         // Beware of repetition !! (there is its original namesake in "welcome_screen.dart :5
+          // Beware of repetition !! (there is its original namesake in "welcome_screen.dart :5
           GlossaryButton(),
         ],
       ),
@@ -173,7 +173,10 @@ class ExtendedSugarSweetening extends StatelessWidget {
                   "Taux de pouvoir sucrant",
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                Text("Modéré !", style: Theme.of(context).textTheme.displayLarge),
+                Text(
+                  "Modéré !",
+                  style: Theme.of(context).textTheme.displayLarge,
+                ),
               ],
             ),
           ),
@@ -261,15 +264,6 @@ class ExtendedDLC extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-  ],
-      ),
-    );
-  }
-}
-  ),
     );
   }
 }

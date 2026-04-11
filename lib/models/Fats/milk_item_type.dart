@@ -1,9 +1,11 @@
-class MilksnEggItemType {
-  // I don't know how to name this class, maybe in the future I will rewrite it.
+import 'package:ganache_lab/services/calculation.dart';
+
+class MilksnEggItemType implements Ingredient {
   final String title;
   final double water;
   final double totalSolids;
   final double fat;
+  final double diaryFat;
   final double milkSolidsNotFat;
   final double litterWeight;
 
@@ -12,18 +14,23 @@ class MilksnEggItemType {
     required this.water,
     required this.totalSolids,
     required this.fat,
+    required this.diaryFat,
     required this.milkSolidsNotFat,
-    required this.litterWeight,
+    this.litterWeight = 1000,
   });
 
-  double get pointOfOverum => (milkSolidsNotFat / 2 * 0.16);
+  @override
+  String get name => title;
 
-  ///DOC
-  ///Suggestion:
-  ///// Sum of total solids (EST)
-  /* double get totalSolids => fat + msnf;
+  @override
+  double get waterContent => water;
 
-  // Calculation of the sweetening power (POD) provided by the lactose of the MSNF
-  // We take ~50% of the MSNF multiplied by the POD of lactose (0.16)
-  double get pointOfOverrun => (msnf * 0.5) * 0.16; */
+  @override
+  double get fatContent => fat;
+
+  @override
+  double get sugarContent => (milkSolidsNotFat * 0.5) * 0.16; // Lactose's POD (Pouvoir Sucrant)
+
+  @override
+  double get solidsContent => totalSolids;
 }

@@ -6,9 +6,20 @@ import 'screens_exportation_file.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
 import 'package:ganache_lab/models/notifiers/ganache_title_notifier.dart';
 import 'package:provider/provider.dart';
+import 'package:ganache_lab/services/calculation.dart';
 
 class CalculateGanache extends StatelessWidget {
   const CalculateGanache({super.key});
+
+  Widget _buildIngredientRow(String name, double weight) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(name, style: const TextStyle(fontSize: 16)),
+        Text("${weight.toStringAsFixed(1)} g", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,27 +82,43 @@ class CalculateGanache extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.all(10.0),
-                padding: const EdgeInsets.all(20.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(width: 1),
-                  // border: Border.all(width: 1),
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                ),
-                child: const Row(
-                  children: [
-                    Icon(Symbols.sentiment_very_satisfied),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        "Votre ganache est idéale pour une application en cadre.",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
+              Consumer<TotalModel>(
+                builder: (context, totalModel, child) {
+                  return Container(
+                    margin: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(20.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(width: 1),
+                      color: Theme.of(context).colorScheme.primaryContainer,
                     ),
-                  ],
-                ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Row(
+                          children: [
+                            Icon(Symbols.receipt_long),
+                            SizedBox(width: 10),
+                            Expanded(
+                              child: Text(
+                                "Recette générée :",
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 15),
+                        _buildIngredientRow("Chocolat", totalModel.chocolateWeight),
+                        const Divider(),
+                        _buildIngredientRow("Crème Liquide", totalModel.creamWeight),
+                        const Divider(),
+                        _buildIngredientRow("Sucre / Miel", totalModel.sugarWeight),
+                        const Divider(),
+                        _buildIngredientRow("Beurre", totalModel.butterWeight),
+                      ],
+                    ),
+                  );
+                },
               ),
               TotalWeightGanache(),
               Indicator(),
@@ -131,5 +158,4 @@ class CalculateGanache extends StatelessWidget {
       ),
     );
   }
-}
 }
