@@ -5,19 +5,8 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-import 'package:url_launcher/url_launcher.dart';
-
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
-
-  Future<void> _launchUrl() async {
-    final Uri url = Uri.parse(
-      "https://www.microsoft.com/en-us/microsoft-365/online-surveys-polls-quizzes",
-    );
-    if (!await launchUrl(url)) {
-      throw Exception("Impossible d'$url");
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,33 +56,37 @@ class WelcomeScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(Symbols.assignment, fill: 1),
-                      SizedBox(width: 10),
+                      const Icon(Symbols.school, fill: 1),
+                      const SizedBox(width: 10),
                       Text(
-                        "Formulaire",
+                        "Comment ça marche ?",
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ],
                   ),
-                  SizedBox(height: 30),
-                  // TODO Implement this darn form.md
+                  const SizedBox(height: 20),
                   Text(
-                    '''Ce logiciel s’inscrit dans la démarche de mon mémoire pour le BTM Chocolatier‑Confiseur que je prépare.
-Mon mémoire porte sur la question suivante : « Comment rendre accessible la création et l’équilibrage de la ganache ».
-Pour cela, j’ai besoin d’obtenir des informations et des réponses à différentes questions afin de toucher le plus grand nombre de professionnels possible.
-J’ai donc choisi de vous proposer un questionnaire en ligne, facile d’accès et rapide à remplir.
-Grâce à votre collaboration, les résultats seront multiples : des données précieuses pour enrichir mon mémoire, un apprentissage personnel sur les besoins des artisans chocolatiers, et un recueil d’idées permettant d’améliorer ce tout‑jeune logiciel.
-Je vous remercie vivement pour votre aide et vous invite à cliquer sur le bouton ci‑dessous, qui vous dirigera vers le formulaire.
-''',
+                    "Découvrez l'équilibrage de ganache en trois étapes simples :",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      fontSize: 16,
+                    ),
                   ),
-                  SizedBox(height: 10),
-                  FilledButton.icon(
-                    onPressed: () {
-                      _launchUrl();
-                    },
-                    icon: Icon(Symbols.open_in_new),
-                    label: const Text("Compléter"),
-                    iconAlignment: IconAlignment.end,
+                  const SizedBox(height: 20),
+                  ListTile(
+                    leading: const CircleAvatar(child: Icon(Symbols.grid_view)),
+                    title: const Text("1. Les Contraintes", style: TextStyle(fontWeight: FontWeight.bold)),
+                    subtitle: const Text("Définissez le type d'application (Cadre, Moulage) pour déterminer le poids cible."),
+                  ),
+                  ListTile(
+                    leading: const CircleAvatar(child: Icon(Symbols.cookie)),
+                    title: const Text("2. Le Chocolat", style: TextStyle(fontWeight: FontWeight.bold)),
+                    subtitle: const Text("Sélectionnez votre couverture. L'algorithme ajuste les ratios de beurre de cacao et de sucre."),
+                  ),
+                  ListTile(
+                    leading: const CircleAvatar(child: Icon(Symbols.balance)),
+                    title: const Text("3. L'Équilibrage", style: TextStyle(fontWeight: FontWeight.bold)),
+                    subtitle: const Text("Ganache.lab génère instantanément une recette équilibrée (Humidité, Texture, Pouvoir Sucrant)."),
                   ),
                 ],
               ),
