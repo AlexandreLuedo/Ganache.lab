@@ -98,14 +98,9 @@ class CalculateGanache extends StatelessWidget {
               ),
               Consumer<TotalModel>(
                 builder: (context, totalModel, child) {
-                  return Container(
-                    margin: const EdgeInsets.all(10.0),
-                    padding: const EdgeInsets.all(20.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(width: 1),
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                    ),
+                  return CustomContainer(
+                    borderRadius: 12,
+                    borderWidth: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -182,34 +177,27 @@ class CalculateGanache extends StatelessWidget {
                 ),
               ),
               Indicator(),
-              Container(
-                margin: const EdgeInsets.all(10.0),
-                padding: const EdgeInsets.all(20.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(width: 1),
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                ),
-                child: SizedBox(
-                  child: Column(
-                    children: [
-                      const Row(
-                        children: [
-                          Icon(Symbols.info),
-                          SizedBox(width: 10),
-                          Expanded(
-                            child: Text(
-                              "Les informations calculées par Ganache.lab sont à titre indicatif. Des variations peuvent survenir lors de la préparation réelle des recettes.",
-                            ),
+              CustomContainer(
+                borderRadius: 12,
+                borderWidth: 1,
+                child: Column(
+                  children: [
+                    const Row(
+                      children: [
+                        Icon(Symbols.info),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            "Les informations calculées par Ganache.lab sont à titre indicatif. Des variations peuvent survenir lors de la préparation réelle des recettes.",
                           ),
-                        ],
-                      ),
-                      Divider(),
-                      Text(
-                        "Pour améliorer votre ganache appuyez sur le bouton orange, ci dessous.",
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                    const Divider(),
+                    const Text(
+                      "Pour améliorer votre ganache appuyez sur le bouton orange, ci dessous.",
+                    ),
+                  ],
                 ),
               ),
             ],

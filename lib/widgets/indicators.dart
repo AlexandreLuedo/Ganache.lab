@@ -39,7 +39,9 @@ class Indicator extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ExtendedHumidity()),
+                MaterialPageRoute(
+                  builder: (context) => const ExtendedHumidity(),
+                ),
               );
             },
             child: Container(
@@ -174,7 +176,7 @@ class Indicator extends StatelessWidget {
                             textureLabel,
                             style: const TextStyle(
                               //  fontWeight: FontWeight.bold,
-                              fontSize: 38,
+                              fontSize: 30,
                               color: Colors.white,
                             ),
                           ),
@@ -264,9 +266,7 @@ class Indicator extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => ExtendedDLC(),
-                ),
+                MaterialPageRoute(builder: (context) => ExtendedDLC()),
               );
             },
             child: Container(
