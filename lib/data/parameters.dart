@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ganache_lab/screens/settings/measurement_units.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import '../models/list_item.dart';
 import '../screens/settings/appearence_screen.dart';
+import '../utils/email_helper.dart';
 
 /// List of categories on the settings page
 final settingsItems = [
@@ -56,12 +58,48 @@ final settingsItems = [
         context: context,
         applicationName: "Ganache.lab",
         applicationVersion: "2.0.0",
-        applicationLegalese: "© 2026 Alexandre Luedo\ncontact.ganache@pm.me",
+        applicationLegalese: "© 2026 Alexandre Luedo\nUn logiciel au service des artisans.",
         applicationIcon: Image.asset(
           'assets/icon/Ganache.lab_logo_256.png',
           width: 50,
           height: 50,
         ),
+        children: [
+          const SizedBox(height: 24),
+          FilledButton.icon(
+            icon: const Icon(Symbols.mail),
+            label: const Text("Me contacter"),
+            onPressed: () {
+              Navigator.pop(context); // Ferme la boîte de dialogue
+              openEmail();
+            },
+          ),
+          const SizedBox(height: 8),
+          OutlinedButton.icon(
+            icon: const Icon(Symbols.license),
+            label: const Text("Licence Ganache.lab"),
+            onPressed: () async {
+              final licenseText = await rootBundle.loadString('assets/licenses/LICENSE.md');
+              if (context.mounted) {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text("Licence propriétaire"),
+                    content: SingleChildScrollView(
+                      child: Text(licenseText),
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text("Fermer"),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            },
+          ),
+        ],
       );
     },
   ),
