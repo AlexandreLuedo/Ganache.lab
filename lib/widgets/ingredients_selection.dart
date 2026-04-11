@@ -12,7 +12,7 @@ class GanacheIngredients extends StatelessWidget {
     final ingredients = [
       {'title': 'Chocolat', 'subtitle': 'Selon sélection'},
       {'title': 'Crème Liquide', 'subtitle': '35% MG'},
-      {'title': 'Sucre Inverti / Miel', 'subtitle': 'Sucre'},
+      {'title': 'Sucre Inverti', 'subtitle': 'Sucre'},
       {'title': 'Beurre Doux', 'subtitle': 'Matière grasse'},
     ];
 

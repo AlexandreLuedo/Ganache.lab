@@ -120,7 +120,7 @@ class TotalModel extends ChangeNotifier {
     if (targetSugar > sugarFromChocolate) {
       sugarWeight = targetSugar - sugarFromChocolate;
     } else {
-      sugarWeight = 0.0;
+      sugarWeight = sugarFromChocolate - targetSugar;
     }
 
     // Determine the needed fats

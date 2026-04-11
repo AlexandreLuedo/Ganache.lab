@@ -18,7 +18,6 @@ final SugarTypes = [
     pointOfOverrun: 1.27,
   ),
   SugarTypeItem(title: "Dextrose", totalSolids: 0.92, pointOfOverrun: 0.75),
-  SugarTypeItem(title: "Miel", totalSolids: 0.80, pointOfOverrun: 1.30),
   SugarTypeItem(
     title: "Sorbitol cristal",
     totalSolids: 1,

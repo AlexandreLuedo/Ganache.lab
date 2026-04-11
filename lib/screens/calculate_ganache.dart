@@ -121,7 +121,7 @@ class CalculateGanache extends StatelessWidget {
                         const Divider(),
                         _buildIngredientRow("Crème Liquide", totalModel.creamWeight),
                         const Divider(),
-                        _buildIngredientRow("Sucre / Miel", totalModel.sugarWeight),
+                        _buildIngredientRow("Sucre Inverti", totalModel.sugarWeight),
                         const Divider(),
                         _buildIngredientRow("Beurre", totalModel.butterWeight),
                       ],
