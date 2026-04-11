@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/widgets/glossary_button.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:ganache_lab/widgets/custom_container.dart';
 
 // TODO make sure via provider to change the name of each appBar based on the name of its "starting itinerary" (the route that brought it here).
 // TODO also match the icons to the cards.
@@ -32,12 +33,11 @@ class ExtendedHumidity extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.all(10.0),
         children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceContainer,
-              borderRadius: BorderRadius.circular(20),
-            ),
+          CustomContainer(
+            margin: 0.0,
+            padding: 10.0,
+            color: Theme.of(context).colorScheme.surfaceContainer,
+            borderRadius: 20,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -49,22 +49,25 @@ class ExtendedHumidity extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 30.0),
-            padding: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: Theme.of(context).colorScheme.primary),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              // TODO Add the glossary or a custom description that talks about the texture
-              children: [
-                Text(
-                  "Ceci est un texte d'explication qui sera attribué soit à une partie du glossaire, soit à une description personnalisée.",
-                ),
-                ListTile(),
-              ],
+          Padding(
+            padding: const EdgeInsets.only(top: 30.0),
+            child: CustomContainer(
+              margin: 0.0,
+              padding: 10.0,
+              color: Colors.transparent,
+              borderColor: Theme.of(context).colorScheme.primary,
+              borderWidth: 1.0,
+              borderRadius: 20,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                // TODO Add the glossary or a custom description that talks about the texture
+                children: [
+                  Text(
+                    "Ceci est un texte d'explication qui sera attribué soit à une partie du glossaire, soit à une description personnalisée.",
+                  ),
+                  ListTile(),
+                ],
+              ),
             ),
           ),
         ],
@@ -96,12 +99,11 @@ class ExtendedTexture extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.all(10.0),
         children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceContainer,
-              borderRadius: BorderRadius.circular(20),
-            ),
+          CustomContainer(
+            margin: 0.0,
+            padding: 10.0,
+            color: Theme.of(context).colorScheme.surfaceContainer,
+            borderRadius: 20,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -113,22 +115,25 @@ class ExtendedTexture extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 30.0),
-            padding: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: Theme.of(context).colorScheme.primary),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              // TODO Add the glossary or a custom description that talks about the texture
-              children: [
-                Text(
-                  "Ceci est un texte d'explication qui sera attribué soit à une partie du glossaire, soit à une description personnalisée.",
-                ),
-                ListTile(),
-              ],
+          Padding(
+            padding: const EdgeInsets.only(top: 30.0),
+            child: CustomContainer(
+              margin: 0.0,
+              padding: 10.0,
+              color: Colors.transparent,
+              borderColor: Theme.of(context).colorScheme.primary,
+              borderWidth: 1.0,
+              borderRadius: 20,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                // TODO Add the glossary or a custom description that talks about the texture
+                children: [
+                  Text(
+                    "Ceci est un texte d'explication qui sera attribué soit à une partie du glossaire, soit à une description personnalisée.",
+                  ),
+                  ListTile(),
+                ],
+              ),
             ),
           ),
         ],
@@ -160,12 +165,11 @@ class ExtendedSugarSweetening extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.all(10.0),
         children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceContainer,
-              borderRadius: BorderRadius.circular(20),
-            ),
+          CustomContainer(
+            margin: 0.0,
+            padding: 10.0,
+            color: Theme.of(context).colorScheme.surfaceContainer,
+            borderRadius: 20,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -180,22 +184,25 @@ class ExtendedSugarSweetening extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 30.0),
-            padding: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: Theme.of(context).colorScheme.primary),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              // TODO Add the glossary or a custom description that talks about the texture
-              children: [
-                Text(
-                  "Ceci est un texte d'explication qui sera attribué soit à une partie du glossaire, soit à une description personnalisée.",
-                ),
-                ListTile(),
-              ],
+          Padding(
+            padding: const EdgeInsets.only(top: 30.0),
+            child: CustomContainer(
+              margin: 0.0,
+              padding: 10.0,
+              color: Colors.transparent,
+              borderColor: Theme.of(context).colorScheme.primary,
+              borderWidth: 1.0,
+              borderRadius: 20,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                // TODO Add the glossary or a custom description that talks about the texture
+                children: [
+                  Text(
+                    "Ceci est un texte d'explication qui sera attribué soit à une partie du glossaire, soit à une description personnalisée.",
+                  ),
+                  ListTile(),
+                ],
+              ),
             ),
           ),
         ],
@@ -227,12 +234,11 @@ class ExtendedDLC extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.all(10.0),
         children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceContainer,
-              borderRadius: BorderRadius.circular(20),
-            ),
+          CustomContainer(
+            margin: 0.0,
+            padding: 10.0,
+            color: Theme.of(context).colorScheme.surfaceContainer,
+            borderRadius: 20,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -244,22 +250,25 @@ class ExtendedDLC extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 30.0),
-            padding: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: Theme.of(context).colorScheme.primary),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              // TODO Add the glossary or a custom description that talks about the texture
-              children: [
-                Text(
-                  "Ceci est un texte d'explication qui sera attribué soit à une partie du glossaire, soit à une description personnalisée.",
-                ),
-                ListTile(),
-              ],
+          Padding(
+            padding: const EdgeInsets.only(top: 30.0),
+            child: CustomContainer(
+              margin: 0.0,
+              padding: 10.0,
+              color: Colors.transparent,
+              borderColor: Theme.of(context).colorScheme.primary,
+              borderWidth: 1.0,
+              borderRadius: 20,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                // TODO Add the glossary or a custom description that talks about the texture
+                children: [
+                  Text(
+                    "Ceci est un texte d'explication qui sera attribué soit à une partie du glossaire, soit à une description personnalisée.",
+                  ),
+                  ListTile(),
+                ],
+              ),
             ),
           ),
         ],

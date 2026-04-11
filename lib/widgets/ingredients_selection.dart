@@ -1,6 +1,7 @@
 // Selection d'ingrédients
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:ganache_lab/widgets/custom_container.dart';
 
 class GanacheIngredients extends StatelessWidget {
   const GanacheIngredients({super.key});
@@ -54,13 +55,11 @@ class GanacheIngredients extends StatelessWidget {
         ),
         // Génération dynamique de containers + ListTile
         ...ingredients.map((ingredient) {
-          return Container(
-            margin: const EdgeInsets.symmetric(vertical: 4),
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceContainerHighest,
-              borderRadius: BorderRadius.circular(12),
-            ),
+          return CustomContainer(
+            margin: 4.0,
+            padding: 8.0,
+            color: Theme.of(context).colorScheme.surfaceContainerHighest,
+            borderRadius: 12,
             child: ListTile(
               leading: const Icon(Symbols.widgets, fill: 1),
               title: Text("${ingredient['title']}"),

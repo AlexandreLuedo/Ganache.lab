@@ -3,6 +3,7 @@ import 'package:material_symbols_icons/symbols.dart';
 import 'screens_exportation_file.dart';
 import 'package:provider/provider.dart';
 import 'package:ganache_lab/models/notifiers/ganache_title_notifier.dart';
+import 'package:ganache_lab/widgets/custom_container.dart';
 
 class Correction extends StatefulWidget {
   const Correction({super.key});
@@ -67,15 +68,12 @@ class _CorrectionState extends State<Correction> {
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
-              Container(
+              CustomContainer(
                 width: double.infinity,
-                margin: const EdgeInsets.all(10.0),
-                padding: const EdgeInsets.all(20.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(width: 1),
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                ),
+                margin: 10.0,
+                padding: 20.0,
+                borderRadius: 12,
+                borderWidth: 1,
                 child: Stack(
                   children: [
                     Column(
@@ -107,15 +105,12 @@ class _CorrectionState extends State<Correction> {
                   ],
                 ),
               ),
-              Container(
+              CustomContainer(
                 width: double.infinity,
-                margin: const EdgeInsets.all(10.0),
-                padding: const EdgeInsets.all(20.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(width: 1),
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                ),
+                margin: 10.0,
+                padding: 20.0,
+                borderRadius: 12,
+                borderWidth: 1,
                 child: Stack(
                   children: [
                     Column(
@@ -157,15 +152,12 @@ class _CorrectionState extends State<Correction> {
                   ],
                 ),
               ),
-              Container(
+              CustomContainer(
                 width: double.infinity,
-                margin: const EdgeInsets.all(10.0),
-                padding: const EdgeInsets.all(20.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(width: 1),
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                ),
+                margin: 10.0,
+                padding: 20.0,
+                borderRadius: 12,
+                borderWidth: 1,
                 child: Stack(
                   children: [
                     Column(
