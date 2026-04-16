@@ -1,0 +1,32 @@
+name: Deploiement GitHub Pages
+
+on:
+  push:
+    branches:
+      - master # S'exécute lors d'un push sur master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Installation de Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Recuperation des dependances
+        run: flutter pub get
+
+      - name: Build Web
+        run: flutter build web --release --base-href "/Ganache.lab/"
+
+      - name: Deploiement vers GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/web
+          publish_branch: gh-pages
