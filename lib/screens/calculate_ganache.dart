@@ -73,20 +73,16 @@ class CalculateGanache extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        heroTag: "Corriger",
-        tooltip: "Corriger la ganache",
-        label: const Text("Corriger"),
-        icon: const Icon(Symbols.check),
+        heroTag: "Save",
+        tooltip: "Enregistrer la ganache",
+        label: const Text("Enregistrer"),
+        icon: const Icon(Symbols.save),
         backgroundColor: const Color(0xFFEB8C36),
         foregroundColor: Colors.white,
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const Correction()),
-          );
+          // TODO: Implement save logic
         },
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      ),      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
