@@ -75,10 +75,44 @@ class _CreateGanacheState extends State<CreateGanache> {
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(4.0),
-          child: LinearProgressIndicator(
-            value: progressValue,
-            backgroundColor: Colors.grey,
-            valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFFEB8C36)),
+          child: Consumer6<TitleModel, ChocolateTypeModel, FrameModel, MoldModel, OtherModel, ApplicationModel>(
+            builder: (context, title, choco, frame, mold, other, app, child) {
+              double progress = 0.0;
+              
+              // Step 1: Name
+              if (title.title.isNotEmpty) progress += 0.34;
+              
+              // Step 2: Chocolate Type
+              if (choco.selection != null) progress += 0.33;
+              
+              // Step 3: Weight Parameters
+              bool isWeightValid = false;
+              switch (app.currentView) {
+                case Application.moulage:
+                  isWeightValid = mold.weight > 0 && mold.numberMussles > 0;
+                  break;
+                case Application.cadrage:
+                  isWeightValid = frame.lenght > 0 && frame.width > 0 && frame.height > 0;
+                  break;
+                case Application.autre:
+                  isWeightValid = other.otherWeight > 0;
+                  break;
+              }
+              if (isWeightValid) progress += 0.33;
+
+              return TweenAnimationBuilder<double>(
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeInOut,
+                tween: Tween<double>(begin: 0, end: progress > 1.0 ? 1.0 : progress),
+                builder: (context, value, child) {
+                  return LinearProgressIndicator(
+                    value: value,
+                    backgroundColor: Colors.grey[300],
+                    valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFFEB8C36)),
+                  );
+                },
+              );
+            },
           ),
         ),
       ),
