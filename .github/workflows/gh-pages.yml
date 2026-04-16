@@ -29,7 +29,12 @@ jobs:
         run: flutter pub get
 
       - name: Build Web
-        run: flutter build web --release --base-href "/Ganache.lab/" --dart-define=FLUTTER_WEB_RENDERER=html
+        run: flutter build web --release --base-href "/Ganache.lab/"
+
+      - name: Post-build setup
+        run: |
+          touch build/web/.nojekyll
+          cp web/404.html build/web/404.html
 
       - name: Deploiement vers GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
