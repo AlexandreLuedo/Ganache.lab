@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ganache_lab/screens/screens_exportation_file.dart';
 import 'package:provider/provider.dart';
 import 'package:ganache_lab/services/calculation.dart';
+import 'package:ganache_lab/services/aw.dart';
 
 double indicatorsScale = 170;
 double spacings = 20;
@@ -14,14 +15,31 @@ class Indicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final recipe = context.watch<TotalModel>();
-    // For MVP, we use standard values based on our fixed ratio generated recipe
-    final humidity = "28"; // ~28% d'eau dans une crème 35% MG
-    final fat = 16.0; // 16% de MG est équilibré
-    final sugar = "86";
 
-    String textureLabel = "Équilibré";
-    if (fat < 13) textureLabel = "Maigre";
-    if (fat > 18) textureLabel = "Gras";
+    // Real-time values from the analytical table
+    final double humidityVal = recipe.waterPercentage * 100;
+    final double fatVal = recipe.totalFatPercentage * 100;
+    final double estVal = recipe.solidsPercentage * 100;
+    final double sugarVal = recipe.sugarPercentage * 100;
+
+    final humidity = humidityVal.toStringAsFixed(1);
+    final fat = fatVal.toStringAsFixed(1);
+    final sugar = recipe.sweeteningPower.toStringAsFixed(1);
+
+    String sugarLabel = "Optimale";
+    if (sugarVal < 25) sugarLabel = "Faible (<25%)";
+    if (sugarVal > 30) sugarLabel = "Élevée";
+
+    String textureLabel = "Fondante";
+    if (humidityVal > 25) {
+      textureLabel = "Trop Molle";
+    } else if (humidityVal < 17) {
+      textureLabel = "Trop Ferme";
+    } else if (estVal < 75) {
+      textureLabel = "Instable"; // Target EST is > 75%
+    } else {
+      textureLabel = "Équilibrée";
+    }
 
     return Container(
       alignment: Alignment.center,
@@ -35,6 +53,7 @@ class Indicator extends StatelessWidget {
         spacing: spacings,
         runSpacing: spacings,
         children: [
+          // Humidité indicator
           InkWell(
             onTap: () {
               Navigator.push(
@@ -87,10 +106,7 @@ class Indicator extends StatelessWidget {
                           children: [
                             Text(
                               "$humidity%",
-                              style: const TextStyle(
-                                //  fontWeight: FontWeight.bold,
-                                fontSize: 55,
-                              ),
+                              style: const TextStyle(fontSize: 48),
                             ),
                           ],
                         ),
@@ -101,20 +117,30 @@ class Indicator extends StatelessWidget {
                           children: [
                             Container(
                               padding: const EdgeInsets.all(5),
-                              //height: 10,
-                              //width: 10,
                               decoration: BoxDecoration(
-                                color: const Color(0xFFEB8C36),
+                                color:
+                                    (humidityVal >= 17 && humidityVal <= 25)
+                                        ? Colors.green
+                                        : const Color(0xFFEB8C36),
                                 borderRadius: BorderRadius.circular(100),
                               ),
-                              child: const Text(
-                                "16°",
-                                style: TextStyle(color: Colors.white),
+                              child: Text(
+                                (humidityVal >= 17 && humidityVal <= 25)
+                                    ? "OK"
+                                    : "Vérif",
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
                               ),
                             ),
-                            const SizedBox(width: 10.0),
-                            // Espacement horizontal
-                            const Expanded(child: Text("Point de rosé")),
+                            const SizedBox(width: 5.0),
+                            const Expanded(
+                              child: Text(
+                                "Cible 17-25%",
+                                style: TextStyle(fontSize: 12),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -136,7 +162,6 @@ class Indicator extends StatelessWidget {
             child: Container(
               height: indicatorsScale,
               width: indicatorsScale,
-              padding: const EdgeInsets.all(6.5),
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.surfaceContainer,
                 borderRadius: BorderRadius.circular(100),
@@ -151,36 +176,34 @@ class Indicator extends StatelessWidget {
                     ),
                   ),
                   Column(
+                    //                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 35.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.waves, color: Colors.white),
-                            const SizedBox(width: 5),
-                            Text(
-                              "Texture",
-                              style: const TextStyle(
-                                fontSize: 19,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      const SizedBox(height: 50),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          const Icon(
+                            Icons.waves,
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                          const SizedBox(width: 5),
                           Text(
-                            textureLabel,
+                            "Texture",
                             style: const TextStyle(
-                              //  fontWeight: FontWeight.bold,
-                              fontSize: 30,
+                              fontSize: 18,
                               color: Colors.white,
                             ),
                           ),
                         ],
+                      ),
+                      Text(
+                        textureLabel,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 28,
+                          color: Colors.white,
+                        ),
                       ),
                     ],
                   ),
@@ -189,6 +212,7 @@ class Indicator extends StatelessWidget {
             ),
           ),
 
+          // Sweetening Power
           InkWell(
             onTap: () {
               Navigator.push(
@@ -204,7 +228,6 @@ class Indicator extends StatelessWidget {
               child: Stack(
                 children: [
                   SvgPicture.asset(
-                    // fit: BoxFit.cover,
                     'assets/svg/testcookie4.svg',
                     colorFilter: ColorFilter.mode(
                       Theme.of(context).colorScheme.surfaceContainer,
@@ -237,22 +260,22 @@ class Indicator extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 20.0),
                             child: Text(
                               sugar,
-                              style: const TextStyle(
-                                //  fontWeight: FontWeight.bold,
-                                fontSize: 45,
-                              ),
+                              style: const TextStyle(fontSize: 45),
                             ),
                           ),
                         ],
                       ),
-                      const Row(
+                      Row(
                         children: [
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.only(left: 20.0),
                             child: Icon(Icons.info, color: Color(0xFFEB8C36)),
                           ),
-                          SizedBox(width: 5),
-                          Text("Taux modéré"),
+                          const SizedBox(width: 5),
+                          Text(
+                            "Taux $sugarLabel",
+                            style: const TextStyle(fontSize: 12),
+                          ),
                         ],
                       ),
                     ],
@@ -262,6 +285,7 @@ class Indicator extends StatelessWidget {
             ),
           ),
 
+          // Shelf Life
           InkWell(
             onTap: () {
               Navigator.push(
@@ -301,7 +325,6 @@ class Indicator extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 9.0, top: 5.0),
                         child: const Row(
                           children: [
-                            // Icon(Icons.water_drop),
                             Icon(Icons.kitchen),
                             SizedBox(width: 4),
                             Text(
@@ -311,37 +334,77 @@ class Indicator extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 25.0, bottom: 20.0),
-                        child: Slider(
-                          year2023: false,
-                          value: 0.75,
-                          onChanged: (value) {},
-                          divisions: 4,
-                          label: "3 mois",
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.only(left: 10.0),
-                            child: Text("DLC"),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(left: 5.0),
-                            padding: const EdgeInsets.all(5),
-                            //height: 10,
-                            //width: 10,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFEB8C36),
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                            child: const Text(
-                              "03/08/2025",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ],
+                      Consumer<TotalModel>(
+                        builder: (context, model, child) {
+                          double aw = model.awValue;
+                          int days = AwService.getDaysFromAw(aw);
+                          double months = days / 30;
+
+                          return Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8.0,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      aw.toStringAsFixed(2),
+                                      style: const TextStyle(
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    const Text(
+                                      "Aw",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Text(
+                                "Env. ${months.toStringAsFixed(1)} mois",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Theme.of(context).colorScheme.primary,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Row(
+                                children: [
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 10.0),
+                                    child: Text(
+                                      "DLC",
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 5.0),
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFEB8C36),
+                                      borderRadius: BorderRadius.circular(100),
+                                    ),
+                                    child: Text(
+                                      AwService.getFormattedDate(days),
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        },
                       ),
                     ],
                   ),

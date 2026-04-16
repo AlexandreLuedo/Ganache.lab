@@ -19,11 +19,17 @@ class TotalWeightGanache extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Symbols.all_inclusive, fill: 1),
+              Icon(
+                Symbols.all_inclusive,
+                fill: 1,
+                color: Theme.of(context).colorScheme.primary,
+              ),
               const SizedBox(width: 10),
               Text(
                 "Poids total",
-                style: Theme.of(context).textTheme.headlineSmall,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
             ],
           ),
