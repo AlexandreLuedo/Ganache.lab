@@ -58,12 +58,13 @@ final settingsItems = [
       showAboutDialog(
         context: context,
         applicationName: "Ganache.lab",
-        applicationVersion: "2.0.0",
-        applicationLegalese: "© 2026 Alexandre Luedo\nUn logiciel au service des artisans.",
+        applicationVersion: "Version: Alpha",
+        applicationLegalese:
+            "© 2026 Hadrien Klotz\nUn logiciel au service des artisans.",
         applicationIcon: Image.asset(
-          'assets/icon/Ganache.lab_logo_256.png',
-          width: 50,
-          height: 50,
+          'assets/png/Icon_app_material_bg.png',
+          width: 70,
+          height: 70,
         ),
         children: [
           const SizedBox(height: 24),
@@ -80,62 +81,70 @@ final settingsItems = [
             icon: const Icon(Symbols.license),
             label: const Text("Licence Ganache.lab"),
             onPressed: () async {
-              final licenseText = await rootBundle.loadString('assets/licenses/LICENSE.md');
+              final licenseText = await rootBundle.loadString(
+                'assets/licenses/LICENSE.md',
+              );
               if (context.mounted) {
                 showModalBottomSheet(
                   context: context,
                   isScrollControlled: true,
                   backgroundColor: Colors.transparent,
-                  builder: (context) => Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
-                      borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                    ),
-                    child: DraggableScrollableSheet(
-                      initialChildSize: 0.8,
-                      minChildSize: 0.5,
-                      maxChildSize: 0.95,
-                      expand: false,
-                      builder: (context, scrollController) {
-                        return Column(
-                          children: [
-                            const SizedBox(height: 8),
-                            Container(
-                              width: 40,
-                              height: 4,
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.4),
-                                borderRadius: BorderRadius.circular(2),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: Text(
-                                "Licence propriétaire",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                  builder:
+                      (context) => Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.surface,
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(24),
+                          ),
+                        ),
+                        child: DraggableScrollableSheet(
+                          initialChildSize: 0.8,
+                          minChildSize: 0.5,
+                          maxChildSize: 0.95,
+                          expand: false,
+                          builder: (context, scrollController) {
+                            return Column(
+                              children: [
+                                const SizedBox(height: 8),
+                                Container(
+                                  width: 40,
+                                  height: 4,
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurfaceVariant
+                                        .withOpacity(0.4),
+                                    borderRadius: BorderRadius.circular(2),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Markdown(
-                                controller: scrollController,
-                                data: licenseText,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: FilledButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: const Text("Fermer"),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
+                                const Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: Text(
+                                    "Licence propriétaire",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Markdown(
+                                    controller: scrollController,
+                                    data: licenseText,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: FilledButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: const Text("Fermer"),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
                 );
               }
             },

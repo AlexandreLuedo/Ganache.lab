@@ -5,6 +5,11 @@ class TemperatureModel extends ChangeNotifier {
 
   double get temperature => _temperature;
 
+  void reset() {
+    _temperature = 32.0;
+    notifyListeners();
+  }
+
   void updateTemperature(double newTemp) {
     _temperature = newTemp;
     notifyListeners();

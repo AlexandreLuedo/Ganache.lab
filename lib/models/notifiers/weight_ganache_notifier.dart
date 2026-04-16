@@ -12,6 +12,14 @@ class MoldModel extends ChangeNotifier {
   double get numberMold => _numberMold;
   double get moldResult => _moldResult;
 
+  void reset() {
+    _weight = 0;
+    _numberMussles = 0;
+    _moldResult = 0;
+    _numberMold = 0;
+    notifyListeners();
+  }
+
   void updateWeight(double newWeight) {
     _weight = newWeight;
     calculate();
@@ -54,6 +62,15 @@ class FrameModel extends ChangeNotifier {
   double get numberFrames => _numberFrames;
   double get frameResult => _frameResult;
 
+  void reset() {
+    _lenght = 0;
+    _width = 0;
+    _height = 0;
+    _numberFrames = 0;
+    _frameResult = 0;
+    notifyListeners();
+  }
+
   void updateLenght(double newLenght) {
     _lenght = newLenght;
     calculate();
@@ -83,6 +100,7 @@ class FrameModel extends ChangeNotifier {
       _numberFrames = 1;
     }
     _frameResult = _lenght * _width * _height * _numberFrames * ratioNumber;
+    notifyListeners();
   }
 }
 
@@ -90,6 +108,11 @@ class FrameModel extends ChangeNotifier {
 class OtherModel extends ChangeNotifier {
   double _otherWeight = 0;
   double get otherWeight => _otherWeight;
+
+  void reset() {
+    _otherWeight = 0;
+    notifyListeners();
+  }
 
   void updateTotalOther(double newOtherWeight) {
     _otherWeight = newOtherWeight;

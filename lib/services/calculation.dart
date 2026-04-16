@@ -1,73 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:ganache_lab/data/chocolates_data.dart';
 import 'package:ganache_lab/models/notifiers/chocolate_type_notifier.dart';
 import 'package:ganache_lab/models/notifiers/weight_ganache_notifier.dart';
 import 'package:ganache_lab/widgets/ganache_type_selection.dart';
 
 abstract class Ingredient {
   String get name;
-  double get waterContent; // % (0.0 to 1.0)
-  double get fatContent; // % (0.0 to 1.0)
-  double get sugarContent; // % (0.0 to 1.0) - Pouvoir Sucrant
-  double get solidsContent; // % (0.0 to 1.0) - Extrait Sec Total
-}
-
-class RecipeIngredient {
-  final Ingredient ingredient;
-  double weight;
-
-  RecipeIngredient({required this.ingredient, this.weight = 0.0});
-
-  double get waterWeight => weight * ingredient.waterContent;
-  double get fatWeight => weight * ingredient.fatContent;
-  double get sugarWeight => weight * ingredient.sugarContent;
-  double get solidsWeight => weight * ingredient.solidsContent;
-}
-
-class RecipeNotifier extends ChangeNotifier {
-  final List<RecipeIngredient> _ingredients = [];
-
-  List<RecipeIngredient> get ingredients => List.unmodifiable(_ingredients);
-
-  void addIngredient(Ingredient ingredient, {double weight = 0.0}) {
-    _ingredients.add(RecipeIngredient(ingredient: ingredient, weight: weight));
-    notifyListeners();
-  }
-
-  void removeIngredient(int index) {
-    _ingredients.removeAt(index);
-    notifyListeners();
-  }
-
-  void updateWeight(int index, double weight) {
-    _ingredients[index].weight = weight;
-    notifyListeners();
-  }
-
-  double get totalWeight =>
-      _ingredients.fold(0, (sum, item) => sum + item.weight);
-  double get totalWater =>
-      _ingredients.fold(0, (sum, item) => sum + item.waterWeight);
-  double get totalFat =>
-      _ingredients.fold(0, (sum, item) => sum + item.fatWeight);
-  double get totalSugar =>
-      _ingredients.fold(0, (sum, item) => sum + item.sugarWeight);
-  double get totalSolids =>
-      _ingredients.fold(0, (sum, item) => sum + item.solidsWeight);
-
-  double get fatPercentage => totalWeight == 0 ? 0 : (totalFat / totalWeight);
-  double get sugarPercentage => totalWeight == 0 ? 0 : (totalSugar / totalWeight);
-  double get solidsPercentage =>
-      totalWeight == 0 ? 0 : (totalSolids / totalWeight);
-  double get waterPercentage => totalWeight == 0 ? 0 : (totalWater / totalWeight);
+  double get waterContent;
+  double get fatContent;
+  double get sugarContent;
+  double get solidsContent;
 }
 
 class TotalModel extends ChangeNotifier {
   double total = 0.0;
   
-  double chocolateWeight = 0.0;
+  // Recipe Weights (g)
+  double chocolateWeight = 0.0;     // Total chocolate or Dark part
+  double milkChocolateWeight = 0.0; // Milk chocolate part (if blend)
   double creamWeight = 0.0;
   double sugarWeight = 0.0;
   double butterWeight = 0.0;
+
+  // Analytical Columns (g) - Following your pro spreadsheet
+  double waterWeight = 0.0;
+  double cocoaButterWeight = 0.0;
+  double defattedCocoaWeight = 0.0;
+  double milkFatWeight = 0.0;
+  double totalFatWeight = 0.0;
+  double totalSugarWeight = 0.0;
+  double totalPODWeight = 0.0;
+  double totalSolidsWeight = 0.0;
+
+  // Final Percentages (%)
+  double waterPercentage = 0.0;
+  double cocoaButterPercentage = 0.0;
+  double sugarPercentage = 0.0;
+  double solidsPercentage = 0.0;
+  double totalFatPercentage = 0.0;
+  double sweeteningPower = 0.0; // POD
+  double awValue = 0.85;
+
+  void reset() {
+    total = 0.0;
+    chocolateWeight = 0.0;
+    milkChocolateWeight = 0.0;
+    creamWeight = 0.0;
+    sugarWeight = 0.0;
+    butterWeight = 0.0;
+    waterWeight = 0.0;
+    cocoaButterWeight = 0.0;
+    defattedCocoaWeight = 0.0;
+    milkFatWeight = 0.0;
+    totalFatWeight = 0.0;
+    totalSugarWeight = 0.0;
+    totalPODWeight = 0.0;
+    totalSolidsWeight = 0.0;
+    waterPercentage = 0.0;
+    cocoaButterPercentage = 0.0;
+    sugarPercentage = 0.0;
+    solidsPercentage = 0.0;
+    totalFatPercentage = 0.0;
+    sweeteningPower = 0.0;
+    awValue = 0.85;
+    notifyListeners();
+  }
 
   void calculateTotal(
     FrameModel frame,
@@ -76,6 +73,7 @@ class TotalModel extends ChangeNotifier {
     ApplicationModel app,
     ChocolateTypeModel chocolateTypeNotifier,
   ) {
+    // 1. Determine Target Total Weight
     switch (app.currentView) {
       case Application.moulage:
         total = mold.moldResult.toDouble();
@@ -88,124 +86,179 @@ class TotalModel extends ChangeNotifier {
         break;
     }
 
-    double recommendedSugar = 0.275; // Recommended 25 at 30% -> 27.5%
-    double recommendedButter = 0.10; // Recommended 5 at 15% -> 10%
+    if (total <= 0) return;
 
-    // User's chocolate type provides cocoa butter content (e.g., 0.18, 0.22).
-    // We assume an average chocolate cocoa butter content if not provided by user directly.
-    double cocoaButterChocolate = chocolateTypeNotifier.cocoaButterType; 
-    
-    // Estimate sugar in chocolate: 1.0 - cocoaButter - nonFatCocoaSolids (~10-15%)
-    // Let's use a simpler heuristic for MVP:
-    double sugarChocolate = (1.0 - cocoaButterChocolate) * 0.8; 
+    // 2. Define Reference Chocolates (based on your example)
+    // Dark: Caraïbe 66% (40.5% BC, 25.5% solids, 32% sugar)
+    final darkChoc = const Chocolate(
+      brand: "Valrhona",
+      name: "Caraïbe 66%",
+      cocoaButter: 0.405,
+      nonFatCocoaSolids: 0.255,
+      totalFat: 0.405,
+      sugar: 0.32,
+    );
 
-    // Target cocoa butter in final ganache (around 12-15%)
-    double targetCocoaButter = 0.15;
+    // Milk: Bahibé 46% (28.4% BC, 17.6% solids, 30% sugar, 6% milk fat, 15% lactose)
+    final milkChoc = const Chocolate(
+      brand: "Valrhona",
+      name: "Bahibé 46%",
+      cocoaButter: 0.284,
+      nonFatCocoaSolids: 0.176,
+      totalFat: 0.42,
+      sugar: 0.30,
+      milkFat: 0.06,
+      milkSolidsNonFat: 0.15,
+    );
+
+    // White: Ivoire 35% (35% BC, 0% solids, 43% sugar, 6.4% milk fat, 15.6% lactose)
+    final whiteChoc = const Chocolate(
+      brand: "Valrhona",
+      name: "Ivoire 35%",
+      cocoaButter: 0.35,
+      nonFatCocoaSolids: 0.0,
+      totalFat: 0.414,
+      sugar: 0.43,
+      milkFat: 0.064,
+      milkSolidsNonFat: 0.22,
+    );
+
+    // --- STEP 1: CALCULATE INGREDIENTS (The formulation logic) ---
     
-    // Calculate required chocolate weight to hit target cocoa butter
-    if (cocoaButterChocolate > 0) {
-      chocolateWeight = (total * targetCocoaButter) / cocoaButterChocolate;
+    // Target BC based on Professional Plasticity Rules (Rules from user)
+    double targetBCRatio = 0.20; // Default
+    
+    // 1. Determine base ratio from chocolate type
+    switch (chocolateTypeNotifier.selection) {
+      case "Noir":
+        targetBCRatio = 0.18;
+        break;
+      case "Noir/Lait":
+        targetBCRatio = 0.20;
+        break;
+      case "Lait":
+        targetBCRatio = 0.22;
+        break;
+      case "Blanc":
+        targetBCRatio = 0.23;
+        break;
+    }
+
+    // 2. Adjust for Application (Moulage cap 12-18%)
+    if (app.currentView == Application.moulage) {
+      // If the target ratio is higher than 18%, we cap it for molding
+      if (targetBCRatio > 0.18) {
+        targetBCRatio = 0.18; 
+      }
+      // Safety check: never below 12%
+      if (targetBCRatio < 0.12) {
+        targetBCRatio = 0.12;
+      }
+    }
+    
+    double targetBCWeight = total * targetBCRatio;
+
+    if (chocolateTypeNotifier.selection == "Noir/Lait") {
+      // Split BC 50/50 between Dark and Milk
+      double bcPart = targetBCWeight / 2;
+      chocolateWeight = bcPart / darkChoc.cocoaButter; // Dark part
+      milkChocolateWeight = bcPart / milkChoc.cocoaButter; // Milk part
+    } else if (chocolateTypeNotifier.selection == "Lait") {
+      chocolateWeight = 0;
+      milkChocolateWeight = targetBCWeight / milkChoc.cocoaButter;
+    } else if (chocolateTypeNotifier.selection == "Blanc") {
+      chocolateWeight = targetBCWeight / whiteChoc.cocoaButter;
+      milkChocolateWeight = 0;
     } else {
-      chocolateWeight = total * 0.45; // Fallback
+      chocolateWeight = targetBCWeight / darkChoc.cocoaButter;
+      milkChocolateWeight = 0;
     }
 
-    if (chocolateWeight > total * 0.7) {
-      chocolateWeight = total * 0.7; // Cap chocolate to 70% max
-    }
-
-    // Determine the needed sugar weight
-    double targetSugar = total * recommendedSugar;
-    double sugarFromChocolate = chocolateWeight * sugarChocolate;
+    // Target Added Sugar: Total target 26%
+    double targetTotalSugarWeight = total * 0.26;
     
-    if (targetSugar > sugarFromChocolate) {
-      sugarWeight = targetSugar - sugarFromChocolate;
+    double sugarFromDark = 0;
+    if (chocolateTypeNotifier.selection == "Blanc") {
+      sugarFromDark = chocolateWeight * whiteChoc.sugar;
     } else {
-      sugarWeight = sugarFromChocolate - targetSugar;
+      sugarFromDark = chocolateWeight * darkChoc.sugar;
     }
+    double sugarFromMilk = milkChocolateWeight * milkChoc.sugar;
+    sugarWeight = targetTotalSugarWeight - (sugarFromDark + sugarFromMilk);
+    if (sugarWeight < 0) sugarWeight = 0;
 
-    // Determine the needed fats
-    butterWeight = total * recommendedButter;
+    // Target Butter: 6% (from your example)
+    butterWeight = total * 0.06;
 
-    // Deduct the cream
-    creamWeight = total - (chocolateWeight + sugarWeight + butterWeight);
-    if (creamWeight < 0) creamWeight = 0; // Safety fallback
+    // Deduced Liquid (Cream 35%)
+    creamWeight = total - (chocolateWeight + milkChocolateWeight + sugarWeight + butterWeight);
+    if (creamWeight < 0) creamWeight = 0;
+
+    // --- STEP 2: ANALYTICAL TABLE (Summing columns) ---
+    
+    // Ingredient constants
+    const double waterInCream = 0.598; 
+    const double milkFatInCream = 0.35;
+    const double lactoseInCream = 0.028;
+    const double waterInButter = 0.16;
+    const double milkFatInButter = 0.82;
+
+    // Column sums
+    waterWeight = (creamWeight * waterInCream) + (butterWeight * waterInButter);
+    
+    if (chocolateTypeNotifier.selection == "Blanc") {
+      cocoaButterWeight = chocolateWeight * whiteChoc.cocoaButter;
+      defattedCocoaWeight = 0.0;
+      milkFatWeight = (creamWeight * milkFatInCream) + 
+                     (butterWeight * milkFatInButter) + 
+                     (chocolateWeight * whiteChoc.milkFat);
+      
+      totalSugarWeight = (chocolateWeight * whiteChoc.sugar) + 
+                        (sugarWeight * 1.0) + 
+                        (creamWeight * lactoseInCream) + 
+                        (chocolateWeight * whiteChoc.milkSolidsNonFat * 0.5);
+
+      totalPODWeight = (chocolateWeight * whiteChoc.sugar * 1.0) + 
+                      (sugarWeight * 1.0) + 
+                      (creamWeight * lactoseInCream * 0.16);
+    } else {
+      cocoaButterWeight = (chocolateWeight * darkChoc.cocoaButter) + 
+                         (milkChocolateWeight * milkChoc.cocoaButter);
+      
+      defattedCocoaWeight = (chocolateWeight * darkChoc.nonFatCocoaSolids) + 
+                           (milkChocolateWeight * milkChoc.nonFatCocoaSolids);
+      
+      milkFatWeight = (creamWeight * milkFatInCream) + 
+                     (butterWeight * milkFatInButter) + 
+                     (milkChocolateWeight * milkChoc.milkFat);
+      
+      totalSugarWeight = (chocolateWeight * darkChoc.sugar) + 
+                        (milkChocolateWeight * milkChoc.sugar) + 
+                        (sugarWeight * 1.0) + 
+                        (creamWeight * lactoseInCream) + 
+                        (milkChocolateWeight * milkChoc.milkSolidsNonFat * 0.5);
+
+      totalPODWeight = (chocolateWeight * darkChoc.sugar * 1.0) + 
+                      (milkChocolateWeight * milkChoc.sugar * 1.0) + 
+                      (sugarWeight * 1.0) + 
+                      (creamWeight * lactoseInCream * 0.16);
+    }
+    
+    totalFatWeight = cocoaButterWeight + milkFatWeight;
+    totalSolidsWeight = total - waterWeight;
+
+    // --- STEP 3: PERCENTAGES & AW ---
+    waterPercentage = waterWeight / total;
+    cocoaButterPercentage = cocoaButterWeight / total;
+    sugarPercentage = totalSugarWeight / total;
+    solidsPercentage = totalSolidsWeight / total;
+    totalFatPercentage = totalFatWeight / total;
+    sweeteningPower = (totalPODWeight / total) * 100;
+
+    // Aw Ross Formula (Simplified with Dry Matter sponging)
+    double sugarRatio = totalSugarWeight / (totalSugarWeight + waterWeight);
+    awValue = 1.0 - (0.65 * sugarRatio) - (0.04 * (defattedCocoaWeight / total));
 
     notifyListeners();
   }
 }
-
-/// The analytic table
-/// This class will take the ganache informations and will output values
-/*
-class Calculation {
-  /// DOC
-  /// This class work in two steps (getIngredientComposition, validationRules)
-  /// getIngredientComposition will fill all "totalvars" with all ingredient composition.
-  /// validationRules will takes all "totalvars" for analysing them and provide statistic on the user screen.
-  double totalWeight = 0.0;
-  double totalWater = 0.0;
-  double totalFat = 0.0;
-  double totalDiaryFat = 0.0;
-  double totalCocoaFat = 0.0;
-  double totalSugar = 0.0;
-
-  double totalSolids = 0.0;
-
-  double ingredientLists = 0.0;
-  String ingredientType = "";
-
-  void getIngredientComposition(
-    totalWeight,
-    totalWater,
-    totalFat,
-    totalDiaryFat,
-    totalCocoaFat,
-    totalSugar,
-
-    totalSolids,
-    ingredientLists,
-    ingredientType,
-  ) {
-    /// This loop passes all the ingredients and get theirs composition.
-    for (var ingredients in ingredientLists) {
-      totalWeight =
-          totalWeight * Ingredients.weight; // Bro must be declared in a class
-
-      totalWater = totalWater + (Ingredients.weight * Ingredient.water);
-      totalFat = totalFat + (Ingredients.weight * Ingredient.fat);
-      totalDiaryFat =
-          totalDiaryFat + (Ingredients.weight * Ingredient.diaryFat);
-      totalCocoaFat =
-          totalCocoaFat + (Ingredients.weight * Ingredient.cocoaFat);
-      totalSugar = totalSugar + (Ingredients.weight * Ingredient.totalSugar);
-
-      totalSolids = totalSolids + (Ingredients.weight * Ingredient.water);
-      totalWater = totalWater + (Ingredients.weight * Ingredient.water);
-    }
-  }
-
-  validationRules(
-    totalWeight,
-    totalWater,
-    totalFat,
-    totalDiaryFat,
-    totalCocoaFat,
-    totalSugar,
-
-    totalSolids,
-    ingredientLists,
-    ingredientType,
-  ) {
-    // if 
-  }
-}
-
-abstract class IngredientBase {
-  String get name;
-  String get ingredientType;
-  double get weight;
-  double get waterPercentage;
-  double get fatPercentage;
-  double get totalSolidsPercentage;
-}
-*/
