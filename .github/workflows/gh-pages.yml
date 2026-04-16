@@ -23,13 +23,13 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          cache: true # Améliore la vitesse des builds suivants
+          cache: true
 
       - name: Recuperation des dependances
         run: flutter pub get
 
       - name: Build Web
-        run: flutter build web --release --base-href="/Ganache.lab/" --web-renderer=html
+        run: flutter build web --release --web-renderer html --base-href /Ganache.lab/
 
       - name: Deploiement vers GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
