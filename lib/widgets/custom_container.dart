@@ -27,7 +27,7 @@ class CustomContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color background =
-        color ?? Theme.of(context).colorScheme.primaryContainer;
+        color ?? Theme.of(context).colorScheme.surfaceContainer;
     final Color resolvedBorderColor =
         borderColor ?? Theme.of(context).dividerColor;
 

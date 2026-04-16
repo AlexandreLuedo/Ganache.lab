@@ -2,6 +2,7 @@
 // Appel les différents widgets de paramétrage pour la ganache ~/ganache_dot_first/lib/widgets/...
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ganache_lab/models/notifiers/ganache_title_notifier.dart';
 import 'package:ganache_lab/models/notifiers/chocolate_type_notifier.dart';
 import 'package:ganache_lab/models/notifiers/weight_ganache_notifier.dart';
 import 'package:ganache_lab/models/notifiers/temperature_notifier.dart';
@@ -11,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'calculate_ganache.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
+import 'package:ganache_lab/widgets/ganache_type_selection.dart';
 
 class CreateGanache extends StatefulWidget {
   const CreateGanache({super.key});
@@ -21,6 +23,7 @@ class CreateGanache extends StatefulWidget {
 
 class _CreateGanacheState extends State<CreateGanache> {
   double progressValue = 0.0;
+  Key _formKey = UniqueKey();
 
   Future<void> _launchUrl() async {
     final Uri url = Uri.parse('https://flutter.dev');
@@ -58,7 +61,7 @@ class _CreateGanacheState extends State<CreateGanache> {
                           // Ferme le dialog
                           _launchUrl();
                         },
-                        icon: Icon(Symbols.open_in_new),
+                        icon: const Icon(Symbols.open_in_new),
                         label: const Text("Visiter la page d'aide"),
                         iconAlignment: IconAlignment.end,
                       ),
@@ -75,7 +78,7 @@ class _CreateGanacheState extends State<CreateGanache> {
           child: LinearProgressIndicator(
             value: progressValue,
             backgroundColor: Colors.grey,
-            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFEB8C36)),
+            valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFFEB8C36)),
           ),
         ),
       ),
@@ -93,7 +96,6 @@ class _CreateGanacheState extends State<CreateGanache> {
                     return AlertDialog(
                       title: const Text("Rechercher un Ingrédient"),
                       content: const Text(
-                        /* TODO Add ingredient search */
                         "",
                       ),
                       actions: <Widget>[
@@ -136,36 +138,70 @@ class _CreateGanacheState extends State<CreateGanache> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        heroTag: "Calcule",
-        label: Text("Calculer"),
-        icon: Icon(Symbols.calculate, fill: 1),
-        backgroundColor: Color(0xFFEB8C36),
-        foregroundColor: Colors.white,
-        onPressed: () {
-          final frame = context.read<FrameModel>();
-          final mold = context.read<MoldModel>();
-          final other = context.read<OtherModel>();
-          final app = context.read<ApplicationModel>();
-          final totalCocoaButter = context.read<ChocolateTypeModel>();
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          FloatingActionButton.small(
+            heroTag: "resetFields",
+            tooltip: "Réinitialiser les champs",
+            backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+            foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
+            onPressed: () {
+              // Reset all models except temperature
+              context.read<TotalModel>().reset();
+              context.read<TitleModel>().reset();
+              context.read<ChocolateTypeModel>().reset();
+              context.read<FrameModel>().reset();
+              context.read<MoldModel>().reset();
+              context.read<OtherModel>().reset();
+              context.read<ApplicationModel>().reset();
 
-          context.read<TotalModel>().calculateTotal(
-            frame,
-            mold,
-            other,
-            app,
-            totalCocoaButter,
-          );
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => CalculateGanache()),
-          );
-        },
+              // Force reconstruction of the view to clear TextFields
+              setState(() {
+                _formKey = UniqueKey();
+              });
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Champs réinitialisés")),
+              );
+            },
+            child: const Icon(Symbols.restart_alt),
+          ),
+          const SizedBox(height: 12),
+          FloatingActionButton.extended(
+            heroTag: "Calcule",
+            label: const Text("Calculer"),
+            icon: const Icon(Symbols.calculate, fill: 1),
+            backgroundColor: const Color(0xFFEB8C36),
+            foregroundColor: Colors.white,
+            onPressed: () {
+              final frame = context.read<FrameModel>();
+              final mold = context.read<MoldModel>();
+              final other = context.read<OtherModel>();
+              final app = context.read<ApplicationModel>();
+              final totalCocoaButter = context.read<ChocolateTypeModel>();
+
+              context.read<TotalModel>().calculateTotal(
+                frame,
+                mold,
+                other,
+                app,
+                totalCocoaButter,
+              );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CalculateGanache()),
+              );
+            },
+          ),
+        ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       body: ListView(
-        padding: EdgeInsets.all(16),
-        children: [
+        key: _formKey,
+        padding: const EdgeInsets.all(16),
+        children: const [
           GanacheNameInput(),
           SizedBox(height: 16),
           GanacheTypeSelection(),
@@ -194,9 +230,11 @@ class FabricationTemperature extends StatelessWidget {
       children: [
         Text(
           "Température d'utilisation",
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            color: Theme.of(context).colorScheme.primary,
+          ),
         ),
-        FabricationTemperatureSelector(),
+        const FabricationTemperatureSelector(),
       ],
     );
   }
@@ -262,15 +300,16 @@ class FabricationMethod extends StatelessWidget {
       children: [
         Text(
           "Méthode de fabrication",
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            color: Theme.of(context).colorScheme.primary,
+          ),
         ),
-        DropdownMenu(
+        const DropdownMenu(
           enableFilter: true,
           leadingIcon: Icon(Symbols.design_services, fill: 1),
-          label: const Text("Selectionnez la méthode de fabrication"),
+          label: Text("Selectionnez la méthode de fabrication"),
           dropdownMenuEntries: [
             DropdownMenuEntry(value: Placeholder(), label: "Méthode 1"),
-            // TODO https://api.flutter.dev/flutter/material/DropdownMenu-class.html
           ],
         ),
       ],

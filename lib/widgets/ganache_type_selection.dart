@@ -17,6 +17,11 @@ class ApplicationModel extends ChangeNotifier {
     _currentView = newView;
     notifyListeners();
   }
+
+  void reset() {
+    _currentView = Application.moulage;
+    notifyListeners();
+  }
 }
 
 // Widget principal
