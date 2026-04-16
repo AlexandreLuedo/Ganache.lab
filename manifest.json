@@ -1,11 +1,11 @@
 {
-    "name": "ganache_lab",
-    "short_name": "ganache_lab",
+    "name": "Ganache.lab",
+    "short_name": "Ganache.lab",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#FADDC6",
     "theme_color": "#FADDC6",
-    "description": "A new Flutter project.",
+    "description": "Le premier équilibreur de Ganache multiplatformes",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
