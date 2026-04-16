@@ -14,6 +14,11 @@ Le premier équilibreur de ganache multiplateforme !
 Ceci est mon premier projet, il sert de support à mon apprentissage de Dart & Flutter. L'architecture est donc amenée à évoluer régulièrement.
 #+end_quote
 
+#+begin_quote
+[!NOTES]
+L'intelligence artificielle a été sollicitée pour accélérer le processus de développement, notamment pour la structuration et l'organisation rigoureuse de l'historique des commits signalés pour révision.
+#+end_quote
+
 ** Fonctionnalités
 L'application Ganache.lab permet l'équilibrage précis de ganaches via trois approches principales :
 
