@@ -3,11 +3,17 @@ name: Deploiement GitHub Pages
 on:
   push:
     branches:
-      - master # S'exécute lors d'un push sur master
+      - master
+
+permissions:
+  contents: write # Obligatoire pour permettre le push sur la branche gh-pages
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true # Supprime l'avertissement de deprecation Node.js
 
     steps:
       - name: Checkout du code
