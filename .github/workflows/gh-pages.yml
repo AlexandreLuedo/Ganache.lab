@@ -28,7 +28,7 @@ jobs:
         run: flutter pub get
 
       - name: Build Web
-        run: flutter build web --release --base-href "/Ganache.lab/"
+        run: flutter build web --release --base-href "/Ganache.lab/" --web-renderer html
 
       - name: Deploiement vers GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
