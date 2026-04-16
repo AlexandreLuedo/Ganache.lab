@@ -15,7 +15,7 @@ Ceci est mon premier projet, il sert de support à mon apprentissage de Dart & F
 #+end_quote
 
 #+begin_quote
-[!NOTES]
+[!NOTE]
 L'intelligence artificielle a été sollicitée pour accélérer le processus de développement, notamment pour la structuration et l'organisation rigoureuse de l'historique des commits signalés pour révision.
 #+end_quote
 
