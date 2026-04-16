@@ -3,7 +3,7 @@ import 'package:material_symbols_icons/symbols.dart';
 import 'screens_exportation_file.dart';
 import 'package:provider/provider.dart';
 import 'package:ganache_lab/models/notifiers/ganache_title_notifier.dart';
-import 'package:ganache_lab/widgets/custom_container.dart';
+import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
 
 class Correction extends StatefulWidget {
   const Correction({super.key});
@@ -65,7 +65,9 @@ class _CorrectionState extends State<Correction> {
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
                   "Phase de correction",
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                 ),
               ),
               CustomContainer(
@@ -81,11 +83,16 @@ class _CorrectionState extends State<Correction> {
                       children: [
                         Row(
                           children: [
-                            const Icon(Symbols.percent),
+                            Icon(
+                              Symbols.percent,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
                             const SizedBox(width: 5),
                             Text(
                               "Pourcentages faussés",
-                              style: Theme.of(context).textTheme.titleLarge,
+                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    color: Theme.of(context).colorScheme.primary,
+                                  ),
                             ),
                           ],
                         ),
@@ -118,11 +125,16 @@ class _CorrectionState extends State<Correction> {
                       children: [
                         Row(
                           children: [
-                            const Icon(Symbols.percent),
+                            Icon(
+                              Symbols.percent,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
                             const SizedBox(width: 5),
                             Text(
                               "Pourcentages faussés",
-                              style: Theme.of(context).textTheme.titleLarge,
+                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    color: Theme.of(context).colorScheme.primary,
+                                  ),
                             ),
                           ],
                         ),
@@ -165,11 +177,16 @@ class _CorrectionState extends State<Correction> {
                       children: [
                         Row(
                           children: [
-                            const Icon(Symbols.percent),
+                            Icon(
+                              Symbols.percent,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
                             const SizedBox(width: 5),
                             Text(
                               "Pourcentages faussés",
-                              style: Theme.of(context).textTheme.titleLarge,
+                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    color: Theme.of(context).colorScheme.primary,
+                                  ),
                             ),
                           ],
                         ),

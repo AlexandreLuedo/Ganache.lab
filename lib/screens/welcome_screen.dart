@@ -2,7 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
+import 'package:ganache_lab/theme.dart';
+import 'package:ganache_lab/widgets/custom_container.dart';
+import 'package:ganache_lab/widgets/widgets_exportation_file.dart'
+    hide CustomContainer;
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -25,16 +28,19 @@ class WelcomeScreen extends StatelessWidget {
                   text: TextSpan(
                     text: 'Bienvenue dans \n',
                     style: TextStyle(fontSize: 20, color: Colors.grey),
-                    children: const <TextSpan>[
+                    children: <TextSpan>[
                       TextSpan(
                         text: 'Ganache',
                         style: TextStyle(
-                          color: Color(0xFF422322),
+                          color:
+                              context.isDark
+                                  ? Colors.white
+                                  : const Color(0xFF422322),
                           fontWeight: FontWeight.bold,
                           fontSize: 32,
                         ),
                       ),
-                      TextSpan(
+                      const TextSpan(
                         text: '.lab',
                         style: TextStyle(
                           color: Color(0xFFEB8C36),
@@ -56,11 +62,17 @@ class WelcomeScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Icon(Symbols.school, fill: 1),
+                      Icon(
+                        Symbols.school,
+                        //fill: 1,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                       const SizedBox(width: 10),
                       Text(
                         "Comment ça marche ?",
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                       ),
                     ],
                   ),
@@ -75,18 +87,42 @@ class WelcomeScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   ListTile(
                     leading: const CircleAvatar(child: Icon(Symbols.grid_view)),
-                    title: const Text("1. Les Contraintes", style: TextStyle(fontWeight: FontWeight.bold)),
-                    subtitle: const Text("Définissez le type d'application (Cadre, Moulage) pour déterminer le poids cible."),
+                    title: Text(
+                      "1. Les Contraintes",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    subtitle: const Text(
+                      "Définissez le type d'application (Cadre, Moulage) pour déterminer le poids cible.",
+                    ),
                   ),
                   ListTile(
                     leading: const CircleAvatar(child: Icon(Symbols.cookie)),
-                    title: const Text("2. Le Chocolat", style: TextStyle(fontWeight: FontWeight.bold)),
-                    subtitle: const Text("Sélectionnez votre couverture. L'algorithme ajuste les ratios de beurre de cacao et de sucre."),
+                    title: Text(
+                      "2. Le Chocolat",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    subtitle: const Text(
+                      "Sélectionnez votre couverture. L'algorithme ajuste les ratios de beurre de cacao et de sucre.",
+                    ),
                   ),
                   ListTile(
                     leading: const CircleAvatar(child: Icon(Symbols.balance)),
-                    title: const Text("3. L'Équilibrage", style: TextStyle(fontWeight: FontWeight.bold)),
-                    subtitle: const Text("Ganache.lab génère instantanément une recette équilibrée (Humidité, Texture, Pouvoir Sucrant)."),
+                    title: Text(
+                      "3. L'Équilibrage",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    subtitle: const Text(
+                      "Ganache.lab génère instantanément une recette équilibrée (Humidité, Texture, Pouvoir Sucrant).",
+                    ),
                   ),
                 ],
               ),

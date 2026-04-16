@@ -8,8 +8,9 @@ class RecipeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 600; // Yes it's dumb
     return Scaffold(
-      floatingActionButton: CreateFab(),
+      floatingActionButton: isMobile ? CreateFab() : null,
       appBar: AppBar(
         // centerTitle: true,
         title: const Text(
@@ -17,8 +18,21 @@ class RecipeList extends StatelessWidget {
         style: TextStyle(fontWeight: FontWeight.bold)*/,
         ),
       ),
-      body: EmptyRecipeMessage()
+      body: EmptyRecipeMessage(),
     );
+  }
+}
+
+class RecipesScreen extends StatelessWidget {
+  const RecipesScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+
+
+
+    ],
+  );
   }
 }
 
@@ -28,22 +42,27 @@ class EmptyRecipeMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        children: [
-          SizedBox(height: 100),
-          Icon(
-            Symbols.menu_book_2,
-            size: 250,
-            color: Colors.grey,
-            weight: 100,
-          ),
-          SizedBox(height: 100),
-          Text(
-            'Aucune recette n\'est calculée pour le moment. \n Vous pouvez en créer une en cliquant sur "Créer sa ganache"',
-            style: TextStyle(color: Colors.grey, fontSize: 15),
-            textAlign: TextAlign.center,
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: 100),
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 500, minWidth: 100),
+              child: const Image(
+                image: AssetImage('assets/png/Empty_recipe_small_res.png'),
+                fit: BoxFit.contain,
+              ),
+            ),
+            const SizedBox(height: 40),
+            const Text(
+              'Aucune recette n\'est calculée pour le moment. \n Vous pouvez en créer une en cliquant sur "Créer sa ganache"',
+              style: TextStyle(color: Colors.grey, fontSize: 15),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }
