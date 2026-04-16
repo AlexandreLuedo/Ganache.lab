@@ -20,4 +20,13 @@ You can find good infos on the README.org (this file is a bit outdated)
 As flutter teacher and expert
 I got 2 weeks (I'm also working so I can't just spend 2h days) to get the MVP. So the MVP is to calculate the ganache. And to have the informations of the ganache who are displayed on the calculate_ganache.dart screen.
 
+# Quality & Standards
+
+- Always review and test your changes.
+- Ensure that the logic is correct, efficient, and respects professional chocolatier rules.
+- Verify that UI updates are synchronized with the underlying data models.
+- Maintain a professional tone at all times.
+- Do not use emojis in communications.
+- Avoid "enjoyer" or overly enthusiastic language; focus on technical accuracy and clarity.
+
 Tell me if you mist or doesn't understand something, I'll be happy to help you and provide the more infos as I can. It's very good to work with you !

@@ -15,49 +15,46 @@ Ceci est mon premier projet, il sert de support à mon apprentissage de Dart & F
 #+end_quote
 
 ** Fonctionnalités
-L'application Ganache.lab permet l'équilibrage précis de ganaches via deux approches principales :
+L'application Ganache.lab permet l'équilibrage précis de ganaches via trois approches principales :
 
 *** 1. Calcul du poids cible (Mode Géométrique)
 L'utilisateur définit ses contraintes physiques (moulage, cadrage ou poids libre). L'application calcule alors le poids total nécessaire pour remplir le volume demandé.
 
-*** 2. Équilibrage de la recette (Mode Algorithmique)
-C'est le cœur du MVP. L'utilisateur saisit ses ingrédients un par un. L'application calcule en temps réel :
+*** 2. Formulation Automatique (Mode Génératif)
+À partir d'un poids cible et d'un type de chocolat, l'algorithme déduit les proportions idéales de crème, beurre et sucre pour respecter les ratios professionnels (18-23% de beurre de cacao).
+
+*** 3. Équilibrage Expert (Mode Algorithmique)
+C'est le cœur scientifique du MVP. L'application calcule en temps réel :
 - **Humidité (%)** : Taux d'eau total dans la recette.
-- **Texture / Matière Grasse (%)** : Équilibre des graisses (beurre de cacao + gras lactique).
-- **Pouvoir Sucrant (PS/POD)** : Intensité sucrée de la ganache.
-- **Extrait Sec Total (EST)** : Pourcentage de matières solides.
+- **Activité de l'eau (Aw - Formule de Ross)** : Calcul moléculaire basé sur la fraction molaire des sucres pour prédire la stabilité microbiologique.
+- **DLC Dynamique** : Date limite de consommation calculée par **interpolation linéaire** entre les points de repère Aw (0.91 à 0.71).
+- **Texture Professionnelle** : Analyse du ratio Eau/Gras pour alerter si la ganache est "Trop Molle", "Sèche" ou "Trop Ferme".
+- **Pouvoir Sucrant (PS/POD)** : Intensité sucrée (sucrose, glucose, inverti).
 
-** Architecture Technique (v2.0)
+** Architecture Technique (v2.1)
 
-*** Modèle d'Ingrédients Unifié
-Pour permettre des calculs précis, tous les ingrédients implémentent désormais l'interface ~Ingredient~ dans ~lib/services/calculation.dart~ :
-#+begin_src dart
-abstract class Ingredient {
-  String get name;
-  double get waterContent;  // % (0.0 to 1.0)
-  double get fatContent;    // % (0.0 to 1.0)
-  double get sugarContent;  // % (0.0 to 1.0)
-  double get solidsContent; // % (0.0 to 1.0)
-}
-#+end_src
+*** Modèle d'Ingrédients Scientifique
+Pour permettre des calculs d'Aw précis, les ingrédients (notamment les sucres) incluent désormais leur **Poids Molaire (g/mol)** dans ~lib/data/sugar_type.dart~.
+
+*** Services de Calcul
+- ~AwService~ : Gère la logique de traduction entre l'Aw (physico-chimique) et la durée de vie (jours).
+- ~TotalModel~ : Centralise les formules de Ross et de formulation de recette.
 
 *** Gestion d'état (Provider)
-L'application utilise le pattern **Observer** via ~ChangeNotifier~ :
-- ~RecipeNotifier~ : Gère la liste des ingrédients sélectionnés et leurs poids respectifs.
-- ~TotalModel~ : Gère les calculs géométriques (cadres/moules).
-- ~ApplicationModel~ : Gère l'état de la navigation entre les modes.
+L'application utilise le pattern **Observer** via ~ChangeNotifier~ pour une mise à jour instantanée de l'UI lors de la saisie des paramètres.
 
 *** Conventions de code
 - *Langue :* Commentaires et variables en **Anglais** (standard industriel).
-- *Pourcentages :* Toujours exprimés entre ~0.0~ et ~1.0~ pour simplifier les calculs (ex: 15% = 0.15).
+- *Algorithmie :* Priorité à la précision mathématique (interpolation, fractions molaires).
 
-** Documentation
-La documentation technique est intégrée via le tag ~// DOC~.
+** Documentation Technique
+La documentation est intégrée via le tag ~// DOC~ dans le code source.
 
-*** Glossaire technique
-- **POD (Point of Overrun)** : Pouvoir Sucrant. Vient du terme italien *Potere Dolcificante*.
+*** Glossaire scientifique
+- **Aw (Water Activity)** : Activité de l'eau (0.0 à 1.0). Détermine la conservation.
+- **Formule de Ross** : Méthode de calcul de l'Aw par multiplication des activités des solutés.
+- **POD (Point of Overrun)** : Pouvoir Sucrant (Sucrose = 1.0).
 - **EST** : Extrait Sec Total (Total Solids).
-- **MSNF** : Milk Solids-Not-Fat (Extrait Sec Dégraissé du Lait).
 
 ** Crédits & Sources
 - *Design des indicateurs :* Inspiré de [[https://github.com/PranshulGG/WeatherMaster][WeatherMaster]]
