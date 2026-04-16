@@ -26,13 +26,12 @@ void main() {
       ChangeNotifierProvider(create: (_) => OtherModel()),
       ChangeNotifierProvider(create: (_) => TotalModel()),
       ChangeNotifierProvider(create: (_) => ChocolateTypeModel()),
-      ChangeNotifierProvider(create: (_) => RecipeNotifier()),
       ChangeNotifierProvider(create: (_) => TemperatureModel()),
-    ],
-    child: const GanacheApp(),
-  ));
-}
-
+      ],
+      child: const GanacheApp(),
+      ),
+      );
+      }
 class GanacheApp extends StatelessWidget {
   const GanacheApp({super.key});
 

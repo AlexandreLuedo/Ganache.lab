@@ -8,11 +8,13 @@ class SugarTypeItem implements Ingredient {
   final double sorbitolRuleMax = 0.05;
   final double totalSolids; // EST (Extrait sec total)
   final double pointOfOverrun; // PS (Pouvoir Sucrant)
+  final double molarWeight; // MW (Poids molaire en g/mol)
 
   SugarTypeItem({
     required this.title,
     required this.totalSolids,
     required this.pointOfOverrun,
+    required this.molarWeight,
   });
 
   @override
