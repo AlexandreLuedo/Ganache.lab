@@ -6,14 +6,14 @@ on:
       - master
 
 permissions:
-  contents: write # Obligatoire pour permettre le push sur la branche gh-pages
+  contents: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     
     env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true # Supprime l'avertissement de deprecation Node.js
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Checkout du code
@@ -23,15 +23,16 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          cache: true # Améliore la vitesse des builds suivants
 
       - name: Recuperation des dependances
         run: flutter pub get
 
       - name: Build Web
-        run: flutter build web --release --base-href "/Ganache.lab/" --web-renderer html
+        run: flutter build web --release --base-href="/Ganache.lab/" --web-renderer=html
 
       - name: Deploiement vers GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
