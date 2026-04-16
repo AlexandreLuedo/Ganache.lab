@@ -7,16 +7,23 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class Navigation extends StatefulWidget {
-  const Navigation({super.key});
+  final int initialIndex;
+  const Navigation({super.key, this.initialIndex = 0});
 
   @override
   State<Navigation> createState() => _NavigationState();
 }
 
 class _NavigationState extends State<Navigation> {
-  int currentPageIndex = 0;
+  late int currentPageIndex;
   NavigationDestinationLabelBehavior labelBehavior =
       NavigationDestinationLabelBehavior.onlyShowSelected;
+
+  @override
+  void initState() {
+    super.initState();
+    currentPageIndex = widget.initialIndex;
+  }
 
   @override
   Widget build(BuildContext context) {

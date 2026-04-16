@@ -80,9 +80,12 @@ class CalculateGanache extends StatelessWidget {
         backgroundColor: const Color(0xFFEB8C36),
         foregroundColor: Colors.white,
         onPressed: () {
-          // TODO: Implement save logic
-        },
-      ),      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const Navigation(initialIndex: 1)),
+            (route) => false,
+          );
+        },      ),      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
