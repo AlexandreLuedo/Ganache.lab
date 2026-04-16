@@ -169,29 +169,51 @@ class _CreateGanacheState extends State<CreateGanache> {
             child: const Icon(Symbols.restart_alt),
           ),
           const SizedBox(height: 12),
-          FloatingActionButton.extended(
-            heroTag: "Calcule",
-            label: const Text("Calculer"),
-            icon: const Icon(Symbols.calculate, fill: 1),
-            backgroundColor: const Color(0xFFEB8C36),
-            foregroundColor: Colors.white,
-            onPressed: () {
-              final frame = context.read<FrameModel>();
-              final mold = context.read<MoldModel>();
-              final other = context.read<OtherModel>();
-              final app = context.read<ApplicationModel>();
-              final totalCocoaButter = context.read<ChocolateTypeModel>();
+          Consumer5<TitleModel, ChocolateTypeModel, FrameModel, MoldModel, OtherModel>(
+            builder: (context, title, choco, frame, mold, other, child) {
+              final app = context.watch<ApplicationModel>();
+              
+              // Validation Logic
+              bool isNameValid = title.title.isNotEmpty;
+              bool isChocoValid = choco.selection != null;
+              bool isWeightValid = false;
 
-              context.read<TotalModel>().calculateTotal(
-                frame,
-                mold,
-                other,
-                app,
-                totalCocoaButter,
-              );
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const CalculateGanache()),
+              switch (app.currentView) {
+                case Application.moulage:
+                  isWeightValid = mold.weight > 0 && mold.numberMussles > 0;
+                  break;
+                case Application.cadrage:
+                  isWeightValid = frame.lenght > 0 && frame.width > 0 && frame.height > 0;
+                  break;
+                case Application.autre:
+                  isWeightValid = other.otherWeight > 0;
+                  break;
+              }
+
+              bool canCalculate = isNameValid && isChocoValid && isWeightValid;
+
+              return FloatingActionButton.extended(
+                heroTag: "Calcule",
+                label: const Text("Calculer"),
+                icon: const Icon(Symbols.calculate, fill: 1),
+                backgroundColor: canCalculate ? const Color(0xFFEB8C36) : Colors.grey,
+                foregroundColor: Colors.white,
+                onPressed: canCalculate
+                    ? () {
+                        context.read<TotalModel>().calculateTotal(
+                              frame,
+                              mold,
+                              other,
+                              app,
+                              choco,
+                            );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CalculateGanache()),
+                        );
+                      }
+                    : null,
               );
             },
           ),
