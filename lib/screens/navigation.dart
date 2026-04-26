@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ganache_lab/screens/settings/settings_screen.dart';
 import 'package:ganache_lab/widgets/create_fab.dart';
 import 'screens_exportation_file.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class Navigation extends StatefulWidget {
