@@ -10,6 +10,8 @@ import 'package:ganache_lab/models/notifiers/ganache_title_notifier.dart';
 import 'package:ganache_lab/models/notifiers/weight_ganache_notifier.dart';
 import 'package:ganache_lab/models/notifiers/temperature_notifier.dart';
 
+import 'package:ganache_lab/models/notifiers/recipe_notifier.dart';
+
 void main() {
   LicenseRegistry.addLicense(() async* {
     final license = await rootBundle.loadString('assets/licenses/LICENSE.md');
@@ -27,6 +29,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => TotalModel()),
       ChangeNotifierProvider(create: (_) => ChocolateTypeModel()),
       ChangeNotifierProvider(create: (_) => TemperatureModel()),
+      ChangeNotifierProvider(create: (_) => RecipeNotifier()),
       ],
       child: const GanacheApp(),
       ),
