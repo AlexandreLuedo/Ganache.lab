@@ -75,16 +75,23 @@ class _CreateGanacheState extends State<CreateGanache> {
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(4.0),
-          child: Consumer6<TitleModel, ChocolateTypeModel, FrameModel, MoldModel, OtherModel, ApplicationModel>(
+          child: Consumer6<
+            TitleModel,
+            ChocolateTypeModel,
+            FrameModel,
+            MoldModel,
+            OtherModel,
+            ApplicationModel
+          >(
             builder: (context, title, choco, frame, mold, other, app, child) {
               double progress = 0.0;
-              
+
               // Step 1: Name
               if (title.title.isNotEmpty) progress += 0.34;
-              
+
               // Step 2: Chocolate Type
               if (choco.selection != null) progress += 0.33;
-              
+
               // Step 3: Weight Parameters
               bool isWeightValid = false;
               switch (app.currentView) {
@@ -92,7 +99,8 @@ class _CreateGanacheState extends State<CreateGanache> {
                   isWeightValid = mold.weight > 0 && mold.numberMussles > 0;
                   break;
                 case Application.cadrage:
-                  isWeightValid = frame.lenght > 0 && frame.width > 0 && frame.height > 0;
+                  isWeightValid =
+                      frame.lenght > 0 && frame.width > 0 && frame.height > 0;
                   break;
                 case Application.autre:
                   isWeightValid = other.otherWeight > 0;
@@ -103,12 +111,17 @@ class _CreateGanacheState extends State<CreateGanache> {
               return TweenAnimationBuilder<double>(
                 duration: const Duration(milliseconds: 400),
                 curve: Curves.easeInOut,
-                tween: Tween<double>(begin: 0, end: progress > 1.0 ? 1.0 : progress),
+                tween: Tween<double>(
+                  begin: 0,
+                  end: progress > 1.0 ? 1.0 : progress,
+                ),
                 builder: (context, value, child) {
                   return LinearProgressIndicator(
                     value: value,
                     backgroundColor: Colors.grey[300],
-                    valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFFEB8C36)),
+                    valueColor: const AlwaysStoppedAnimation<Color>(
+                      Color(0xFFEB8C36),
+                    ),
                   );
                 },
               );
@@ -129,9 +142,7 @@ class _CreateGanacheState extends State<CreateGanache> {
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: const Text("Rechercher un Ingrédient"),
-                      content: const Text(
-                        "",
-                      ),
+                      content: const Text(""),
                       actions: <Widget>[
                         OutlinedButton(
                           onPressed: () {
@@ -203,10 +214,16 @@ class _CreateGanacheState extends State<CreateGanache> {
             child: const Icon(Symbols.restart_alt),
           ),
           const SizedBox(height: 12),
-          Consumer5<TitleModel, ChocolateTypeModel, FrameModel, MoldModel, OtherModel>(
+          Consumer5<
+            TitleModel,
+            ChocolateTypeModel,
+            FrameModel,
+            MoldModel,
+            OtherModel
+          >(
             builder: (context, title, choco, frame, mold, other, child) {
               final app = context.watch<ApplicationModel>();
-              
+
               // Validation Logic
               bool isNameValid = title.title.isNotEmpty;
               bool isChocoValid = choco.selection != null;
@@ -217,7 +234,8 @@ class _CreateGanacheState extends State<CreateGanache> {
                   isWeightValid = mold.weight > 0 && mold.numberMussles > 0;
                   break;
                 case Application.cadrage:
-                  isWeightValid = frame.lenght > 0 && frame.width > 0 && frame.height > 0;
+                  isWeightValid =
+                      frame.lenght > 0 && frame.width > 0 && frame.height > 0;
                   break;
                 case Application.autre:
                   isWeightValid = other.otherWeight > 0;
@@ -230,24 +248,27 @@ class _CreateGanacheState extends State<CreateGanache> {
                 heroTag: "Calcule",
                 label: const Text("Calculer"),
                 icon: const Icon(Symbols.calculate, fill: 1),
-                backgroundColor: canCalculate ? const Color(0xFFEB8C36) : Colors.grey,
+                backgroundColor:
+                    canCalculate ? const Color(0xFFEB8C36) : Colors.grey,
                 foregroundColor: Colors.white,
-                onPressed: canCalculate
-                    ? () {
-                        context.read<TotalModel>().calculateTotal(
-                              frame,
-                              mold,
-                              other,
-                              app,
-                              choco,
-                            );
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const CalculateGanache()),
-                        );
-                      }
-                    : null,
+                onPressed:
+                    canCalculate
+                        ? () {
+                          context.read<TotalModel>().calculateTotal(
+                            frame,
+                            mold,
+                            other,
+                            app,
+                            choco,
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CalculateGanache(),
+                            ),
+                          );
+                        }
+                        : null,
               );
             },
           ),
@@ -365,7 +386,7 @@ class FabricationMethod extends StatelessWidget {
           leadingIcon: Icon(Symbols.design_services, fill: 1),
           label: Text("Selectionnez la méthode de fabrication"),
           dropdownMenuEntries: [
-            DropdownMenuEntry(value: Placeholder(), label: "Méthode 1"),
+            DropdownMenuEntry(value: Placeholder(), label: "Méthode à chaud"),
           ],
         ),
       ],

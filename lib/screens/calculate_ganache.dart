@@ -10,29 +10,88 @@ import 'package:ganache_lab/models/notifiers/chocolate_type_notifier.dart';
 import 'package:ganache_lab/models/notifiers/weight_ganache_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:ganache_lab/services/calculation.dart';
-import 'package:ganache_lab/widgets/ganache_type_selection.dart';
+import 'package:ganache_lab/models/recipe.dart';
+import 'package:ganache_lab/models/notifiers/recipe_notifier.dart';
 
 class CalculateGanache extends StatelessWidget {
   const CalculateGanache({super.key});
+
+  // --- UTILS ---
+
+  String _getApplicationName(Application app) {
+    if (app == Application.cadrage) return "Cadrage";
+    if (app == Application.moulage) return "Moulage";
+    return "Autre";
+  }
+
+  Recipe _createRecipeFromCurrentState(BuildContext context, {String id = "temp"}) {
+    final titleModel = Provider.of<TitleModel>(context, listen: false);
+    final totalModel = Provider.of<TotalModel>(context, listen: false);
+    final chocoModel = Provider.of<ChocolateTypeModel>(context, listen: false);
+    final tempModel = Provider.of<TemperatureModel>(context, listen: false);
+    final appModel = Provider.of<ApplicationModel>(context, listen: false);
+
+    return Recipe(
+      id: id,
+      title: titleModel.title.isEmpty ? "Ma Ganache" : titleModel.title,
+      createdAt: DateTime.now(),
+      chocolateWeight: totalModel.chocolateWeight,
+      milkChocolateWeight: totalModel.milkChocolateWeight,
+      creamWeight: totalModel.creamWeight,
+      sugarWeight: totalModel.sugarWeight,
+      butterWeight: totalModel.butterWeight,
+      chocolateType: chocoModel.selection ?? "Inconnu",
+      application: _getApplicationName(appModel.currentView),
+      temperature: tempModel.temperature,
+      totalWeight: totalModel.total,
+      waterPercentage: totalModel.waterPercentage,
+      fatPercentage: totalModel.totalFatPercentage,
+      sugarPercentage: totalModel.sugarPercentage,
+      solidsPercentage: totalModel.solidsPercentage,
+      sweeteningPower: totalModel.sweeteningPower,
+      awValue: totalModel.awValue,
+    );
+  }
+
+  // --- ACTIONS ---
+
+  void _showExportSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (context) => ExportHubSheet(recipe: _createRecipeFromCurrentState(context)),
+    );
+  }
+
+  void _saveRecipe(BuildContext context) {
+    final recipe = _createRecipeFromCurrentState(context, id: DateTime.now().millisecondsSinceEpoch.toString());
+    Provider.of<RecipeNotifier>(context, listen: false).addRecipe(recipe);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Ganache enregistrée avec succès !"), backgroundColor: Colors.green, duration: Duration(seconds: 2)),
+    );
+
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const Navigation(initialIndex: 1)),
+      (route) => false,
+    );
+  }
+
+  // --- WIDGETS ---
 
   Widget _buildIngredientRow(String name, double weight) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(name, style: const TextStyle(fontSize: 16)),
-        Text(
-          "${weight.toStringAsFixed(1)} g",
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-        ),
+        Text("${weight.toStringAsFixed(1)} g", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
       ],
     );
   }
 
-  Widget _buildSummaryRow({
-    required IconData icon,
-    required String title,
-    required String value,
-  }) {
+  Widget _buildSummaryRow({required IconData icon, required String title, required String value}) {
     return Row(
       children: [
         Icon(icon, size: 20),
@@ -46,11 +105,12 @@ class CalculateGanache extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(
         title: Consumer<TitleModel>(
-          builder: (_, model, _) =>
-              Text(model.title.isEmpty ? "Votre Ganache" : model.title),
+          builder: (_, model, _) => Text(model.title.isEmpty ? "Votre Ganache" : model.title),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
@@ -60,13 +120,11 @@ class CalculateGanache extends StatelessWidget {
             IconButton(
               tooltip: "Partager la ganache",
               icon: const Icon(Symbols.share, fill: 1),
-              onPressed: () {},
+              onPressed: () => _showExportSheet(context),
             ),
             IconButton(
               tooltip: "Modifier la ganache",
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              onPressed: () => Navigator.pop(context),
               icon: const Icon(Symbols.edit, fill: 1),
             ),
           ],
@@ -74,31 +132,23 @@ class CalculateGanache extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         heroTag: "Save",
-        tooltip: "Enregistrer la ganache",
         label: const Text("Enregistrer"),
         icon: const Icon(Symbols.save),
         backgroundColor: const Color(0xFFEB8C36),
         foregroundColor: Colors.white,
-        onPressed: () {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => const Navigation(initialIndex: 1)),
-            (route) => false,
-          );
-        },      ),      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+        onPressed: () => _saveRecipe(context),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Text(
-                "État de calcul",
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-              ),
+              child: Text("État de calcul", style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: colorScheme.primary)),
             ),
+            
+            // Recette Générée
             Consumer<TotalModel>(
               builder: (context, totalModel, child) {
                 return CustomContainer(
@@ -109,157 +159,74 @@ class CalculateGanache extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Icon(
-                            Symbols.receipt_long,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
+                          Icon(Symbols.receipt_long, color: colorScheme.primary),
                           const SizedBox(width: 10),
-                          Expanded(
-                            child: Text(
-                              "Recette générée",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall
-                                  ?.copyWith(
-                                    color: Theme.of(context).colorScheme.primary,
-                                  ),
-                            ),
-                          ),
+                          Text("Recette générée", style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: colorScheme.primary)),
                         ],
                       ),
                       const SizedBox(height: 15),
-                      // Dynamic Ingredients based on the calculation
                       Consumer<ChocolateTypeModel>(
                         builder: (context, chocoModel, child) {
-                          String chocolateName = "Couverture Chocolat";
-                          if (chocoModel.selection == "Noir") {
-                            chocolateName = "Couverture Noire";
-                          } else if (chocoModel.selection == "Lait") {
-                            chocolateName = "Couverture Lait";
-                          } else if (chocoModel.selection == "Blanc") {
-                            chocolateName = "Couverture Blanche";
-                          } else if (chocoModel.selection == "Noir/Lait") {
-                            chocolateName = "Couverture Noire";
-                          }
+                          String chocoName = "Couverture Chocolat";
+                          if (chocoModel.selection == "Noir") chocoName = "Couverture Noire";
+                          else if (chocoModel.selection == "Lait") chocoName = "Couverture Lait";
+                          else if (chocoModel.selection == "Blanc") chocoName = "Couverture Blanche";
 
                           return Column(
                             children: [
-                              if (totalModel.chocolateWeight > 0)
-                                Column(
-                                  children: [
-                                    _buildIngredientRow(
-                                      chocolateName,
-                                      totalModel.chocolateWeight,
-                                    ),
-                                    const Divider(),
-                                  ],
-                                ),
-                              if (totalModel.milkChocolateWeight > 0)
-                                Column(
-                                  children: [
-                                    _buildIngredientRow(
-                                      "Couverture Lait",
-                                      totalModel.milkChocolateWeight,
-                                    ),
-                                    const Divider(),
-                                  ],
-                                ),
+                              if (totalModel.chocolateWeight > 0) Column(children: [_buildIngredientRow(chocoName, totalModel.chocolateWeight), const Divider()]),
+                              if (totalModel.milkChocolateWeight > 0) Column(children: [_buildIngredientRow("Couverture Lait", totalModel.milkChocolateWeight), const Divider()]),
                             ],
                           );
                         },
                       ),
-                      _buildIngredientRow(
-                        "Crème Liquide 35%",
-                        totalModel.creamWeight,
-                      ),
+                      _buildIngredientRow("Crème Liquide 35%", totalModel.creamWeight),
                       const Divider(),
-                      _buildIngredientRow(
-                        "Matière Sucrante",
-                        totalModel.sugarWeight,
-                      ),
+                      _buildIngredientRow("Matière Sucrante", totalModel.sugarWeight),
                       const Divider(),
-                      _buildIngredientRow(
-                        "Beurre Laitier 82%",
-                        totalModel.butterWeight,
-                      ),
+                      _buildIngredientRow("Beurre Laitier 82%", totalModel.butterWeight),
                     ],
                   ),
                 );
               },
             ),
+            
             const TotalWeightGanache(),
+            
+            // Résumé
             CustomContainer(
               borderRadius: 12,
               borderWidth: 1,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Résumé des paramètres",
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
+                  Row(
+                    children: [
+                      Icon(Symbols.settings_suggest, color: colorScheme.primary, fill: 1),
+                      const SizedBox(width: 10),
+                      Text("Résumé des paramètres", style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: colorScheme.primary)),
+                    ],
                   ),
                   const SizedBox(height: 15),
-                  Consumer<ApplicationModel>(
-                    builder: (context, app, child) {
-                      String appName = "Autre";
-                      if (app.currentView == Application.cadrage) {
-                        appName = "Cadrage";
-                      } else if (app.currentView == Application.moulage) {
-                        appName = "Moulage";
-                      }
-                      return _buildSummaryRow(
-                        icon: Symbols.grid_view,
-                        title: "Application",
-                        value: appName,
-                      );
-                    },
-                  ),
+                  Consumer<ApplicationModel>(builder: (context, app, _) => _buildSummaryRow(icon: Symbols.grid_view, title: "Application", value: _getApplicationName(app.currentView))),
                   const Divider(),
-                  Consumer<ChocolateTypeModel>(
-                    builder: (context, choco, child) {
-                      return _buildSummaryRow(
-                        icon: Symbols.cookie,
-                        title: "Chocolat",
-                        value: choco.selection ?? "Non défini",
-                      );
-                    },
-                  ),
+                  Consumer<ChocolateTypeModel>(builder: (context, choco, _) => _buildSummaryRow(icon: Symbols.cookie, title: "Chocolat", value: choco.selection ?? "Non défini")),
                   const Divider(),
-                  Consumer<TemperatureModel>(
-                    builder: (context, temp, child) {
-                      return _buildSummaryRow(
-                        icon: Symbols.device_thermostat,
-                        title: "Température",
-                        value: "${temp.temperature.toStringAsFixed(0)} °C",
-                      );
-                    },
-                  ),
+                  Consumer<TemperatureModel>(builder: (context, temp, _) => _buildSummaryRow(icon: Symbols.device_thermostat, title: "Température", value: "${temp.temperature.toStringAsFixed(0)} °C")),
                 ],
               ),
             ),
+            
             const Indicator(),
+            
             CustomContainer(
               borderRadius: 12,
               borderWidth: 1,
-              child: const Column(
+              child: const Row(
                 children: [
-                  Row(
-                    children: [
-                      Icon(Symbols.info),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: Text(
-                          "Les informations calculées par Ganache.lab sont à titre indicatif. Des variations peuvent survenir lors de la préparation réelle des recettes.",
-                        ),
-                      ),
-                    ],
-                  ),
-                  Divider(),
-                  Text(
-                    "Pour améliorer votre ganache appuyez sur le bouton orange, ci dessous.",
-                  ),
+                  Icon(Symbols.info),
+                  SizedBox(width: 10),
+                  Expanded(child: Text("Les informations calculées par Ganache.lab sont à titre indicatif. Des variations peuvent survenir lors de la préparation réelle des recettes.")),
                 ],
               ),
             ),
