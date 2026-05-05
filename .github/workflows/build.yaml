@@ -12,9 +12,9 @@ jobs:
       - uses: action/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.x'
-          channel: 'stable'
-      - uses: dart-lang/setup-dart
+          flutter-version: "3.x"
+          channel: "stable"
+      - uses: dart-lang/setup-dart@latest
 
       - name: Install flutters dependecies
         run: flutter pub get
