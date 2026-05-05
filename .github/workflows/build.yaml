@@ -9,12 +9,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: action/checkout@v4
+      - uses: action/checkout@v6
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.x"
-          channel: "stable"
-      - uses: dart-lang/setup-dart@v1.7.2
+          channel: master
+          flutter-version-file: pubsec.yaml
+      - name: Get flutter version
+        run: flutter --version
 
       - name: Install flutters dependecies
         run: flutter pub get
