@@ -13,7 +13,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: master
-          flutter-version-file: pubsec.yaml
+          flutter-version-file: pubspec.yaml
       - name: Get flutter version
         run: flutter --version
 
