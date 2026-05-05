@@ -1,0 +1,26 @@
+name: Build using subosito/flutter-action
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: action/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          channel: 'stable'
+      - uses: dart-lang/setup-dart
+
+      - name: Install flutters dependecies
+        run: flutter pub get
+
+      - name: Analyze the project
+        run: dart analyze
+
+      - name: Build for the web
+        run: flutter build web --release
