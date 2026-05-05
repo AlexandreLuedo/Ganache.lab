@@ -2,7 +2,7 @@ import 'package:ganache_lab/models/sugar/sugar_item_type.dart';
 
 /// Reference list for various sugars used in the chocolate industry.
 /// Molar weights (MW) are essential for calculating the Water Activity (Aw) using the Ross formula.
-final SugarTypes = [
+final sugarTypes = [
   SugarTypeItem(
     title: "Saccharose",
     totalSolids: 1.0,

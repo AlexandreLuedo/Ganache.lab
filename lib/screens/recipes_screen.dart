@@ -4,7 +4,6 @@ import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:provider/provider.dart';
 import 'package:ganache_lab/models/notifiers/recipe_notifier.dart';
-import 'package:ganache_lab/models/recipe.dart';
 import 'recipe_detail_screen.dart';
 
 class RecipeList extends StatelessWidget {

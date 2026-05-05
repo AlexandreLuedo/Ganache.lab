@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void openEmail() async {
@@ -7,6 +8,6 @@ void openEmail() async {
   );
 
   if (!await launchUrl(emailUri, mode: LaunchMode.externalApplication)) {
-    print('Impossible d\'ouvrir l\'application mail');
+    debugPrint('Impossible d\'ouvrir l\'application mail');
   }
 }

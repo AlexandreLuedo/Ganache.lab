@@ -127,8 +127,6 @@ class ExportHubSheet extends StatelessWidget {
       debugPrint("Chargement des polices PDF...");
       font = await PdfGoogleFonts.robotoRegular();
       fontBold = await PdfGoogleFonts.robotoBold();
-      // materialIcons() n'est pas supporté par PdfGoogleFonts par défaut.
-      // On le retire pour éviter les freezes potentiels.
       debugPrint("Polices chargées.");
     } catch (e) {
       debugPrint("Fallback polices PDF : $e");
@@ -349,8 +347,9 @@ class ExportHubSheet extends StatelessWidget {
       // Code pour les plateformes natives (macOS, iOS, Android)
       final dir = await getApplicationDocumentsDirectory();
       final file = File('${dir.path}/$fileName');
-      if (!await file.parent.exists())
+      if (!await file.parent.exists()) {
         await file.parent.create(recursive: true);
+      }
       await file.writeAsBytes(bytes, flush: true);
 
       if (context.mounted) {
@@ -366,10 +365,11 @@ class ExportHubSheet extends StatelessWidget {
         );
       }
     } catch (e) {
-      if (context.mounted)
+      if (context.mounted) {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text("Erreur : $e")));
+      }
     }
   }
 
@@ -410,8 +410,11 @@ class ExportHubSheet extends StatelessWidget {
                   final bytes = await pdf.save();
                   final fileName = "${_toSnakeCase(recipe.title)}.pdf";
 
-                  if (context.mounted) Navigator.pop(context);
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                  }
 
+                  // ignore: deprecated_member_use
                   await Share.shareXFiles([
                     XFile.fromData(
                       bytes,
@@ -420,10 +423,11 @@ class ExportHubSheet extends StatelessWidget {
                     ),
                   ], subject: recipe.title);
                 } catch (e) {
-                  if (context.mounted)
+                  if (context.mounted) {
                     ScaffoldMessenger.of(
                       context,
                     ).showSnackBar(SnackBar(content: Text("Erreur : $e")));
+                  }
                 }
               },
             ),
@@ -463,6 +467,7 @@ class ExportHubSheet extends StatelessWidget {
             title: const Text("Partager le texte"),
             onTap: () {
               Navigator.pop(context);
+              // ignore: deprecated_member_use
               Share.share(_generateSummaryText());
             },
           ),

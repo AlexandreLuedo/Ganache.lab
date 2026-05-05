@@ -1,6 +1,6 @@
 import 'package:ganache_lab/models/Fats/milk_item_type.dart';
 
-final MilksnEggType = [
+final milkSnEggType = [
   MilksnEggItemType(
     title: "Whole Milk",
     water: 0.88,

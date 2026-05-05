@@ -7,7 +7,6 @@ import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
 import 'package:ganache_lab/models/notifiers/ganache_title_notifier.dart';
 import 'package:ganache_lab/models/notifiers/temperature_notifier.dart';
 import 'package:ganache_lab/models/notifiers/chocolate_type_notifier.dart';
-import 'package:ganache_lab/models/notifiers/weight_ganache_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:ganache_lab/services/calculation.dart';
 import 'package:ganache_lab/models/recipe.dart';
@@ -168,9 +167,13 @@ class CalculateGanache extends StatelessWidget {
                       Consumer<ChocolateTypeModel>(
                         builder: (context, chocoModel, child) {
                           String chocoName = "Couverture Chocolat";
-                          if (chocoModel.selection == "Noir") chocoName = "Couverture Noire";
-                          else if (chocoModel.selection == "Lait") chocoName = "Couverture Lait";
-                          else if (chocoModel.selection == "Blanc") chocoName = "Couverture Blanche";
+                          if (chocoModel.selection == "Noir") {
+                            chocoName = "Couverture Noire";
+                          } else if (chocoModel.selection == "Lait") {
+                            chocoName = "Couverture Lait";
+                          } else if (chocoModel.selection == "Blanc") {
+                            chocoName = "Couverture Blanche";
+                          }
 
                           return Column(
                             children: [

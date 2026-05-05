@@ -8,7 +8,7 @@ class GanacheNameInput extends StatefulWidget {
   const GanacheNameInput({super.key});
 
   @override
-  _GanacheNameInputState createState() => _GanacheNameInputState();
+  State<GanacheNameInput> createState() => _GanacheNameInputState();
 }
 
 class _GanacheNameInputState extends State<GanacheNameInput> {

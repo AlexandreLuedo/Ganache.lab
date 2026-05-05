@@ -140,11 +140,17 @@ class ExtendedTexture extends StatelessWidget {
                     final double water = recipe.waterPercentage * 100;
                     
                     String textureLabel = "Fondante";
-                    if (water > 25) textureLabel = "Trop Molle";
-                    else if (water < 18) textureLabel = "Trop Ferme";
-                    else if (fat < 30) textureLabel = "Sèche";
-                    else if (fat > 42) textureLabel = "Grasse";
-                    else textureLabel = "Équilibrée";
+                    if (water > 25) {
+                      textureLabel = "Trop Molle";
+                    } else if (water < 18) {
+                      textureLabel = "Trop Ferme";
+                    } else if (fat < 30) {
+                      textureLabel = "Sèche";
+                    } else if (fat > 42) {
+                      textureLabel = "Grasse";
+                    } else {
+                      textureLabel = "Équilibrée";
+                    }
                     
                     return Text(textureLabel, style: Theme.of(context).textTheme.displayLarge);
                   },

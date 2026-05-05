@@ -120,7 +120,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen>
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 30),
               decoration: BoxDecoration(
-                color: colorScheme.primaryContainer.withOpacity(0.3),
+                color: colorScheme.primaryContainer.withValues(alpha: 0.3),
                 borderRadius: const BorderRadius.vertical(
                   bottom: Radius.circular(30),
                 ),

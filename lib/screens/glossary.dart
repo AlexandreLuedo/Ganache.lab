@@ -9,7 +9,7 @@ class Glossary extends StatefulWidget {
   const Glossary({super.key});
 
   @override
-  _GlossaryState createState() => _GlossaryState();
+  State<Glossary> createState() => _GlossaryState();
 }
 
 class _GlossaryState extends State<Glossary> {
@@ -55,7 +55,7 @@ class _GlossaryState extends State<Glossary> {
       // TODO generate the snackbar
       // SNACKBAR HERE
 
-      print("Impossible d’ouvrir $url");
+      debugPrint("Impossible d’ouvrir $url");
     }
   }
 

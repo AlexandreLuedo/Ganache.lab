@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 class FatsItemType {
   final double butter;
   final double cream;
@@ -11,8 +13,7 @@ class FatsItemType {
 
   double calculateFatPercentage(double total) {
     if (total == 0) return 0;
-    return (totalOthersFats / total) *
-        100; // Bad use of percentagescd
+    return (totalOthersFats / total) * 100; // Bad use of percentagescd
   }
 
   /// DOC
@@ -20,7 +21,8 @@ class FatsItemType {
   /// WARN
   /// The use of percentages needs to be reviewed
   String get fatDiagnostic {
-    double fat = totalOthersFats; // Here it should be the % compared to the total
+    double fat =
+        totalOthersFats; // Here it should be the % compared to the total
     // Let's imagine we have the percentage:
     double percent = 14.0; // To be replaced by your actual calculation
 

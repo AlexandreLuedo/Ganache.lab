@@ -23,12 +23,15 @@ class Indicator extends StatelessWidget {
     final double sugarVal = recipe.sugarPercentage * 100;
 
     final humidity = humidityVal.toStringAsFixed(1);
-    final fat = fatVal.toStringAsFixed(1);
     final sugar = recipe.sweeteningPower.toStringAsFixed(1);
 
     String sugarLabel = "Optimale";
-    if (sugarVal < 25) sugarLabel = "Faible (<25%)";
-    if (sugarVal > 30) sugarLabel = "Élevée";
+    if (sugarVal < 25) {
+      sugarLabel = "Faible (<25%)";
+    }
+    if (sugarVal > 30) {
+      sugarLabel = "Élevée";
+    }
 
     String textureLabel = "Fondante";
     if (humidityVal > 25) {

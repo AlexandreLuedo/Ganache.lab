@@ -12,7 +12,6 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'calculate_ganache.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
-import 'package:ganache_lab/widgets/ganache_type_selection.dart';
 
 class CreateGanache extends StatefulWidget {
   const CreateGanache({super.key});
@@ -321,11 +320,11 @@ class FabricationTemperatureSelector extends StatefulWidget {
   const FabricationTemperatureSelector({super.key});
 
   @override
-  _FabricationTemperatureSelector createState() =>
-      _FabricationTemperatureSelector();
+  State<FabricationTemperatureSelector> createState() =>
+      _FabricationTemperatureSelectorState();
 }
 
-class _FabricationTemperatureSelector
+class _FabricationTemperatureSelectorState
     extends State<FabricationTemperatureSelector> {
   late TextEditingController _controller;
 

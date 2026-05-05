@@ -139,7 +139,7 @@ class AnnouncePageScreen extends StatefulWidget {
   const AnnouncePageScreen({super.key});
 
   @override
-  _AnnouncePageScreenState createState() => _AnnouncePageScreenState();
+  State<AnnouncePageScreen> createState() => _AnnouncePageScreenState();
 }
 
 class _AnnouncePageScreenState extends State<AnnouncePageScreen> {
