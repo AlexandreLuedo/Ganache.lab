@@ -1,5 +1,6 @@
 // Affiche la création de ganache.
 // Appel les différents widgets de paramétrage pour la ganache ~/ganache_dot_first/lib/widgets/...
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ganache_lab/models/notifiers/ganache_title_notifier.dart';
@@ -264,24 +265,13 @@ class _CreateGanacheState extends State<CreateGanache> {
                           Navigator.push(
                             context,
                             PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) =>
-                                      const CalculateGanache(),
-                              transitionsBuilder: (
-                                context,
-                                animation,
-                                secondaryAnimation,
-                                child,
-                              ) {
-                                const begin = Offset(1.0, 0.0);
-                                const end = Offset.zero;
-                                const curve = Curves.easeInOutCubic;
-                                var tween = Tween(
-                                  begin: begin,
-                                  end: end,
-                                ).chain(CurveTween(curve: curve));
-                                return SlideTransition(
-                                  position: animation.drive(tween),
+                              pageBuilder: (context, animation, secondaryAnimation) =>
+                                  const CalculateGanache(),
+                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                return SharedAxisTransition(
+                                  animation: animation,
+                                  secondaryAnimation: secondaryAnimation,
+                                  transitionType: SharedAxisTransitionType.horizontal,
                                   child: child,
                                 );
                               },
@@ -294,7 +284,7 @@ class _CreateGanacheState extends State<CreateGanache> {
           ),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: ListView(
         key: _formKey,
         padding: const EdgeInsets.all(16),

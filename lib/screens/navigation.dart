@@ -1,4 +1,5 @@
 // Main page containing the navigationBar.
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/screens/settings/settings_screen.dart';
 import 'package:ganache_lab/widgets/create_fab.dart';
@@ -98,18 +99,17 @@ class _NavigationState extends State<Navigation> {
                   ],
                 ),
               Expanded(
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  transitionBuilder: (Widget child, Animation<double> animation) {
-                    return FadeTransition(
-                      opacity: animation,
-                      child: SlideTransition(
-                        position: Tween<Offset>(
-                          begin: const Offset(0.02, 0),
-                          end: Offset.zero,
-                        ).animate(animation),
-                        child: child,
-                      ),
+                child: PageTransitionSwitcher(
+                  duration: const Duration(milliseconds: 400),
+                  transitionBuilder: (
+                    Widget child,
+                    Animation<double> animation,
+                    Animation<double> secondaryAnimation,
+                  ) {
+                    return FadeThroughTransition(
+                      animation: animation,
+                      secondaryAnimation: secondaryAnimation,
+                      child: child,
                     );
                   },
                   child: <Widget>[

@@ -1,4 +1,5 @@
 // Affiche le résultat d'un calcul de ganache. Appelle les indicators.
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ganache_lab/widgets/total_weight.dart';
@@ -75,7 +76,18 @@ class CalculateGanache extends StatelessWidget {
 
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => const Navigation(initialIndex: 1)),
+      PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 600),
+        pageBuilder: (context, animation, secondaryAnimation) => const Navigation(initialIndex: 1),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return SharedAxisTransition(
+            animation: animation,
+            secondaryAnimation: secondaryAnimation,
+            transitionType: SharedAxisTransitionType.horizontal,
+            child: child,
+          );
+        },
+      ),
       (route) => false,
     );
   }
@@ -154,7 +166,7 @@ class CalculateGanache extends StatelessWidget {
           _saveRecipe(context);
         },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
