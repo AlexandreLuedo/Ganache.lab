@@ -2,31 +2,76 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ganache_lab/theme.dart';
 import 'package:ganache_lab/widgets/custom_container.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart'
     hide CustomContainer;
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
 
   @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 20),
+      vsync: this,
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 600; // Yes it's dumb
+    final colorScheme = Theme.of(context).colorScheme;
+    final isMobile = MediaQuery.of(context).size.width < 600;
+
     return Scaffold(
-      appBar: AppBar(actions: <Widget>[VersionPill(), GlossaryButton()]),
+      appBar: AppBar(
+        actions: <Widget>[const VersionPill(), const GlossaryButton()],
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 60),
+            const SizedBox(height: 30),
             Center(
-              child: Hero(
-                tag: 'app_logo',
-                child: Image.asset(
-                  'assets/icon/Ganache.lab_logo.png',
-                  height: 120,
-                ),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  RotationTransition(
+                    turns: _controller,
+                    child: SvgPicture.asset(
+                      'assets/svg/cookie12.svg',
+                      height: 180,
+                      width: 180,
+                      colorFilter: ColorFilter.mode(
+                        colorScheme.primaryContainer,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  ),
+                  Hero(
+                    tag: 'app_logo',
+                    child: Image.asset(
+                      'assets/icon/Ganache.lab_logo.png',
+                      height: 120,
+                    ),
+                  ),
+                ],
               ),
             ),
             Center(

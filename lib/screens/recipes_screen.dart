@@ -1,4 +1,5 @@
 // Displays recipes via the db (Actually from RecipeNotifier now)
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -31,47 +32,44 @@ class RecipeList extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             itemBuilder: (context, index) {
               final recipe = notifier.recipes[index];
-              return Card(
-                elevation: 2,
-                margin: const EdgeInsets.symmetric(
-                  vertical: 8.0,
-                  horizontal: 4.0,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 16.0,
-                    vertical: 8.0,
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: OpenContainer(
+                  transitionDuration: const Duration(milliseconds: 500),
+                  openBuilder:
+                      (context, _) => RecipeDetailScreen(recipe: recipe),
+                  closedElevation: 2,
+                  closedShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  leading: CircleAvatar(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.primaryContainer,
-                    child: Icon(
-                      Symbols.humidity_high,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                  title: Text(
-                    recipe.title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  subtitle: Text(
-                    "Calculée le ${_formatDate(recipe.createdAt)} • ${recipe.totalWeight.toStringAsFixed(0)} g",
-                    style: TextStyle(color: Colors.grey[600]),
-                  ),
-                  trailing: const Icon(Symbols.chevron_right),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:
-                            (context) => RecipeDetailScreen(recipe: recipe),
+                  closedColor: Theme.of(context).cardColor,
+                  closedBuilder: (context, openContainer) {
+                    return ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 8.0,
                       ),
+                      leading: CircleAvatar(
+                        backgroundColor:
+                            Theme.of(context).colorScheme.primaryContainer,
+                        child: Icon(
+                          Symbols.humidity_high,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      title: Text(
+                        recipe.title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      subtitle: Text(
+                        "Calculée le ${_formatDate(recipe.createdAt)} • ${recipe.totalWeight.toStringAsFixed(0)} g",
+                        style: TextStyle(color: Colors.grey[600]),
+                      ),
+                      trailing: const Icon(Symbols.chevron_right),
+                      onTap: openContainer,
                     );
                   },
                 ),
