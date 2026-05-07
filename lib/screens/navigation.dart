@@ -98,12 +98,26 @@ class _NavigationState extends State<Navigation> {
                   ],
                 ),
               Expanded(
-                child:
-                    <Widget>[
-                      WelcomeScreen(),
-                      RecipeList(),
-                      SettingScreen(),
-                    ][currentPageIndex],
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder: (Widget child, Animation<double> animation) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: SlideTransition(
+                        position: Tween<Offset>(
+                          begin: const Offset(0.02, 0),
+                          end: Offset.zero,
+                        ).animate(animation),
+                        child: child,
+                      ),
+                    );
+                  },
+                  child: <Widget>[
+                    const WelcomeScreen(key: ValueKey(0)),
+                    const RecipeList(key: ValueKey(1)),
+                    const SettingScreen(key: ValueKey(2)),
+                  ][currentPageIndex],
+                ),
               ),
             ],
           ),

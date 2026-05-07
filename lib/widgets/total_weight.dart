@@ -3,6 +3,7 @@ import 'package:ganache_lab/services/calculation.dart';
 import 'package:ganache_lab/widgets/custom_container.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:provider/provider.dart';
+import 'package:ganache_lab/widgets/animated_count_text.dart';
 
 class TotalWeightGanache extends StatelessWidget {
   const TotalWeightGanache({super.key});
@@ -33,9 +34,12 @@ class TotalWeightGanache extends StatelessWidget {
               ),
             ],
           ),
-          SelectableText(
-            "${total.toStringAsFixed(3)}g",
+          AnimatedCountText(
+            value: total,
+            suffix: "g",
+            decimals: 3,
             style: const TextStyle(fontSize: 45),
+            duration: const Duration(milliseconds: 600),
           ),
         ],
       ),

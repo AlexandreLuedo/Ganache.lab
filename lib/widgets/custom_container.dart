@@ -16,7 +16,7 @@ class CustomContainer extends StatelessWidget {
     this.color,
     this.padding = 20.0,
     this.margin = 10.0,
-    this.borderRadius = 1.0,
+    this.borderRadius = 12.0,
     this.borderWidth,
     this.borderColor,
     this.width,

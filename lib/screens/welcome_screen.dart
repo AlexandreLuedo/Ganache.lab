@@ -19,10 +19,20 @@ class WelcomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(height: 60),
+            Center(
+              child: Hero(
+                tag: 'app_logo',
+                child: Image.asset(
+                  'assets/icon/Ganache.lab_logo.png',
+                  height: 120,
+                ),
+              ),
+            ),
             Center(
               // #docregion text
               child: Padding(
-                padding: EdgeInsets.only(top: 100, bottom: 100),
+                padding: EdgeInsets.only(top: 40, bottom: 100),
                 child: RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
