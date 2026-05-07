@@ -13,6 +13,7 @@ import 'package:ganache_lab/models/notifiers/temperature_notifier.dart';
 import 'package:ganache_lab/models/notifiers/recipe_notifier.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   LicenseRegistry.addLicense(() async* {
     final license = await rootBundle.loadString('assets/licenses/LICENSE.md');
     yield LicenseEntryWithLineBreaks(['Ganache.lab'], license);

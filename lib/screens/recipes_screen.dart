@@ -1,6 +1,5 @@
 // Displays recipes via the db (Actually from RecipeNotifier now)
 import 'package:flutter/material.dart';
-import 'package:ganache_lab/screens/create_ganache.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:provider/provider.dart';
@@ -129,26 +128,6 @@ class EmptyRecipeMessage extends StatelessWidget {
                 context,
               ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
               textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 32),
-            OutlinedButton.icon(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CreateGanache()),
-                );
-              },
-              icon: const Icon(Symbols.add),
-              label: const Text("Créer sa première ganache"),
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 12,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
             ),
           ],
         ),
