@@ -49,7 +49,9 @@ class GanacheIngredients extends StatelessWidget {
             IconButton(
               tooltip: "Ajouter un ingrédient",
               onPressed: () {
-                // TODO: Implement ingredient addition
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("L'ajout d'ingrédients personnalisés sera disponible prochainement.")),
+                );
               },
               icon: Icon(
                 Symbols.add_circle,

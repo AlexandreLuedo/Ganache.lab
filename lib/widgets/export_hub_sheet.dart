@@ -140,12 +140,10 @@ class ExportHubSheet extends StatelessWidget {
     pw.Font? iconFont;
 
     try {
-      debugPrint("Chargement des polices PDF...");
       font = await PdfGoogleFonts.robotoRegular();
       fontBold = await PdfGoogleFonts.robotoBold();
-      debugPrint("Polices chargées.");
     } catch (e) {
-      debugPrint("Fallback polices PDF : $e");
+      // Fallback
     }
 
     // Chargement des images (Logo + QR Code)
@@ -162,7 +160,7 @@ class ExportHubSheet extends StatelessWidget {
       );
       qrImage = pw.MemoryImage(qrData.buffer.asUint8List());
     } catch (e) {
-      debugPrint("Erreur chargement images PDF : $e");
+      // Fallback
     }
 
     final primaryColor = PdfColor.fromInt(0xff89511f);
@@ -502,7 +500,6 @@ class ExportHubSheet extends StatelessWidget {
                   // On vérifie si le dialogue est encore là avant de pop
                   // (en cas d'erreur avant le premier pop)
                   Navigator.of(context, rootNavigator: true).pop();
-                  debugPrint("Erreur impression : $e");
                 }
               }
             },

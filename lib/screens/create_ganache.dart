@@ -171,9 +171,8 @@ class _CreateGanacheState extends State<CreateGanache> {
                     action: SnackBarAction(
                       label: 'Annuler',
                       onPressed: () {
-                        // TODO Implement cancel
-                      },
-                    ),
+                        // Logic for cancel if needed, otherwise leave empty or remove action
+                      },                    ),
                   ),
                 );
               },

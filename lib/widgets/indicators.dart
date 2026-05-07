@@ -159,7 +159,7 @@ class Indicator extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ExtendedTexture()),
+                MaterialPageRoute(builder: (context) => const ExtendedTexture()),
               );
             },
             child: Container(

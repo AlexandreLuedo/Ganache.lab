@@ -10,11 +10,3 @@ Future<Map<String, int>> loadConfig(String path) async {
   // Conversion to Map<String, int>
   return yamlMap.map((key, value) => MapEntry(key.toString(), value as int));
 }
-
-/// Used to return the variables stored in the privateConfig.yaml file
-/*
-void main() async {
-  final config = await loadConfig('config/PrivateConfig.yaml');
-  print(config['darkChocolateCocoaButter']); // should display 18
-}
-*/

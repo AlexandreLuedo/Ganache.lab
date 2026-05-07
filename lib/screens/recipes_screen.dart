@@ -1,5 +1,6 @@
 // Displays recipes via the db (Actually from RecipeNotifier now)
 import 'package:flutter/material.dart';
+import 'package:ganache_lab/screens/create_ganache.dart';
 import 'package:ganache_lab/widgets/widgets_exportation_file.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:provider/provider.dart';
@@ -116,17 +117,17 @@ class EmptyRecipeMessage extends StatelessWidget {
             const SizedBox(height: 30),
             Text(
               'Prêt à équilibrer ?',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
             Text(
               'Aucune recette n\'est enregistrée pour le moment. Commencez par créer votre première ganache.',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.grey[600],
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
@@ -134,7 +135,7 @@ class EmptyRecipeMessage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const CreateGanache()),
+                  MaterialPageRoute(builder: (context) => CreateGanache()),
                 );
               },
               icon: const Icon(Symbols.add),

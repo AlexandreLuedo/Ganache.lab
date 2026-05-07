@@ -52,10 +52,11 @@ class _GlossaryState extends State<Glossary> {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
-      // TODO generate the snackbar
-      // SNACKBAR HERE
-
-      debugPrint("Impossible d’ouvrir $url");
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Impossible d'ouvrir le lien : $url")),
+        );
+      }
     }
   }
 

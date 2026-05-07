@@ -3,8 +3,6 @@ import 'package:material_symbols_icons/symbols.dart';
 import '../models/list_item.dart';
 import '../utils/email_helper.dart';
 
-// TODO add all data containers here
-
 /// List who store the containers data's with some options.
 final List<CustomContainerItem> customContainerItems = [
   CustomContainerItem(
