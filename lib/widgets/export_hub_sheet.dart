@@ -18,6 +18,22 @@ class ExportHubSheet extends StatelessWidget {
 
   // --- UTILS ---
 
+  void _showLoadingDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        content: Row(
+          children: [
+            const CircularProgressIndicator(),
+            const SizedBox(width: 20),
+            Expanded(child: Text(message)),
+          ],
+        ),
+      ),
+    );
+  }
+
   String _toSnakeCase(String text) {
     return text
         .toLowerCase()
@@ -332,7 +348,12 @@ class ExportHubSheet extends StatelessWidget {
   // --- ACTIONS ---
 
   Future<void> _handleDownload(BuildContext context) async {
+    _showLoadingDialog(context, "Génération du PDF...");
+
     try {
+      // Un léger délai pour laisser le temps à l'UI d'afficher le loader
+      await Future.delayed(const Duration(milliseconds: 300));
+      
       final pdf = await _generatePdf();
       final bytes = await pdf.save();
       final fileName = "${_toSnakeCase(recipe.title)}.pdf";
@@ -340,7 +361,10 @@ class ExportHubSheet extends StatelessWidget {
       if (kIsWeb) {
         // Sur le Web, on utilise Printing.sharePdf qui déclenche un téléchargement
         await Printing.sharePdf(bytes: bytes, filename: fileName);
-        if (context.mounted) Navigator.pop(context);
+        if (context.mounted) {
+          Navigator.pop(context); // Ferme le dialogue
+          Navigator.pop(context); // Ferme le bottom sheet
+        }
         return;
       }
 
@@ -353,7 +377,8 @@ class ExportHubSheet extends StatelessWidget {
       await file.writeAsBytes(bytes, flush: true);
 
       if (context.mounted) {
-        Navigator.pop(context);
+        Navigator.pop(context); // Ferme le dialogue
+        Navigator.pop(context); // Ferme le bottom sheet
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text("Fichier enregistré dans Documents"),
@@ -366,9 +391,10 @@ class ExportHubSheet extends StatelessWidget {
       }
     } catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text("Erreur : $e")));
+        Navigator.pop(context); // Ferme le dialogue
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Erreur : $e")),
+        );
       }
     }
   }
@@ -405,13 +431,18 @@ class ExportHubSheet extends StatelessWidget {
               leading: const Icon(Symbols.share, color: Colors.blue),
               title: const Text("Partager"),
               onTap: () async {
+                _showLoadingDialog(context, "Préparation du partage...");
                 try {
+                  // Un léger délai pour laisser le temps à l'UI d'afficher le loader
+                  await Future.delayed(const Duration(milliseconds: 300));
+                  
                   final pdf = await _generatePdf();
                   final bytes = await pdf.save();
                   final fileName = "${_toSnakeCase(recipe.title)}.pdf";
 
                   if (context.mounted) {
-                    Navigator.pop(context);
+                    Navigator.pop(context); // Ferme le dialogue
+                    Navigator.pop(context); // Ferme le bottom sheet
                   }
 
                   // ignore: deprecated_member_use
@@ -424,9 +455,10 @@ class ExportHubSheet extends StatelessWidget {
                   ], subject: recipe.title);
                 } catch (e) {
                   if (context.mounted) {
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(SnackBar(content: Text("Erreur : $e")));
+                    Navigator.pop(context); // Ferme le dialogue
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Erreur : $e")),
+                    );
                   }
                 }
               },
@@ -442,22 +474,36 @@ class ExportHubSheet extends StatelessWidget {
             leading: const Icon(Symbols.print, color: Colors.green),
             title: const Text("Imprimer"),
             onTap: () async {
-              // On macOS debug mode, it's safer to close the bottom sheet first
-              // to avoid window focus conflicts with the native print dialog.
-              if (context.mounted) Navigator.pop(context);
+              _showLoadingDialog(context, "Préparation de l'impression...");
 
               try {
-                // On génère le PDF avant d'ouvrir la boîte de dialogue d'impression
-                // pour éviter de bloquer le thread UI pendant l'affichage du dialogue natif.
+                // Délai initial pour voir le loader
+                await Future.delayed(const Duration(milliseconds: 300));
+
                 final pdf = await _generatePdf();
                 final bytes = await pdf.save();
 
-                await Printing.layoutPdf(
+                if (context.mounted) {
+                  Navigator.pop(context); // Ferme le dialogue
+                  Navigator.pop(context); // Ferme le bottom sheet
+                }
+
+                // Délai de sécurité pour macOS avant d'ouvrir le dialogue natif
+                await Future.delayed(const Duration(milliseconds: 500));
+
+                // On ne met pas 'await' ici car sur macOS le dialogue natif 
+                // peut bloquer l'exécution asynchrone de Flutter
+                Printing.layoutPdf(
                   onLayout: (format) => bytes,
                   name: _toSnakeCase(recipe.title),
                 );
               } catch (e) {
-                debugPrint("Erreur impression : $e");
+                if (context.mounted) {
+                  // On vérifie si le dialogue est encore là avant de pop
+                  // (en cas d'erreur avant le premier pop)
+                  Navigator.of(context, rootNavigator: true).pop();
+                  debugPrint("Erreur impression : $e");
+                }
               }
             },
           ),
@@ -465,8 +511,15 @@ class ExportHubSheet extends StatelessWidget {
           ListTile(
             leading: Icon(Symbols.send, color: colorScheme.primary),
             title: const Text("Partager le texte"),
-            onTap: () {
-              Navigator.pop(context);
+            onTap: () async {
+              _showLoadingDialog(context, "Génération du résumé...");
+              
+              await Future.delayed(const Duration(milliseconds: 300));
+              
+              if (context.mounted) {
+                Navigator.pop(context); // Ferme le dialogue
+                Navigator.pop(context); // Ferme le bottom sheet
+              }
               // ignore: deprecated_member_use
               Share.share(_generateSummaryText());
             },
