@@ -5,6 +5,7 @@ import 'package:ganache_lab/screens/screens_exportation_file.dart';
 import 'package:provider/provider.dart';
 import 'package:ganache_lab/services/calculation.dart';
 import 'package:ganache_lab/services/aw.dart';
+import 'package:ganache_lab/widgets/animated_count_text.dart';
 
 double indicatorsScale = 170;
 double spacings = 20;
@@ -22,9 +23,6 @@ class Indicator extends StatelessWidget {
     final double estVal = recipe.solidsPercentage * 100;
     final double sugarVal = recipe.sugarPercentage * 100;
 
-    final humidity = humidityVal.toStringAsFixed(1);
-    final sugar = recipe.sweeteningPower.toStringAsFixed(1);
-
     String sugarLabel = "Optimale";
     if (sugarVal < 25) {
       sugarLabel = "Faible (<25%)";
@@ -32,7 +30,6 @@ class Indicator extends StatelessWidget {
     if (sugarVal > 30) {
       sugarLabel = "Élevée";
     }
-
     String textureLabel = "Fondante";
     if (humidityVal > 25) {
       textureLabel = "Trop Molle";
@@ -107,9 +104,12 @@ class Indicator extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Row(
                           children: [
-                            Text(
-                              "$humidity%",
+                            AnimatedCountText(
+                              value: humidityVal,
+                              suffix: "%",
+                              decimals: 1,
                               style: const TextStyle(fontSize: 48),
+                              duration: const Duration(milliseconds: 600),
                             ),
                           ],
                         ),
@@ -261,9 +261,11 @@ class Indicator extends StatelessWidget {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 20.0),
-                            child: Text(
-                              sugar,
+                            child: AnimatedCountText(
+                              value: recipe.sweeteningPower,
+                              decimals: 1,
                               style: const TextStyle(fontSize: 45),
+                              duration: const Duration(milliseconds: 600),
                             ),
                           ),
                         ],
@@ -352,15 +354,16 @@ class Indicator extends StatelessWidget {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      aw.toStringAsFixed(2),
+                                    AnimatedCountText(
+                                      value: aw,
+                                      decimals: 2,
                                       style: const TextStyle(
                                         fontSize: 40,
                                         fontWeight: FontWeight.bold,
                                       ),
+                                      duration: const Duration(milliseconds: 600),
                                     ),
-                                    const SizedBox(width: 5),
-                                    const Text(
+                                    const SizedBox(width: 5),                                    const Text(
                                       "Aw",
                                       style: TextStyle(
                                         fontSize: 16,
@@ -436,3 +439,4 @@ class RoundedRectClipper extends CustomClipper<Path> {
     return false;
   }
 }
+

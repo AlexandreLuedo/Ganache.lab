@@ -1,5 +1,6 @@
 // Affiche le résultat d'un calcul de ganache. Appelle les indicators.
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ganache_lab/widgets/total_weight.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'screens_exportation_file.dart';
@@ -11,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:ganache_lab/services/calculation.dart';
 import 'package:ganache_lab/models/recipe.dart';
 import 'package:ganache_lab/models/notifiers/recipe_notifier.dart';
+import 'package:ganache_lab/widgets/animated_count_text.dart';
 
 class CalculateGanache extends StatelessWidget {
   const CalculateGanache({super.key});
@@ -85,19 +87,25 @@ class CalculateGanache extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(name, style: const TextStyle(fontSize: 16)),
-        Text("${weight.toStringAsFixed(1)} g", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        AnimatedCountText(
+          value: weight,
+          suffix: " g",
+          decimals: 1,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          duration: const Duration(milliseconds: 600),
+        ),
       ],
     );
   }
 
-  Widget _buildSummaryRow({required IconData icon, required String title, required String value}) {
+  Widget _buildSummaryRow({required IconData icon, required String title, required Widget valueWidget}) {
     return Row(
       children: [
         Icon(icon, size: 20),
         const SizedBox(width: 8),
         Text("$title :", style: const TextStyle(fontWeight: FontWeight.w500)),
         const Spacer(),
-        Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
+        valueWidget,
       ],
     );
   }
@@ -119,11 +127,17 @@ class CalculateGanache extends StatelessWidget {
             IconButton(
               tooltip: "Partager la ganache",
               icon: const Icon(Symbols.share, fill: 1),
-              onPressed: () => _showExportSheet(context),
+              onPressed: () {
+                HapticFeedback.lightImpact();
+                _showExportSheet(context);
+              },
             ),
             IconButton(
               tooltip: "Modifier la ganache",
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                HapticFeedback.lightImpact();
+                Navigator.pop(context);
+              },
               icon: const Icon(Symbols.edit, fill: 1),
             ),
           ],
@@ -135,7 +149,10 @@ class CalculateGanache extends StatelessWidget {
         icon: const Icon(Symbols.save),
         backgroundColor: const Color(0xFFEB8C36),
         foregroundColor: Colors.white,
-        onPressed: () => _saveRecipe(context),
+        onPressed: () {
+          HapticFeedback.mediumImpact();
+          _saveRecipe(context);
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       body: SingleChildScrollView(
@@ -211,11 +228,35 @@ class CalculateGanache extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 15),
-                  Consumer<ApplicationModel>(builder: (context, app, _) => _buildSummaryRow(icon: Symbols.grid_view, title: "Application", value: _getApplicationName(app.currentView))),
+                  Consumer<ApplicationModel>(
+                    builder: (context, app, _) => _buildSummaryRow(
+                      icon: Symbols.grid_view,
+                      title: "Application",
+                      valueWidget: Text(_getApplicationName(app.currentView), style: const TextStyle(fontWeight: FontWeight.bold)),
+                    ),
+                  ),
                   const Divider(),
-                  Consumer<ChocolateTypeModel>(builder: (context, choco, _) => _buildSummaryRow(icon: Symbols.cookie, title: "Chocolat", value: choco.selection ?? "Non défini")),
+                  Consumer<ChocolateTypeModel>(
+                    builder: (context, choco, _) => _buildSummaryRow(
+                      icon: Symbols.cookie,
+                      title: "Chocolat",
+                      valueWidget: Text(choco.selection ?? "Non défini", style: const TextStyle(fontWeight: FontWeight.bold)),
+                    ),
+                  ),
                   const Divider(),
-                  Consumer<TemperatureModel>(builder: (context, temp, _) => _buildSummaryRow(icon: Symbols.device_thermostat, title: "Température", value: "${temp.temperature.toStringAsFixed(0)} °C")),
+                  Consumer<TemperatureModel>(
+                    builder: (context, temp, _) => _buildSummaryRow(
+                      icon: Symbols.device_thermostat,
+                      title: "Température",
+                      valueWidget: AnimatedCountText(
+                        value: temp.temperature,
+                        suffix: " °C",
+                        decimals: 0,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        duration: const Duration(milliseconds: 600),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

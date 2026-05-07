@@ -192,6 +192,7 @@ class _CreateGanacheState extends State<CreateGanache> {
             backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
             foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
             onPressed: () {
+              HapticFeedback.lightImpact();
               // Reset all models except temperature
               context.read<TotalModel>().reset();
               context.read<TitleModel>().reset();
@@ -253,6 +254,7 @@ class _CreateGanacheState extends State<CreateGanache> {
                 onPressed:
                     canCalculate
                         ? () {
+                          HapticFeedback.mediumImpact();
                           context.read<TotalModel>().calculateTotal(
                             frame,
                             mold,
@@ -262,8 +264,28 @@ class _CreateGanacheState extends State<CreateGanache> {
                           );
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => const CalculateGanache(),
+                            PageRouteBuilder(
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) =>
+                                      const CalculateGanache(),
+                              transitionsBuilder: (
+                                context,
+                                animation,
+                                secondaryAnimation,
+                                child,
+                              ) {
+                                const begin = Offset(1.0, 0.0);
+                                const end = Offset.zero;
+                                const curve = Curves.easeInOutCubic;
+                                var tween = Tween(
+                                  begin: begin,
+                                  end: end,
+                                ).chain(CurveTween(curve: curve));
+                                return SlideTransition(
+                                  position: animation.drive(tween),
+                                  child: child,
+                                );
+                              },
                             ),
                           );
                         }
