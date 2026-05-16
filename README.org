@@ -11,9 +11,7 @@ Le premier équilibreur de ganache multiplateforme !
 
 * V1 - Arnaud
 Voici la première version de Ganache.lab, portant le prénom de la personne qui sans qui tout cela ne serai possible.
-#+begin_src md
----
-#+end_src
+-----
 #+begin_quote
 [!NOTE]
 Ceci est mon premier projet, il sert de support à mon apprentissage de Dart & Flutter. L'architecture est donc amenée à évoluer régulièrement.
